@@ -15,6 +15,7 @@ theme = "hugo-theme-learn"
   disableBreadcrumb = false
   disableNextPrev = false
   disableSearch = false
+  custom_css = ["css/vietnamese-font.css", "css/table-borders.css"]
 
 [languages.en]
   title = "Internship Report"

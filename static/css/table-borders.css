@@ -1,0 +1,33 @@
+﻿/* Table borders - FCJ Workshop */
+
+.markdown table,
+#body-inner table {
+    width: 100%;
+    border-collapse: collapse !important;
+    border-spacing: 0 !important;
+    border: 1px solid #dddddd !important;
+}
+
+/* Horizontal and vertical separators */
+.markdown table th,
+.markdown table td,
+#body-inner table th,
+#body-inner table td {
+    border: 1px solid #dddddd !important;
+    padding: 10px 12px !important;
+    vertical-align: middle;
+}
+
+/* Table header */
+.markdown table thead th,
+#body-inner table thead th {
+    background-color: #f5f5f5 !important;
+    font-weight: 700;
+    text-align: left;
+}
+
+/* Table content */
+.markdown table tbody td,
+#body-inner table tbody td {
+    background-color: #ffffff;
+}
