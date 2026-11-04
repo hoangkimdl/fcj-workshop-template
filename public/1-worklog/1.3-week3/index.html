@@ -12,22 +12,22 @@
     <title>Week 3 Worklog :: Internship Report</title>
 
     
-    <link href="/css/nucleus.css?1793781996" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1793781996" rel="stylesheet">
-    <link href="/css/hybrid.css?1793781996" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1793781996" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1793781996" rel="stylesheet">
-    <link href="/css/auto-complete.css?1793781996" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1793781996" rel="stylesheet">
-    <link href="/css/theme.css?1793781996" rel="stylesheet">
-    <link href="/css/tabs.css?1793781996" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1793781996" rel="stylesheet">
+    <link href="/css/nucleus.css?1793785422" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1793785422" rel="stylesheet">
+    <link href="/css/hybrid.css?1793785422" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1793785422" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1793785422" rel="stylesheet">
+    <link href="/css/auto-complete.css?1793785422" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1793785422" rel="stylesheet">
+    <link href="/css/theme.css?1793785422" rel="stylesheet">
+    <link href="/css/tabs.css?1793785422" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1793785422" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1793781996" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1793785422" rel="stylesheet">
     
-    <link href="/css/vietnamese-font.css?1793781996" rel="stylesheet"><link href="/css/table-borders.css?1793781996" rel="stylesheet">
+    <link href="/css/vietnamese-font.css?1793785422" rel="stylesheet"><link href="/css/table-borders.css?1793785422" rel="stylesheet">
 
-    <script src="/js/jquery-3.3.1.min.js?1793781996"></script>
+    <script src="/js/jquery-3.3.1.min.js?1793785422"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1793781996"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1793781996"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1793785422"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1793785422"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1793781996"></script>
+<script type="text/javascript" src="/js/search.js?1793785422"></script>
 
     
   </div>
@@ -707,14 +707,18 @@
 
 
 
-	
-<div class="notices warning" ><p>⚠️ <strong>Note:</strong> The following information is for reference purposes only. Please <strong>do not copy verbatim</strong> for your own report, including this warning.</p>
-</div>
-
-<h3 id="week-3-objectives">Week 3 Objectives:</h3>
+	<h3 id="week-3-objectives">Week 3 Objectives:</h3>
 <ul>
-<li>Connect and get acquainted with members of First Cloud AI Journey.</li>
-<li>Understand basic AWS services, how to use the console &amp; CLI.</li>
+<li>Understand the overview of Amazon Virtual Private Cloud (Amazon VPC) and its role in building and managing isolated virtual network environments on AWS.</li>
+<li>Understand basic networking concepts, including IP addresses, CIDR, Availability Zones, and how to divide a network into Subnets to organize AWS resources.</li>
+<li>Learn about the functions and operations of VPC networking components, including Subnets, Route Tables, Internet Gateway (IGW), and NAT Gateway.</li>
+<li>Understand network security mechanisms in VPC through Security Groups and Network Access Control Lists (Network ACLs), and distinguish their scopes and operating mechanisms.</li>
+<li>Gain practical knowledge and experience in creating VPCs, configuring Subnets, Internet Gateways, Route Tables, Security Groups, and VPC Flow Logs.</li>
+<li>Learn how to deploy Amazon EC2 Instances in Public and Private Subnets, establish SSH connections, configure NAT Gateways, and verify network connectivity.</li>
+<li>Become familiar with AWS network analysis and monitoring tools, including VPC Resource Map, VPC Reachability Analyzer, AWS Systems Manager Session Manager, and Amazon CloudWatch.</li>
+<li>Understand AWS Site-to-Site VPN and the principles of establishing secure network connectivity between an On-premises environment and Amazon VPC through encrypted VPN tunnels.</li>
+<li>Gain practical experience in configuring Virtual Private Gateway (VGW), Customer Gateway (CGW), VPN Connection, and Libreswan software to establish Site-to-Site VPN connectivity.</li>
+<li>Understand the procedures for monitoring VPN Tunnels, customizing connection parameters, troubleshooting connectivity issues, and cleaning up AWS resources to minimize unexpected costs.</li>
 </ul>
 <h3 id="tasks-to-be-carried-out-this-week">Tasks to be carried out this week:</h3>
 <table>
@@ -730,84 +734,248 @@
   <tbody>
       <tr>
           <td style="text-align: left">2</td>
-          <td style="text-align: left">- Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations</td>
-          <td style="text-align: left">08/11/2025</td>
-          <td style="text-align: left">08/11/2025</td>
-          <td style="text-align: left"></td>
+          <td style="text-align: left">- Study the overview of Amazon Virtual Private Cloud (Amazon VPC) and its role in creating isolated virtual network environments on AWS.<br>- Learn about VPC network architecture and its basic concepts:<br>  + VPC: An isolated virtual network in AWS that allows users to control network configurations and deploy resources.<br>  + CIDR: The range of IP addresses allocated to a VPC and its Subnets.<br>  + Availability Zone (AZ): An independent location within an AWS Region that supports high availability for deployed resources.<br>- Learn about different types of Subnets:<br>  + Public Subnet: A Subnet with a route to the Internet through an Internet Gateway.<br>  + Private Subnet: A Subnet without a direct route to an Internet Gateway.<br>  + VPN-only Subnet: A Subnet configured with routes to a Virtual Private Gateway for VPN connectivity.<br>- Study Route Tables and their routing components:<br>  + Destination: The destination IP address or network range of traffic.<br>  + Target: The gateway or network component to which traffic is forwarded.<br>- Learn about Internet Gateway (IGW), its function in connecting a VPC to the Internet, and how to configure IGW routes in a Route Table.<br>- Understand NAT Gateway and how it allows resources in Private Subnets to initiate outbound Internet connections without allowing the Internet to initiate direct connections to those resources.<br>- Distinguish between NAT Gateway and NAT Instance.<br>- Study Multi-AZ network architecture and the benefits of distributing resources across multiple Availability Zones to improve availability.</td>
+          <td style="text-align: left">19/10/2026</td>
+          <td style="text-align: left">19/10/2026</td>
+          <td style="text-align: left"><a href="https://000003.awsfcaj.com/">Amazon VPC and AWS Site-to-Site VPN Workshop</a></td>
       </tr>
       <tr>
           <td style="text-align: left">3</td>
-          <td style="text-align: left">- Learn about AWS and its types of services <br>  + Compute <br>  + Storage <br>  + Networking <br>  + Database <br>  + &hellip; <br></td>
-          <td style="text-align: left">08/12/2025</td>
-          <td style="text-align: left">08/12/2025</td>
-          <td style="text-align: left"><a href="https://cloudjourney.awsstudygroup.com/">https://cloudjourney.awsstudygroup.com/</a></td>
+          <td style="text-align: left">- Study network security mechanisms in Amazon VPC:<br>  + Security Group: A virtual firewall that controls inbound and outbound traffic at the Network Interface or associated resource level.<br>  + Network ACL (NACL): A network traffic control mechanism applied at the Subnet level.<br>- Understand the differences between Security Groups and Network ACLs in terms of scope and operating mechanisms:<br>  + Security Groups are Stateful, meaning response traffic for permitted connections is automatically allowed.<br>  + Network ACLs are Stateless, requiring rules for both inbound and outbound traffic.<br>- Learn about Inbound Rules and Outbound Rules, including how to specify protocols, Port Ranges, and Source/Destination addresses when configuring security rules.<br>- Become familiar with VPC Resource Map to visualize relationships between VPCs, Subnets, Route Tables, Internet Gateways, and related network components.<br>- <strong>Practice:</strong> Build an Amazon VPC network environment using the AWS Management Console.<br>  + Access the VPC service and create a Custom VPC named ASG.<br>  + Configure the IPv4 CIDR block <code>10.10.0.0/16</code> for the VPC.<br>  + Enable Enable DNS Hostnames and Enable DNS Resolution in VPC Settings.<br>  + Create Public and Private Subnets in the selected Availability Zones.<br>  + Create an Internet Gateway and attach it to the ASG VPC.<br>  + Create a Route Table for the Public Subnet and configure the default route <code>0.0.0.0/0</code> to the Internet Gateway.<br>  + Associate the Subnets with their appropriate Route Tables.<br>  + Create a Security Group and configure Inbound Rules and Outbound Rules according to connectivity requirements.<br>  + Learn how to configure Network ACLs to control traffic at the Subnet level.<br>  + Enable VPC Flow Logs to record and monitor IP traffic flowing to and from Network Interfaces.<br>- Review the VPC Resource Map to verify the network structure and relationships between components after configuration.</td>
+          <td style="text-align: left">20/10/2026</td>
+          <td style="text-align: left">20/10/2026</td>
+          <td style="text-align: left"><a href="https://000003.awsfcaj.com/">Amazon VPC and AWS Site-to-Site VPN Workshop</a></td>
       </tr>
       <tr>
           <td style="text-align: left">4</td>
-          <td style="text-align: left">- Create AWS Free Tier account <br> - Learn about AWS Console &amp; AWS CLI <br> - <strong>Practice:</strong> <br>  + Create AWS account <br>  + Install &amp; configure AWS CLI <br>   + How to use AWS CLI</td>
-          <td style="text-align: left">08/13/2025</td>
-          <td style="text-align: left">08/13/2025</td>
-          <td style="text-align: left"><a href="https://cloudjourney.awsstudygroup.com/">https://cloudjourney.awsstudygroup.com/</a></td>
+          <td style="text-align: left">- <strong>Practice:</strong> Deploy Amazon EC2 Instances in the created VPC environment.<br>  + Access the Amazon EC2 service and select Launch instances.<br>  + Create Public and Private EC2 Instances according to the workshop architecture.<br>  + Select an appropriate Amazon Machine Image (AMI) and Instance Type.<br>  + Configure Key Pairs, VPCs, Subnets, and Security Groups for each EC2 Instance.<br>  + Check the public IP addresses, private IP addresses, and operational status of the EC2 Instances.<br>- <strong>Practice:</strong> Verify connectivity to EC2 Instances.<br>  + Establish SSH connections to EC2 Instances using Visual Studio Code with the Remote - SSH extension, following the workshop instructions.<br>  + Verify connectivity between EC2 Instances and other components within the VPC.<br>  + Test Internet connectivity for resources configured in Public Subnets.<br>- <strong>Practice:</strong> Create and configure a NAT Gateway.<br>  + Allocate an Elastic IP Address for the NAT Gateway.<br>  + Create a Public NAT Gateway in the appropriate Public Subnet.<br>  + Associate the NAT Gateway with the allocated Elastic IP Address.<br>  + Configure the Private Subnet Route Table with the default route <code>0.0.0.0/0</code> pointing to the NAT Gateway.<br>  + Verify outbound Internet connectivity from the EC2 Instance in the Private Subnet.<br>- Study VPC Reachability Analyzer and how to use it to analyze network paths, examine Security Group and Network ACL configurations, and identify potential causes of connectivity failures.<br>- Learn about EC2 Instance Connect Endpoint as an additional EC2 connection method (optional content).<br>- Study AWS Systems Manager Session Manager and how to securely access EC2 Instances through a browser without requiring SSH Keys or opening inbound SSH ports.<br>- Learn about CloudWatch Monitoring &amp; Alerting and how to monitor EC2, NAT Gateway, VPN Connection, and VPC Flow Logs metrics.<br>- Understand how to configure CloudWatch alarms to monitor resources and detect network connectivity issues.</td>
+          <td style="text-align: left">21/10/2026</td>
+          <td style="text-align: left">21/10/2026</td>
+          <td style="text-align: left"><a href="https://000003.awsfcaj.com/">Amazon VPC and AWS Site-to-Site VPN Workshop</a></td>
       </tr>
       <tr>
           <td style="text-align: left">5</td>
-          <td style="text-align: left">- Learn basic EC2: <br>  + Instance types <br>  + AMI <br>  + EBS <br>  + &hellip; <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br></td>
-          <td style="text-align: left">08/14/2025</td>
-          <td style="text-align: left">08/15/2025</td>
-          <td style="text-align: left"><a href="https://cloudjourney.awsstudygroup.com/">https://cloudjourney.awsstudygroup.com/</a></td>
+          <td style="text-align: left">- Study the overview of AWS Site-to-Site VPN and its purpose in establishing secure network connectivity between an On-premises environment and Amazon VPC.<br>- Learn about Site-to-Site VPN architecture and the functions of its main components:<br>  + Virtual Private Gateway (VGW): The AWS-side VPN gateway attached to a VPC.<br>  + Customer Gateway (CGW): Represents the VPN device or software on the customer network side.<br>  + VPN Connection: The VPN connection established between a Virtual Private Gateway and a Customer Gateway.<br>  + VPN Tunnel: An encrypted communication tunnel used to securely transfer data between two network environments.<br>- <strong>Practice:</strong> Build a simulated Branch Office environment for VPN connectivity.<br>  + Create a separate VPC named ASG VPN with the IPv4 CIDR block <code>10.11.0.0/16</code>.<br>  + Create a Public Subnet and configure an Internet Gateway for the VPN environment.<br>  + Create a Route Table and configure appropriate network routes.<br>  + Create a Security Group that allows the necessary connections for VPN, SSH, and connectivity testing according to the workshop instructions.<br>  + Launch an EC2 Instance in the Public Subnet to act as the Customer Gateway environment.<br>  + Check the public IP address of the EC2 Instance used as the Customer Gateway.<br>- <strong>Practice:</strong> Create AWS Site-to-Site VPN components.<br>  + Create a Virtual Private Gateway named VPN Gateway and attach it to the target VPC.<br>  + Create a Customer Gateway using the public IP address of the EC2 Customer Gateway.<br>  + Configure the BGP ASN according to the instructions, using the default value of 65000 for the static routing scenario.<br>  + Create a VPN Connection and select the previously created Virtual Private Gateway and Customer Gateway.<br>  + Select Static Routing and specify the network range <code>10.11.0.0/16</code> of the simulated Customer Gateway environment.<br>  + Check the VPN Connection status and wait until the resource reaches the Available state.</td>
+          <td style="text-align: left">22/10/2026</td>
+          <td style="text-align: left">22/10/2026</td>
+          <td style="text-align: left"><a href="https://000003.awsfcaj.com/">Amazon VPC and AWS Site-to-Site VPN Workshop</a></td>
       </tr>
       <tr>
           <td style="text-align: left">6</td>
-          <td style="text-align: left">- <strong>Practice:</strong> <br>  + Launch an EC2 instance <br>  + Connect via SSH <br>  + Attach an EBS volume</td>
-          <td style="text-align: left">08/15/2025</td>
-          <td style="text-align: left">08/15/2025</td>
-          <td style="text-align: left"><a href="https://cloudjourney.awsstudygroup.com/">https://cloudjourney.awsstudygroup.com/</a></td>
+          <td style="text-align: left">- <strong>Practice:</strong> Configure the Customer Gateway and establish VPN Tunnels.<br>  + Access the created VPN Connection in the VPC Console.<br>  + Download the VPN configuration file for the Customer Gateway device.<br>  + Select Vendor and Platform as OpenSwan, Software as OpenSwan 2.6.38+, and IKE version as IKEv1 according to the workshop instructions.<br>  + Establish an SSH connection to the EC2 Instance acting as the Customer Gateway.<br>  + Install and configure Libreswan on the EC2 Instance according to the instructions.<br>  + Check and modify the IPsec configuration in <code>/etc/ipsec.conf</code> when necessary.<br>  + Configure IP Forwarding and the necessary network parameters on the Customer Gateway.<br>  + Configure the VPN Tunnel using the configuration file provided by AWS.<br>  + Check the VPN Tunnel status and verify connectivity between the AWS network and the simulated Branch Office environment.<br>- Learn how to customize VPN Tunnel parameters through the AWS VPC Console:<br>  + Dead Peer Detection (DPD) Timeout.<br>  + IKE versions (IKEv1/IKEv2).<br>  + Encryption Algorithms.<br>  + Integrity Algorithms.<br>  + Diffie-Hellman (DH) Groups.<br>- Learn how to enable VPN Tunnel Activity Logs and use Amazon CloudWatch Logs to monitor VPN activities, connection events, and authentication information.<br>- Study the VPN Troubleshooting Guide and learn how to check Tunnel status, IKE/IPsec configurations, routing, IP Forwarding, and system logs to troubleshoot connectivity issues.<br>- Explore alternative VPN configurations and the StrongSwan with Transit Gateway connectivity model as optional workshop extensions.<br>- Study Infrastructure as Code (IaC) Templates and the benefits of automating VPC deployment through infrastructure definition files.<br>- <strong>Practice:</strong> Review and clean up AWS resources created during the lab in the appropriate order:<br>  + Terminate the EC2 Instances created for the lab.<br>  + Delete NAT Gateways.<br>  + Release Elastic IP Addresses when they are no longer in use.<br>  + Delete VPC Endpoints if they were created.<br>  + Delete VPN Connections.<br>  + Detach and delete Virtual Private Gateways.<br>  + Delete Customer Gateways.<br>  + Delete the related VPCs after removing dependent resources.<br>- Verify that all resources have been properly cleaned up to minimize unexpected AWS charges.</td>
+          <td style="text-align: left">23/10/2026</td>
+          <td style="text-align: left">23/10/2026</td>
+          <td style="text-align: left"><a href="https://000003.awsfcaj.com/">Amazon VPC and AWS Site-to-Site VPN Workshop</a></td>
       </tr>
   </tbody>
 </table>
 <h3 id="week-3-achievements">Week 3 Achievements:</h3>
 <ul>
 <li>
-<p>Understood what AWS is and mastered the basic service groups:</p>
+<p>Gained an overall understanding of Amazon Virtual Private Cloud (Amazon VPC) and its role in building isolated virtual network environments and managing AWS resources through user-defined network configurations.</p>
+</li>
+<li>
+<p>Understood basic networking architecture and IP addressing concepts in VPC, including:</p>
 <ul>
-<li>Compute</li>
-<li>Storage</li>
-<li>Networking</li>
-<li>Database</li>
-<li>&hellip;</li>
+<li><strong>VPC:</strong> A logically isolated virtual network environment within AWS.</li>
+<li><strong>CIDR:</strong> An IP address range used to define the network address space of a VPC and its Subnets.</li>
+<li><strong>Availability Zone (AZ):</strong> An independent location within an AWS Region that supports resource distribution and high availability.</li>
+<li><strong>Subnet:</strong> A subdivision of a VPC into smaller networks to organize and manage AWS resources.</li>
 </ul>
 </li>
 <li>
-<p>Successfully created and configured an AWS Free Tier account.</p>
-</li>
-<li>
-<p>Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.</p>
-</li>
-<li>
-<p>Installed and configured AWS CLI on the computer, including:</p>
+<p>Distinguished different types of Subnets based on routing configurations and their purposes:</p>
 <ul>
-<li>Access Key</li>
-<li>Secret Key</li>
-<li>Default Region</li>
-<li>&hellip;</li>
+<li><strong>Public Subnet:</strong> Has a route to the Internet through an Internet Gateway.</li>
+<li><strong>Private Subnet:</strong> Does not have a direct route to an Internet Gateway but can use a NAT Gateway to initiate outbound Internet connections.</li>
+<li><strong>VPN-only Subnet:</strong> Configured with routes to a Virtual Private Gateway to communicate through a VPN connection.</li>
 </ul>
 </li>
 <li>
-<p>Used AWS CLI to perform basic operations such as:</p>
+<p>Understood the functions and operations of VPC routing components:</p>
 <ul>
-<li>Check account &amp; configuration information</li>
-<li>Retrieve the list of regions</li>
-<li>View EC2 service</li>
-<li>Create and manage key pairs</li>
-<li>Check information about running services</li>
-<li>&hellip;</li>
+<li><strong>Route Table:</strong> Contains routing rules that determine how network traffic is forwarded based on Destination and Target.</li>
+<li><strong>Internet Gateway (IGW):</strong> Allows resources in a VPC to communicate with the Internet when configured with public IP addresses and appropriate routes.</li>
+<li><strong>NAT Gateway:</strong> Allows resources in Private Subnets to initiate outbound connections to the Internet or external services without allowing the Internet to initiate direct connections to those resources.</li>
 </ul>
 </li>
 <li>
-<p>Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.</p>
+<p>Understood the differences between NAT Gateway and NAT Instance, as well as the role of NAT Gateway in allowing resources in Private Subnets to access the Internet through outbound connections.</p>
 </li>
 <li>
-<p>&hellip;</p>
+<p>Understood Multi-AZ architecture and the benefits of deploying resources across multiple Availability Zones to improve availability and reduce the risk of service disruption when an AZ experiences a failure.</p>
+</li>
+<li>
+<p>Understood network security mechanisms in Amazon VPC, including:</p>
+<ul>
+<li><strong>Security Group:</strong> A virtual firewall that controls inbound and outbound traffic at the Network Interface or associated resource level and operates using a Stateful mechanism.</li>
+<li><strong>Network ACL (NACL):</strong> A network traffic control mechanism applied at the Subnet level that operates using a Stateless mechanism.</li>
+<li><strong>Inbound Rules:</strong> Rules that control incoming traffic to resources.</li>
+<li><strong>Outbound Rules:</strong> Rules that control outgoing traffic from resources.</li>
+</ul>
+</li>
+<li>
+<p>Distinguished Security Groups and Network ACLs in terms of their application scope, operating mechanisms, and security rule configurations, while understanding the importance of allowing only necessary connections.</p>
+</li>
+<li>
+<p>Became familiar with VPC Resource Map and learned how to use it to visualize relationships between VPCs, Subnets, Route Tables, Internet Gateways, and other network components in AWS.</p>
+</li>
+<li>
+<p>Understood the function of VPC Flow Logs in recording IP traffic information flowing to and from Network Interfaces, supporting security monitoring, traffic analysis, and network troubleshooting.</p>
+</li>
+<li>
+<p>Gained practical knowledge and experience in building an Amazon VPC environment, including:</p>
+<ul>
+<li>Creating a Custom VPC named ASG with the IPv4 CIDR block <code>10.10.0.0/16</code>.</li>
+<li>Enabling Enable DNS Hostnames and Enable DNS Resolution.</li>
+<li>Creating Public and Private Subnets in selected Availability Zones.</li>
+<li>Creating an Internet Gateway and attaching it to the VPC.</li>
+<li>Creating Route Tables and configuring the default route <code>0.0.0.0/0</code> to the Internet Gateway for Public Subnets.</li>
+<li>Associating Subnets with appropriate Route Tables.</li>
+<li>Creating and configuring Security Groups with Inbound Rules and Outbound Rules.</li>
+<li>Learning how to configure Network ACLs to control traffic at the Subnet level.</li>
+<li>Enabling VPC Flow Logs to monitor network traffic.</li>
+</ul>
+</li>
+<li>
+<p>Gained practical knowledge and experience in deploying Amazon EC2 Instances, including:</p>
+<ul>
+<li>Selecting appropriate Amazon Machine Images (AMIs) and Instance Types.</li>
+<li>Configuring Key Pairs, VPCs, Subnets, and Security Groups.</li>
+<li>Deploying EC2 Instances in Public and Private Subnets.</li>
+<li>Checking EC2 Instance operational status, public IP addresses, and private IP addresses.</li>
+<li>Establishing SSH connections to EC2 Instances through Visual Studio Code and the Remote - SSH extension.</li>
+<li>Verifying connectivity between resources within the VPC environment.</li>
+</ul>
+</li>
+<li>
+<p>Understood how to deploy a NAT Gateway in a Public Subnet, allocate and associate an Elastic IP Address, and configure the Private Subnet Route Table to allow EC2 Instances to access the Internet through outbound connections.</p>
+</li>
+<li>
+<p>Became familiar with VPC Reachability Analyzer and learned how to use the tool to:</p>
+<ul>
+<li>Analyze network paths between resources within a VPC.</li>
+<li>Verify network connectivity based on current configurations.</li>
+<li>Examine Security Group and Network ACL rules.</li>
+<li>Identify configuration components that may affect network connectivity.</li>
+</ul>
+</li>
+<li>
+<p>Learned about EC2 Instance Connect Endpoint as an additional method of connecting to EC2 Instances without relying entirely on public IP addresses.</p>
+</li>
+<li>
+<p>Understood the function of AWS Systems Manager Session Manager in securely accessing and managing EC2 Instances through interactive sessions with auditing capabilities, without requiring SSH Keys or opening inbound SSH ports.</p>
+</li>
+<li>
+<p>Understood the role of Amazon CloudWatch in monitoring resources and network traffic, including:</p>
+<ul>
+<li>Monitoring NAT Gateway metrics.</li>
+<li>Monitoring VPN Tunnel status and data traffic.</li>
+<li>Monitoring EC2 Instance performance, CPU, and memory metrics when corresponding metrics are available.</li>
+<li>Monitoring VPC Flow Logs and security events.</li>
+<li>Learning how to configure alarms when metrics exceed specified thresholds.</li>
+</ul>
+</li>
+<li>
+<p>Gained an overall understanding of AWS Site-to-Site VPN and how to establish secure network connectivity between an On-premises environment and Amazon VPC through encrypted VPN Tunnels.</p>
+</li>
+<li>
+<p>Understood the functions of the main components in Site-to-Site VPN architecture:</p>
+<ul>
+<li><strong>Virtual Private Gateway (VGW):</strong> The AWS-side VPN gateway attached to a VPC to establish VPN connectivity.</li>
+<li><strong>Customer Gateway (CGW):</strong> Represents the VPN device or software on the customer network side.</li>
+<li><strong>VPN Connection:</strong> Establishes connectivity between a Virtual Private Gateway and a Customer Gateway.</li>
+<li><strong>VPN Tunnel:</strong> An encrypted tunnel used to securely transfer data between two network environments.</li>
+</ul>
+</li>
+<li>
+<p>Gained practical experience in building a simulated Branch Office environment for VPN connectivity, including:</p>
+<ul>
+<li>Creating a separate VPC named ASG VPN with the IPv4 CIDR block <code>10.11.0.0/16</code>.</li>
+<li>Creating a Public Subnet and configuring an Internet Gateway.</li>
+<li>Creating a Route Table and configuring the necessary network routes.</li>
+<li>Creating a Security Group for VPN, SSH, and network connectivity testing.</li>
+<li>Deploying an EC2 Instance in a Public Subnet to act as the Customer Gateway.</li>
+<li>Checking the public IP address of the EC2 Instance.</li>
+</ul>
+</li>
+<li>
+<p>Gained practical experience in creating and configuring AWS Site-to-Site VPN components, including:</p>
+<ul>
+<li>Creating a Virtual Private Gateway and attaching it to the target VPC.</li>
+<li>Creating a Customer Gateway using the public IP address of the EC2 Customer Gateway.</li>
+<li>Configuring the BGP ASN according to the workshop instructions, using the default value of 65000 in the static routing scenario.</li>
+<li>Creating a VPN Connection between the Virtual Private Gateway and Customer Gateway.</li>
+<li>Selecting Static Routing and specifying the network range <code>10.11.0.0/16</code> of the simulated Customer Gateway environment.</li>
+<li>Checking the VPN Connection status and connection initialization process.</li>
+</ul>
+</li>
+<li>
+<p>Understood the process of downloading and using the VPN configuration file provided by AWS for the Customer Gateway, including:</p>
+<ul>
+<li>Selecting Vendor and Platform as OpenSwan.</li>
+<li>Selecting Software OpenSwan 2.6.38+.</li>
+<li>Selecting IKEv1 according to the workshop instructions.</li>
+<li>Using the configuration file as the basis for establishing IPsec on the EC2 Customer Gateway.</li>
+</ul>
+</li>
+<li>
+<p>Gained practical knowledge of installing and configuring Libreswan on the EC2 Customer Gateway, including:</p>
+<ul>
+<li>Installing Libreswan on a suitable Linux environment.</li>
+<li>Checking and configuring the <code>/etc/ipsec.conf</code> file.</li>
+<li>Enabling IP Forwarding and configuring the necessary network parameters.</li>
+<li>Configuring IPsec parameters based on the AWS-provided configuration file.</li>
+<li>Checking VPN Tunnel status and verifying data transmission between the two networks.</li>
+</ul>
+</li>
+<li>
+<p>Understood how to customize VPN Tunnel parameters, including DPD Timeout, IKE versions, encryption algorithms, integrity algorithms, and Diffie-Hellman Groups.</p>
+</li>
+<li>
+<p>Became familiar with enabling VPN Tunnel Activity Logs and using Amazon CloudWatch Logs to monitor VPN Tunnel activities, connection events, and information required for troubleshooting.</p>
+</li>
+<li>
+<p>Understood the procedures for checking and troubleshooting Site-to-Site VPN connectivity issues, including:</p>
+<ul>
+<li>Checking VPN Tunnel operational status.</li>
+<li>Verifying Customer Gateway and VPN Connection configurations.</li>
+<li>Checking IKE/IPsec parameters and authentication processes.</li>
+<li>Verifying IP Forwarding and routing information between the two networks.</li>
+<li>Examining network configurations and system logs to identify the causes of connectivity interruptions.</li>
+</ul>
+</li>
+<li>
+<p>Explored alternative VPN configurations and the StrongSwan with Transit Gateway connectivity model as optional workshop extensions.</p>
+</li>
+<li>
+<p>Understood Infrastructure as Code (IaC) and the benefits of managing and deploying AWS infrastructure through machine-readable definition files, including:</p>
+<ul>
+<li>Reusing configurations to deploy consistent environments.</li>
+<li>Managing versions and tracking infrastructure changes.</li>
+<li>Automating deployment processes to reduce manual errors.</li>
+<li>Recreating or cleaning up environments systematically.</li>
+<li>Supporting standardized infrastructure and security configuration checks.</li>
+</ul>
+</li>
+<li>
+<p>Recognized the importance of cleaning up AWS resources after completing practical exercises, especially NAT Gateways, Elastic IP Addresses, EC2 Instances, and VPN Connections, as these resources may incur charges during usage.</p>
+</li>
+<li>
+<p>Understood the resource cleanup sequence recommended by the workshop to avoid dependency-related errors:</p>
+<ul>
+<li>Terminate EC2 Instances.</li>
+<li>Delete NAT Gateways.</li>
+<li>Release Elastic IP Addresses.</li>
+<li>Delete VPC Endpoints, if any.</li>
+<li>Delete VPN Connections.</li>
+<li>Detach and delete Virtual Private Gateways.</li>
+<li>Delete Customer Gateways.</li>
+<li>Delete VPCs last.</li>
+</ul>
+</li>
+<li>
+<p>Understood that properly reviewing and cleaning up AWS resources helps minimize unexpected charges while keeping the AWS account environment organized and manageable.</p>
 </li>
 </ul>
 
@@ -1121,19 +1289,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1793781996"></script>
-    <script src="/js/perfect-scrollbar.min.js?1793781996"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1793781996"></script>
-    <script src="/js/jquery.sticky.js?1793781996"></script>
-    <script src="/js/featherlight.min.js?1793781996"></script>
-    <script src="/js/highlight.pack.js?1793781996"></script>
+    <script src="/js/clipboard.min.js?1793785422"></script>
+    <script src="/js/perfect-scrollbar.min.js?1793785422"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1793785422"></script>
+    <script src="/js/jquery.sticky.js?1793785422"></script>
+    <script src="/js/featherlight.min.js?1793785422"></script>
+    <script src="/js/highlight.pack.js?1793785422"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1793781996"></script>
-    <script src="/js/learn.js?1793781996"></script>
-    <script src="/js/hugo-learn.js?1793781996"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1793785422"></script>
+    <script src="/js/learn.js?1793785422"></script>
+    <script src="/js/hugo-learn.js?1793785422"></script>
     
         
-            <script src="/mermaid/mermaid.js?1793781996"></script>
+            <script src="/mermaid/mermaid.js?1793785422"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
