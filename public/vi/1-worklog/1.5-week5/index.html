@@ -1,0 +1,1269 @@
+<!DOCTYPE html>
+<html lang="vi" class="js csstransforms3d">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="Hugo 0.134.3">
+    <meta name="description" content="">
+
+
+    <link rel="icon" href="/images/favicon.png" type="image/png">
+
+    <title>Worklog Tuần 5 :: Báo cáo thực tập</title>
+
+    
+    <link href="/css/nucleus.css?1794302820" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1794302820" rel="stylesheet">
+    <link href="/css/hybrid.css?1794302820" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1794302820" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1794302820" rel="stylesheet">
+    <link href="/css/auto-complete.css?1794302820" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1794302820" rel="stylesheet">
+    <link href="/css/theme.css?1794302820" rel="stylesheet">
+    <link href="/css/tabs.css?1794302820" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1794302820" rel="stylesheet">
+    
+    <link href="/css/theme-workshop.css?1794302820" rel="stylesheet">
+    
+    <link href="/css/vietnamese-font.css?1794302820" rel="stylesheet"><link href="/css/table-borders.css?1794302820" rel="stylesheet">
+
+    <script src="/js/jquery-3.3.1.min.js?1794302820"></script>
+
+    <style>
+      :root #header + #content > #left > #rlblock_left{
+          display:none !important;
+      }
+      
+    </style>
+    
+  </head>
+  <body class="" data-url="/vi/1-worklog/1.5-week5/">
+    <nav id="sidebar" class="showVisitedLinks">
+
+
+
+  <div id="header-wrapper">
+    <div id="header">
+      <a id="logo" href="/">
+
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 30" width="30%"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:#fff;fill-rule:evenodd;}</style></defs><title>AWS-Logo_White-Color</title><path class="cls-1" d="M14.09,10.85a4.7,4.7,0,0,0,.19,1.48,7.73,7.73,0,0,0,.54,1.19.77.77,0,0,1,.12.38.64.64,0,0,1-.32.49l-1,.7a.83.83,0,0,1-.44.15.69.69,0,0,1-.49-.23,3.8,3.8,0,0,1-.6-.77q-.25-.42-.51-1a6.14,6.14,0,0,1-4.89,2.3,4.54,4.54,0,0,1-3.32-1.19,4.27,4.27,0,0,1-1.22-3.2A4.28,4.28,0,0,1,3.61,7.75,6.06,6.06,0,0,1,7.69,6.46a12.47,12.47,0,0,1,1.76.13q.92.13,1.91.36V5.73a3.65,3.65,0,0,0-.79-2.66A3.81,3.81,0,0,0,7.86,2.3a7.71,7.71,0,0,0-1.79.22,12.78,12.78,0,0,0-1.79.57,4.55,4.55,0,0,1-.58.22l-.26,0q-.35,0-.35-.52V2a1.09,1.09,0,0,1,.12-.58,1.2,1.2,0,0,1,.47-.35A10.88,10.88,0,0,1,5.77.32,10.19,10.19,0,0,1,8.36,0a6,6,0,0,1,4.35,1.35,5.49,5.49,0,0,1,1.38,4.09ZM7.34,13.38a5.36,5.36,0,0,0,1.72-.31A3.63,3.63,0,0,0,10.63,12,2.62,2.62,0,0,0,11.19,11a5.63,5.63,0,0,0,.16-1.44v-.7a14.35,14.35,0,0,0-1.53-.28,12.37,12.37,0,0,0-1.56-.1,3.84,3.84,0,0,0-2.47.67A2.34,2.34,0,0,0,5,11a2.35,2.35,0,0,0,.61,1.76A2.4,2.4,0,0,0,7.34,13.38Zm13.35,1.8a1,1,0,0,1-.64-.16,1.3,1.3,0,0,1-.35-.65L15.81,1.51a3,3,0,0,1-.15-.67.36.36,0,0,1,.41-.41H17.7a1,1,0,0,1,.65.16,1.4,1.4,0,0,1,.33.65l2.79,11,2.59-11A1.17,1.17,0,0,1,24.39.6a1.1,1.1,0,0,1,.67-.16H26.4a1.1,1.1,0,0,1,.67.16,1.17,1.17,0,0,1,.32.65L30,12.39,32.88,1.25A1.39,1.39,0,0,1,33.22.6a1,1,0,0,1,.65-.16h1.54a.36.36,0,0,1,.41.41,1.36,1.36,0,0,1,0,.26,3.64,3.64,0,0,1-.12.41l-4,12.86a1.3,1.3,0,0,1-.35.65,1,1,0,0,1-.64.16H29.25a1,1,0,0,1-.67-.17,1.26,1.26,0,0,1-.32-.67L25.67,3.64,23.11,14.34a1.26,1.26,0,0,1-.32.67,1,1,0,0,1-.67.17Zm21.36.44a11.28,11.28,0,0,1-2.56-.29,7.44,7.44,0,0,1-1.92-.67,1,1,0,0,1-.61-.93v-.84q0-.52.38-.52a.9.9,0,0,1,.31.06l.42.17a8.77,8.77,0,0,0,1.83.58,9.78,9.78,0,0,0,2,.2,4.48,4.48,0,0,0,2.43-.55,1.76,1.76,0,0,0,.86-1.57,1.61,1.61,0,0,0-.45-1.16A4.29,4.29,0,0,0,43,9.22l-2.41-.76A5.15,5.15,0,0,1,38,6.78a3.94,3.94,0,0,1-.83-2.41,3.7,3.7,0,0,1,.45-1.85,4.47,4.47,0,0,1,1.19-1.37A5.27,5.27,0,0,1,40.51.29,7.4,7.4,0,0,1,42.6,0a8.87,8.87,0,0,1,1.12.07q.57.07,1.08.19t.95.26a4.27,4.27,0,0,1,.7.29,1.59,1.59,0,0,1,.49.41.94.94,0,0,1,.15.55v.79q0,.52-.38.52a1.76,1.76,0,0,1-.64-.2,7.74,7.74,0,0,0-3.2-.64,4.37,4.37,0,0,0-2.21.47,1.6,1.6,0,0,0-.79,1.48,1.58,1.58,0,0,0,.49,1.18,4.94,4.94,0,0,0,1.83.92L44.55,7a5.08,5.08,0,0,1,2.57,1.6A3.76,3.76,0,0,1,47.9,11a4.21,4.21,0,0,1-.44,1.93,4.4,4.4,0,0,1-1.21,1.47,5.43,5.43,0,0,1-1.85.93A8.25,8.25,0,0,1,42.05,15.62Z"></path><path class="cls-2" d="M45.19,23.81C39.72,27.85,31.78,30,25,30A36.64,36.64,0,0,1,.22,20.57c-.51-.46-.06-1.09.56-.74A49.78,49.78,0,0,0,25.53,26.4,49.23,49.23,0,0,0,44.4,22.53C45.32,22.14,46.1,23.14,45.19,23.81Z"></path><path class="cls-2" d="M47.47,21.21c-.7-.9-4.63-.42-6.39-.21-.53.06-.62-.4-.14-.74,3.13-2.2,8.27-1.57,8.86-.83s-.16,5.89-3.09,8.35c-.45.38-.88.18-.68-.32C46.69,25.8,48.17,22.11,47.47,21.21Z"></path></svg>
+
+</a>
+    </div>
+    
+        <div class="searchbox">
+    <label for="search-by"><i class="fas fa-search"></i></label>
+    <input data-search-input id="search-by" type="search" placeholder="Search...">
+    <span data-search-clear=""><i class="fas fa-times"></i></span>
+</div>
+
+<script type="text/javascript" src="/js/lunr.min.js?1794302820"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1794302820"></script>
+<script type="text/javascript">
+    
+        var baseurl = "http:\/\/localhost:1313\/\/vi";
+    
+</script>
+<script type="text/javascript" src="/js/search.js?1794302820"></script>
+
+    
+  </div>
+  
+    <section id="homelinks">
+      <ul>
+        <li>
+            <a class="padding" href='/'><i class='fas fa-home'></i> Home</a>
+        </li>
+      </ul>
+    </section>
+  
+
+    <div class="highlightable">
+    <ul class="topics">
+
+        
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/" title="Nhật ký công việc" class="dd-item
+        parent
+        
+        
+        ">
+      <a href="/vi/1-worklog/">
+           <b> 1. </b> Nhật ký công việc
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/1.1-week1/" title="Worklog Tuần 1" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/1-worklog/1.1-week1/">
+           <b> 1.1. </b> Worklog Tuần 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/1.2-week2/" title="Worklog Tuần 2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/1-worklog/1.2-week2/">
+           <b> 1.2. </b> Worklog Tuần 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/1.3-week3/" title="Worklog Tuần 3" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/1-worklog/1.3-week3/">
+           <b> 1.3. </b> Worklog Tuần 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/1.4-week4/" title="Worklog Tuần 4" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/1-worklog/1.4-week4/">
+           <b> 1.4. </b> Worklog Tuần 4
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/1-worklog/1.5-week5/" title="Worklog Tuần 5" class="dd-item
+        
+        active
+        
+        ">
+      <a href="/vi/1-worklog/1.5-week5/">
+           <b> 1.5. </b> Worklog Tuần 5
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/2-proposal/" title="Bản đề xuất" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/2-proposal/">
+           <b> 2. </b> Bản đề xuất
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-blogsposted/" title="Các bài blogs đã đăng" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/3-blogsposted/">
+           <b> 3. </b> Các bài blogs đã đăng
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-blogsposted/3.1-blog1/" title="Blog 1" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/3-blogsposted/3.1-blog1/">
+           <b> 3.1. </b> Blog 1
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-blogsposted/3.2-blog2/" title="Blog 2" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/3-blogsposted/3.2-blog2/">
+           <b> 3.2. </b> Blog 2
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/3-blogsposted/3.3-blog3/" title="Blog 3" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/3-blogsposted/3.3-blog3/">
+           <b> 3.3. </b> Blog 3
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-eventparticipated/" title="Các events đã tham gia" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/4-eventparticipated/">
+           <b> 4. </b> Các events đã tham gia
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+        <ul>
+          
+          
+            
+          
+          
+
+        
+          
+            
+            
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/4-eventparticipated/4.1-event1/" title="" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/4-eventparticipated/4.1-event1/">
+          
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+            
+          
+        
+        </ul>
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/5-workshop/" title="Workshop" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/5-workshop/">
+           <b> 5. </b> Workshop
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/6-self-evaluation/" title="Tự đánh giá" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/6-self-evaluation/">
+           <b> 6. </b> Tự đánh giá
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+          
+
+
+
+
+ 
+  
+    
+    <li data-nav-id="/vi/7-feedback/" title="Chia sẻ, đóng góp ý kiến" class="dd-item
+        
+        
+        
+        ">
+      <a href="/vi/7-feedback/">
+           <b> 7. </b> Chia sẻ, đóng góp ý kiến
+          
+            <i class="fas fa-check read-icon"></i>
+          
+      </a>
+      
+      
+    </li>
+  
+ 
+
+          
+        
+    </ul>
+
+    
+    
+      <section id="shortcuts">
+        <h3>More</h3>
+        <ul>
+          
+              <li>
+                  <a class="padding" href="https://awsstudygroup.com"><i class='fab fa-aws'></i> AWS Study Group - Blog</a>
+              </li>
+          
+              <li>
+                  <a class="padding" href="https://www.facebook.com/groups/awsstudygroupfcj"><i class='fab fa-facebook'></i> AWS Study Group - Nhóm FB</a>
+              </li>
+          
+        </ul>
+      </section>
+    
+
+    
+    <section id="prefooter">
+      <hr/>
+      <ul>
+      
+        <li>
+          <a class="padding">
+            <i class="fas fa-language fa-fw"></i>
+          <div class="select-style">
+            <select id="select-language" onchange="location = this.value;">
+          
+          
+          
+              
+              
+                  
+                    
+                    
+                      <option id="en" value="http://localhost:1313/1-worklog/1.5-week5/">English</option>
+                    
+                  
+              
+                  
+              
+          
+              
+              
+                  
+              
+                  
+                    
+                    
+                      <option id="vi" value="http://localhost:1313/vi/1-worklog/1.5-week5/" selected>Tiếng Việt</option>
+                    
+                  
+              
+          
+        </select>
+        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+          width="255px" height="255px" viewBox="0 0 255 255" style="enable-background:new 0 0 255 255;" xml:space="preserve">
+          <g>
+            <g id="arrow-drop-down">
+              <polygon points="0,63.75 127.5,191.25 255,63.75 		" />
+            </g>
+          </g>
+        </svg>
+        </div>
+        </a>
+        </li>
+      
+
+      
+        <li><a class="padding" href="#" data-clear-history-toggle=""><i class="fas fa-history fa-fw"></i> Clear History</a></li>
+      
+      </ul>
+    </section>
+    
+    <section id="footer">
+      <left>
+    <br>
+    <br>
+    <b> Last Updated </b> <br>
+    <i>
+        <font color=orange>10-11-2026</font>
+    </i>
+</left>
+<left>
+    <br>
+    <br>
+    <b> Team </b> <br>
+    <i>
+        <a href="https://www.facebook.com/groups/660548818043427" style="color:orange">First Cloud AI Journey</a>
+    </i>
+</left>
+
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+    </section>
+  </div>
+</nav>
+
+
+
+
+        <section id="body">
+        <div id="overlay"></div>
+        <div class="padding highlightable">
+              
+              <div>
+                <div id="top-bar">
+                
+                
+                <div id="breadcrumbs" itemscope="" itemtype="http://data-vocabulary.org/Breadcrumb">
+                    <span id="sidebar-toggle-span">
+                        <a href="#" id="sidebar-toggle" data-sidebar-toggle="">
+                          <i class="fas fa-bars"></i>
+                        </a>
+                    </span>
+                  
+                  <span id="toc-menu"><i class="fas fa-list-alt"></i></span>
+                  
+                  <span class="links">
+                 
+                 
+                    
+          
+          
+            
+            
+          
+          
+            
+            
+          
+          
+            <a href='/vi/'>Báo cáo thực tập</a> > <a href='/vi/1-worklog/'>Nhật ký công việc</a> > Worklog Tuần 5
+          
+        
+          
+        
+          
+        
+                 
+                  </span>
+                </div>
+                
+                    <div class="progress">
+    <div class="wrapper">
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#mục-tiêu-tuần-5">Mục tiêu tuần 5:</a></li>
+        <li><a href="#các-công-việc-cần-triển-khai-trong-tuần-này">Các công việc cần triển khai trong tuần này:</a></li>
+        <li><a href="#kết-quả-đạt-được-trong-tuần-5">Kết quả đạt được trong tuần 5:</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+</div>
+
+                
+              </div>
+            </div>
+            
+        <div id="head-tags">
+        
+        </div>
+        
+        <div id="body-inner">
+          
+            <h1>
+              
+              Worklog Tuần 5
+            </h1>
+          
+
+        
+
+
+
+	<h3 id="mục-tiêu-tuần-5">Mục tiêu tuần 5:</h3>
+<ul>
+<li>Tìm hiểu tổng quan về AWS CloudShell, vai trò và lợi ích của môi trường dòng lệnh được AWS quản lý trực tiếp trên trình duyệt.</li>
+<li>Nắm được cách truy cập AWS CloudShell thông qua AWS Management Console, khởi tạo CloudShell Environment và làm quen với giao diện Terminal.</li>
+<li>Tìm hiểu các lệnh Linux cơ bản thường được sử dụng trong AWS CloudShell để quản lý thư mục, tệp tin và kiểm tra quyền truy cập.</li>
+<li>Thực hành sử dụng các lệnh <code>pwd</code>, <code>ls -la</code>, <code>mkdir</code>, <code>cd</code>, <code>touch</code>, <code>vi</code> và <code>cat</code> để thao tác với thư mục và tệp tin trong môi trường CloudShell.</li>
+<li>Tìm hiểu AWS Command Line Interface (AWS CLI), chức năng và khả năng quản lý các dịch vụ AWS thông qua dòng lệnh.</li>
+<li>Thực hành sử dụng AWS CLI để kiểm tra phiên bản công cụ, liệt kê các Amazon S3 Bucket và truy vấn thông tin EC2 Instance trong tài khoản AWS.</li>
+<li>Nắm được cách tải tệp từ máy tính cá nhân lên CloudShell và tải tệp từ CloudShell về máy tính thông qua giao diện quản lý tệp.</li>
+<li>Hiểu được cách quản lý và xóa CloudShell Environment sau khi hoàn thành bài thực hành nhằm hạn chế việc lưu trữ dữ liệu không cần thiết.</li>
+</ul>
+<h3 id="các-công-việc-cần-triển-khai-trong-tuần-này">Các công việc cần triển khai trong tuần này:</h3>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Thứ</th>
+          <th style="text-align: left">Công việc</th>
+          <th style="text-align: left">Ngày bắt đầu</th>
+          <th style="text-align: left">Ngày hoàn thành</th>
+          <th style="text-align: left">Nguồn tài liệu</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">2</td>
+          <td style="text-align: left"><strong>Tìm hiểu AWS CloudShell và khởi tạo CloudShell Environment</strong><br><br> - Tìm hiểu tổng quan về AWS CloudShell, một môi trường dòng lệnh được AWS quản lý hoàn toàn và có thể truy cập trực tiếp thông qua trình duyệt web.<br> - Tìm hiểu vai trò của CloudShell trong việc thực hiện các thao tác quản lý tài nguyên AWS mà không cần cài đặt hoặc cấu hình môi trường dòng lệnh trên máy tính cá nhân.<br> - Tìm hiểu các công cụ được tích hợp sẵn trong CloudShell, bao gồm AWS CLI, AWS SDKs và một số công cụ dòng lệnh cần thiết.<br> - Tìm hiểu cơ chế xác thực của CloudShell thông qua quyền truy cập được kế thừa từ IAM User hoặc IAM Role đang sử dụng trong AWS Management Console.<br> - Tìm hiểu dung lượng lưu trữ được cấp phát sẵn trong thư mục <code>$HOME</code>, với 1 GB dung lượng lưu trữ được phân bổ cho môi trường CloudShell.<br> - Thực hành đăng nhập AWS Management Console bằng tài khoản AWS đã đăng ký.<br> - Sử dụng thanh tìm kiếm dịch vụ trên AWS Management Console, nhập từ khóa CloudShell và lựa chọn dịch vụ AWS CloudShell.<br> - Thực hành mở CloudShell Environment thông qua giao diện Terminal và lựa chọn tùy chọn mở môi trường <code>us-west-1</code> theo hướng dẫn Workshop.<br> - Làm quen với giao diện Terminal, khu vực nhập lệnh và cách tương tác với môi trường CloudShell.<br> - Kiểm tra khả năng truy cập CloudShell và chuẩn bị môi trường để thực hiện các bài thực hành tiếp theo.</td>
+          <td style="text-align: left">02/11/2026</td>
+          <td style="text-align: left">02/11/2026</td>
+          <td style="text-align: left"><a href="https://000049.awsfcaj.com/">Getting Started with AWS CloudShell</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">3</td>
+          <td style="text-align: left"><strong>Tìm hiểu và thực hành các lệnh Linux cơ bản trong AWS CloudShell</strong><br><br> - Tìm hiểu vai trò của các lệnh Linux cơ bản trong việc quản lý thư mục, tệp tin và kiểm tra thông tin hệ thống thông qua giao diện dòng lệnh.<br> - Thực hành sử dụng lệnh <code>pwd</code> để hiển thị đường dẫn của thư mục làm việc hiện tại trong CloudShell.<br> - Thực hành sử dụng lệnh <code>ls -la</code> để liệt kê các tệp tin và thư mục, bao gồm cả những thành phần ẩn cùng thông tin quyền truy cập của người dùng và nhóm.<br> - Tìm hiểu ý nghĩa của các quyền truy cập <code>rwx</code>, bao gồm Read (đọc), Write (ghi) và Execute (thực thi).<br> - Phân biệt ba nhóm quyền truy cập tương ứng với User, Group và Other trong hệ thống Linux.<br> - Thực hành sử dụng lệnh <code>mkdir project</code> để tạo thư mục mới có tên <code>project</code>.<br> - Sử dụng lệnh <code>cd project</code> để di chuyển vào thư mục vừa tạo.<br> - Sử dụng lệnh <code>touch test.txt</code> để tạo tệp tin <code>test.txt</code> trong thư mục <code>project</code>.<br> - Thực hành sử dụng trình soạn thảo văn bản <code>vi test.txt</code> để chỉnh sửa nội dung tệp tin.<br> - Tìm hiểu thao tác nhấn phím <code>i</code> để chuyển sang chế độ Insert, nhập nội dung mẫu <code>Hello First Cloud AI Journey!</code>, sau đó nhấn <code>Esc</code> và sử dụng lệnh <code>:wq</code> để lưu nội dung và thoát khỏi trình soạn thảo.<br> - Sử dụng lệnh <code>cat test.txt</code> để hiển thị và kiểm tra nội dung đã lưu trong tệp tin.<br> - Kiểm tra lại cấu trúc thư mục và các tệp tin đã tạo trong quá trình thực hành.</td>
+          <td style="text-align: left">03/11/2026</td>
+          <td style="text-align: left">03/11/2026</td>
+          <td style="text-align: left"><a href="https://000049.awsfcaj.com/2-basicfeature/">Getting Started with AWS CloudShell - Basic Commands</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">4</td>
+          <td style="text-align: left"><strong>Tìm hiểu và thực hành sử dụng AWS Command Line Interface (AWS CLI)</strong><br><br> - Tìm hiểu tổng quan về AWS Command Line Interface (AWS CLI), một công cụ cho phép quản lý và tương tác với nhiều dịch vụ AWS thông qua các lệnh trong Terminal.<br> - Tìm hiểu khả năng sử dụng AWS CLI để quản lý tài nguyên AWS, kiểm tra thông tin dịch vụ và tự động hóa các thao tác thông qua những tệp lệnh chứa nhiều câu lệnh liên tiếp.<br> - Tìm hiểu việc AWS CLI đã được cài đặt và cấu hình sẵn trong môi trường AWS CloudShell, không cần thực hiện cài đặt thủ công.<br> - Thực hành sử dụng lệnh <code>aws --version</code> để kiểm tra phiên bản AWS CLI hiện có trong CloudShell.<br> - Sử dụng lệnh <code>aws s3 ls</code> để liệt kê danh sách các Amazon S3 Bucket thuộc tài khoản AWS đang sử dụng.<br> - Sử dụng lệnh <code>aws ec2 describe-instances</code> để truy vấn và hiển thị thông tin các EC2 Instance trong tài khoản AWS.<br> - Tìm hiểu cách AWS CLI tương tác với các dịch vụ AWS dựa trên quyền truy cập của IAM User hoặc IAM Role hiện tại.<br> - Thực hành đọc kết quả trả về từ các câu lệnh AWS CLI và nhận biết thông tin cơ bản của các tài nguyên AWS.<br> - Hiểu được lợi ích của AWS CLI trong việc giảm thao tác trên giao diện quản lý AWS Console, hỗ trợ kiểm tra tài nguyên và thực hiện các công việc quản trị nhanh chóng.</td>
+          <td style="text-align: left">04/11/2026</td>
+          <td style="text-align: left">04/11/2026</td>
+          <td style="text-align: left"><a href="https://000049.awsfcaj.com/3-useawscli/">Getting Started with AWS CloudShell - Using AWS CLI</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">5</td>
+          <td style="text-align: left"><strong>Thực hành tải lên và tải xuống tệp tin trong AWS CloudShell</strong><br><br> - Tìm hiểu chức năng quản lý tệp tin của AWS CloudShell và khả năng trao đổi dữ liệu giữa máy tính cá nhân với môi trường CloudShell.<br> - Thực hành tạo một tệp tin có tên <code>test.txt</code> trên máy tính cá nhân và nhập nội dung tùy ý để chuẩn bị cho quá trình tải lên.<br> - Truy cập giao diện AWS CloudShell, lựa chọn Actions → Upload file và chọn tệp <code>test.txt</code> từ máy tính cá nhân.<br> - Kiểm tra thông báo xác nhận tải tệp thành công sau khi hoàn tất thao tác Upload file.<br> - Sử dụng lệnh <code>ls</code> trong CloudShell để kiểm tra sự xuất hiện của tệp tin vừa tải lên.<br> - Sử dụng lệnh <code>cat test.txt</code> để đọc và kiểm tra nội dung của tệp tin đã được tải lên CloudShell.<br> - Thực hành tạo một tệp tin mới có tên <code>test1.txt</code> bằng lệnh <code>touch test1.txt</code> để chuẩn bị cho thao tác tải xuống.<br> - Sử dụng lệnh <code>vi test1.txt</code> để mở và chỉnh sửa tệp tin, nhập nội dung mẫu <code>Hello FCAJ!</code>, sau đó nhấn <code>Esc</code> và sử dụng <code>:wq</code> để lưu và thoát.<br> - Sử dụng lệnh <code>ls</code> để kiểm tra tên tệp tin vừa tạo trong môi trường CloudShell.<br> - Thực hành lựa chọn Actions → Download file, nhập tên tệp <code>test1.txt</code> và nhấn Download để tải tệp từ CloudShell về máy tính cá nhân.<br> - Mở tệp tin đã tải xuống trên máy tính và kiểm tra nội dung nhằm xác nhận quá trình tải xuống thành công.<br> - Hiểu được quy trình trao đổi tệp tin giữa máy tính cá nhân và AWS CloudShell phục vụ cho các bài thực hành quản trị tài nguyên AWS.</td>
+          <td style="text-align: left">05/11/2026</td>
+          <td style="text-align: left">05/11/2026</td>
+          <td style="text-align: left"><a href="https://000049.awsfcaj.com/3-useawscli/">Getting Started with AWS CloudShell - Using AWS CLI</a></td>
+      </tr>
+      <tr>
+          <td style="text-align: left">6</td>
+          <td style="text-align: left"><strong>Thực hành dọn dẹp và xóa CloudShell Environment sau Workshop</strong><br><br> - Tìm hiểu mục đích của việc dọn dẹp tài nguyên và dữ liệu CloudShell sau khi hoàn thành các bài thực hành.<br> - Kiểm tra lại môi trường CloudShell và các tệp tin đã tạo trong quá trình thực hành, bao gồm thư mục <code>project</code>, tệp <code>test.txt</code> và <code>test1.txt</code>.<br> - Thực hành truy cập mục Actions trên giao diện AWS CloudShell.<br> - Lựa chọn chức năng Delete để thực hiện xóa CloudShell Environment theo hướng dẫn Workshop.<br> - Xác nhận thao tác bằng cách nhấn Delete tại hộp thoại xác nhận xóa.<br> - Kiểm tra quá trình xóa CloudShell Environment và hoàn tất việc dọn dẹp môi trường thực hành.<br> - Tổng kết các nội dung đã thực hiện, bao gồm khởi tạo CloudShell, sử dụng lệnh Linux cơ bản, thao tác AWS CLI và quản lý tệp tin.<br> - Nhận thức được tầm quan trọng của việc kiểm tra và quản lý dữ liệu trong môi trường CloudShell sau khi hoàn thành Workshop.</td>
+          <td style="text-align: left">06/11/2026</td>
+          <td style="text-align: left">06/11/2026</td>
+          <td style="text-align: left"><a href="https://000049.awsfcaj.com/4-cleanup/">Getting Started with AWS CloudShell - Clean Up Resources</a></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="kết-quả-đạt-được-trong-tuần-5">Kết quả đạt được trong tuần 5:</h3>
+<ul>
+<li>
+<p>Nắm được tổng quan về AWS CloudShell, hiểu được vai trò của môi trường dòng lệnh được AWS quản lý hoàn toàn và khả năng truy cập trực tiếp thông qua AWS Management Console mà không cần cài đặt hoặc cấu hình công cụ trên máy tính cá nhân.</p>
+</li>
+<li>
+<p>Hiểu được những lợi ích chính của AWS CloudShell trong quá trình quản trị AWS, bao gồm:</p>
+<ul>
+<li>Truy cập môi trường dòng lệnh trực tiếp trên trình duyệt.</li>
+<li>Sử dụng AWS CLI và AWS SDKs được tích hợp sẵn.</li>
+<li>Thực hiện các thao tác quản lý và kiểm tra tài nguyên AWS.</li>
+<li>Hỗ trợ viết và thực thi các tập lệnh tự động hóa.</li>
+<li>Cung cấp 1 GB dung lượng lưu trữ được phân bổ trong thư mục <code>$HOME</code>.</li>
+</ul>
+</li>
+<li>
+<p>Hiểu được cơ chế xác thực và cấp quyền truy cập của CloudShell thông qua IAM User hoặc IAM Role đang sử dụng trong AWS Management Console, giúp thực hiện các thao tác trên dịch vụ AWS theo quyền được cấp.</p>
+</li>
+<li>
+<p>Thực hành truy cập AWS CloudShell thông qua AWS Management Console, tìm kiếm dịch vụ CloudShell, mở CloudShell Environment và làm quen với giao diện Terminal.</p>
+</li>
+<li>
+<p>Nắm được cách sử dụng các lệnh Linux cơ bản trong AWS CloudShell, bao gồm:</p>
+<ul>
+<li><strong><code>pwd</code>:</strong> Hiển thị đường dẫn của thư mục làm việc hiện tại.</li>
+<li><strong><code>ls -la</code>:</strong> Liệt kê các tệp tin và thư mục, bao gồm các thành phần ẩn cùng thông tin quyền truy cập.</li>
+<li><strong><code>mkdir</code>:</strong> Tạo thư mục mới.</li>
+<li><strong><code>cd</code>:</strong> Di chuyển giữa các thư mục.</li>
+<li><strong><code>touch</code>:</strong> Tạo tệp tin mới.</li>
+<li><strong><code>vi</code>:</strong> Mở và chỉnh sửa nội dung tệp tin bằng trình soạn thảo văn bản.</li>
+<li><strong><code>cat</code>:</strong> Hiển thị nội dung của tệp tin.</li>
+</ul>
+</li>
+<li>
+<p>Hiểu được ý nghĩa của các quyền truy cập Linux <code>rwx</code>, trong đó:</p>
+<ul>
+<li><strong>Read (r):</strong> Quyền đọc dữ liệu.</li>
+<li><strong>Write (w):</strong> Quyền ghi và chỉnh sửa dữ liệu.</li>
+<li><strong>Execute (x):</strong> Quyền thực thi.</li>
+<li><strong>User:</strong> Quyền của chủ sở hữu tệp tin hoặc thư mục.</li>
+<li><strong>Group:</strong> Quyền của nhóm người dùng.</li>
+<li><strong>Other:</strong> Quyền của những người dùng khác.</li>
+</ul>
+</li>
+<li>
+<p>Có kinh nghiệm thực hành tạo và quản lý thư mục, tệp tin trong CloudShell thông qua các thao tác:</p>
+<ul>
+<li>Tạo thư mục <code>project</code> bằng lệnh <code>mkdir</code>.</li>
+<li>Di chuyển vào thư mục bằng lệnh <code>cd</code>.</li>
+<li>Tạo tệp <code>test.txt</code> bằng lệnh <code>touch</code>.</li>
+<li>Chỉnh sửa nội dung bằng trình soạn thảo <code>vi</code>.</li>
+<li>Lưu nội dung và thoát khỏi trình soạn thảo bằng tổ hợp thao tác <code>Esc</code> và <code>:wq</code>.</li>
+<li>Kiểm tra nội dung tệp tin bằng lệnh <code>cat</code>.</li>
+</ul>
+</li>
+<li>
+<p>Nắm được tổng quan về AWS Command Line Interface (AWS CLI), hiểu được vai trò của công cụ trong việc quản lý, tương tác với các dịch vụ AWS thông qua dòng lệnh và hỗ trợ tự động hóa các thao tác quản trị.</p>
+</li>
+<li>
+<p>Hiểu được AWS CLI đã được cài đặt và cấu hình sẵn trong AWS CloudShell, không cần phải thực hiện các bước cài đặt thủ công.</p>
+</li>
+<li>
+<p>Thực hành sử dụng các lệnh AWS CLI để kiểm tra và truy vấn thông tin tài nguyên AWS, bao gồm:</p>
+<ul>
+<li><strong><code>aws --version</code>:</strong> Kiểm tra phiên bản AWS CLI đang được sử dụng.</li>
+<li><strong><code>aws s3 ls</code>:</strong> Liệt kê danh sách các Amazon S3 Bucket trong tài khoản AWS.</li>
+<li><strong><code>aws ec2 describe-instances</code>:</strong> Truy vấn thông tin các EC2 Instance trong tài khoản AWS.</li>
+</ul>
+</li>
+<li>
+<p>Hiểu được cách AWS CLI sử dụng quyền truy cập được cấp cho IAM User hoặc IAM Role hiện tại để thực hiện các thao tác trên dịch vụ AWS.</p>
+</li>
+<li>
+<p>Có kinh nghiệm thực hành quản lý và trao đổi tệp tin giữa máy tính cá nhân với môi trường CloudShell, bao gồm:</p>
+<ul>
+<li>Tạo tệp <code>test.txt</code> trên máy tính cá nhân để chuẩn bị tải lên CloudShell.</li>
+<li>Sử dụng Actions → Upload file để tải tệp từ máy tính cá nhân lên CloudShell.</li>
+<li>Sử dụng lệnh <code>ls</code> để kiểm tra tệp tin đã được tải lên.</li>
+<li>Sử dụng lệnh <code>cat</code> để kiểm tra nội dung tệp tin.</li>
+<li>Tạo tệp <code>test1.txt</code> trực tiếp trong CloudShell.</li>
+<li>Chỉnh sửa và lưu nội dung tệp tin bằng trình soạn thảo <code>vi</code>.</li>
+<li>Sử dụng Actions → Download file để tải tệp từ CloudShell về máy tính cá nhân.</li>
+<li>Kiểm tra nội dung tệp tin sau khi tải xuống thành công.</li>
+</ul>
+</li>
+<li>
+<p>Hiểu được sự thuận tiện của chức năng Upload file và Download file trong CloudShell, hỗ trợ trao đổi dữ liệu giữa môi trường làm việc trên AWS và máy tính cá nhân mà không cần sử dụng thêm công cụ truyền tệp bên ngoài.</p>
+</li>
+<li>
+<p>Nắm được quy trình dọn dẹp CloudShell Environment sau khi hoàn thành Workshop, bao gồm:</p>
+<ul>
+<li>Truy cập mục Actions trong giao diện CloudShell.</li>
+<li>Lựa chọn chức năng Delete.</li>
+<li>Xác nhận thao tác xóa bằng cách nhấn Delete.</li>
+<li>Hoàn tất việc xóa môi trường CloudShell theo hướng dẫn.</li>
+</ul>
+</li>
+<li>
+<p>Nhận thức được tầm quan trọng của việc quản lý môi trường làm việc, dữ liệu và tài nguyên AWS sau khi hoàn thành các bài thực hành nhằm tránh lưu trữ những dữ liệu không còn cần thiết và hạn chế các chi phí phát sinh không mong muốn.</p>
+</li>
+</ul>
+
+
+
+
+
+<footer class=" footline" >
+	
+</footer>
+
+        
+        </div>
+        
+
+      </div>
+
+    <div id="navigation">
+        
+        
+
+        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                        
+                        
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                        
+                    
+                    
+
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+                        
+            
+            
+                
+                    
+                
+                
+
+                    
+                    
+                    
+
+                    
+            
+        
+                    
+            
+        
+
+        
+
+
+	 
+	 
+		
+			<a class="nav nav-prev" href="/vi/1-worklog/1.4-week4/" title="Worklog Tuần 4"> <i class="fa fa-chevron-left"></i></a>
+		
+		
+			<a class="nav nav-next" href="/vi/2-proposal/" title="Bản đề xuất" style="margin-right: 0px;"><i class="fa fa-chevron-right"></i></a>
+		
+	
+    </div>
+
+    </section>
+
+    <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
+      <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
+    </div>
+    <script src="/js/clipboard.min.js?1794302820"></script>
+    <script src="/js/perfect-scrollbar.min.js?1794302820"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1794302820"></script>
+    <script src="/js/jquery.sticky.js?1794302820"></script>
+    <script src="/js/featherlight.min.js?1794302820"></script>
+    <script src="/js/highlight.pack.js?1794302820"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="/js/modernizr.custom-3.6.0.js?1794302820"></script>
+    <script src="/js/learn.js?1794302820"></script>
+    <script src="/js/hugo-learn.js?1794302820"></script>
+    
+        
+            <script src="/mermaid/mermaid.js?1794302820"></script>
+        
+        <script>
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    
+    <script>
+  (function (i, s, o, g, r, a, m) {
+    i["GoogleAnalyticsObject"] = r;
+    ((i[r] =
+      i[r] ||
+      function () {
+        (i[r].q = i[r].q || []).push(arguments);
+      }),
+      (i[r].l = 1 * new Date()));
+    ((a = s.createElement(o)), (m = s.getElementsByTagName(o)[0]));
+    a.async = 1;
+    a.src = g;
+    m.parentNode.insertBefore(a, m);
+  })(
+    window,
+    document,
+    "script",
+    "https://www.google-analytics.com/analytics.js",
+    "ga",
+  );
+
+  ga("create", "UA-158079754-2", "auto");
+  ga("send", "pageview");
+</script>
+  </body>
+</html>
