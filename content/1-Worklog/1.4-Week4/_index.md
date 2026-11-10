@@ -5,53 +5,48 @@ weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}} 
-⚠️ **Note:** The following information is for reference purposes only. Please **do not copy verbatim** for your own report, including this warning.
-{{% /notice %}}
-
 
 ### Week 4 Objectives:
 
-* Connect and get acquainted with members of First Cloud AI Journey.
-* Understand basic AWS services, how to use the console & CLI.
+- Understand the overview of Amazon EC2 (Elastic Compute Cloud), its role in AWS, and its key components, including Instance Types, AMIs, EBS, Key Pairs, and Security Groups.
+- Practice creating and configuring Virtual Private Clouds (VPCs) for Linux and Windows servers, and setting up Security Groups to control network traffic.
+- Practice launching Amazon EC2 Instances running Microsoft Windows Server 2025 and Amazon Linux 2023, and connecting to the servers through RDP and SSH.
+- Learn how to manage EC2 Instances, modify server configurations, create EBS Snapshots, create Custom AMIs, and launch new Instances from the created AMIs.
+- Practice deploying the AWS User Management application built with Node.js on Amazon Linux 2023 and Windows Server 2025.
+- Understand how to use AWS IAM to control access permissions and manage AWS resource costs.
+- Practice granting applications access to Amazon S3 using Access Keys and IAM Roles attached to EC2 Instances, and compare the security levels of these two methods.
+- Understand the process of cleaning up AWS resources after completing the Workshop to minimize unnecessary costs.
 
-### Tasks to be carried out this week:
-| Day | Task                                                                                                                                                                                                   | Start Date | Completion Date | Reference Material                        |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------- | --------------- | ----------------------------------------- |
-| 2   | - Get acquainted with FCAJ members <br> - Read and take note of internship unit rules and regulations                                                                                                   | 08/11/2025 | 08/11/2025      |
-| 3   | - Learn about AWS and its types of services <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                              | 08/12/2025 | 08/12/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Create AWS Free Tier account <br> - Learn about AWS Console & AWS CLI <br> - **Practice:** <br>&emsp; + Create AWS account <br>&emsp; + Install & configure AWS CLI <br> &emsp; + How to use AWS CLI | 08/13/2025 | 08/13/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Learn basic EC2: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - SSH connection methods to EC2 <br> - Learn about Elastic IP   <br>                            | 08/14/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Practice:** <br>&emsp; + Launch an EC2 instance <br>&emsp; + Connect via SSH <br>&emsp; + Attach an EBS volume                                                                                     | 08/15/2025 | 08/15/2025      | <https://cloudjourney.awsstudygroup.com/> |
+### Tasks to Be Completed During the Week:
 
+| Day | Tasks | Start Date | Completion Date | Reference Materials |
+|---|---|---|---|---|
+| 2 | **Learn about Amazon EC2 and Prepare the Network Environment**<br><br> - Learn about Amazon EC2, its functions, and the benefits of using virtual servers on AWS Cloud.<br> - Learn about different EC2 Instance Types and the factors affecting performance, such as CPU, RAM, Storage, and Network Performance.<br> - Learn about Amazon Machine Images (AMIs), Amazon EBS, Instance Store, Key Pairs, and Security Groups.<br> - Practice creating separate VPCs for Linux and Windows environments. For the Linux VPC, select the "VPC and more" configuration, set up 2 Availability Zones, 2 Public Subnets, and 2 Private Subnets, and do not create VPC Endpoints during the workshop.<br> - Enable automatic Public IPv4 address assignment for Public Subnets to support connections to EC2 Instances.<br> - Create separate Security Groups for Linux and Windows, and configure the corresponding Inbound Rules based on access requirements, including SSH (22), HTTP (80), HTTPS (443), RDP (3389), MySQL (3306), Custom TCP (5000), and ICMP.<br> - Learn the Least Privilege security principle by allowing only necessary ports and restricting access sources appropriately. | 26/10/2026 | 26/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| 3 | **Launch EC2 Instances and Practice Connecting to Windows/Linux Servers**<br><br> - Practice launching a Microsoft Windows Server 2025 Instance on Amazon EC2 using the Windows Server 2025 License Included AMI.<br> - Configure the Instance Type, Key Pair, VPC, Subnet, Security Group, and other required settings when launching the Windows server.<br> - Retrieve the Administrator password using the created Key Pair and connect to Windows Server through the Remote Desktop Protocol (RDP).<br> - Practice launching an Amazon Linux 2023 Instance by selecting an appropriate AMI, Instance Type, Key Pair, VPC, Subnet, and Security Group.<br> - Connect to the Amazon Linux Instance through SSH using MobaXterm or PuTTY on a Windows computer.<br> - Check the Instance status, Public IPv4 address, connectivity, and the operation of Security Group Rules.<br> - Compare the server administration methods for Windows using RDP and Linux using SSH. | 27/10/2026 | 27/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| 4 | **Learn About and Practice Managing Amazon EC2 Resources**<br><br> - Learn about EC2 Instance Type specifications and practice changing the Instance Type to match the server's processing requirements.<br> - Learn about Amazon EBS Snapshots, which are point-in-time copies of data on a Volume and support data backup, recovery, and migration.<br> - Practice creating and managing EBS Snapshots from EC2 resources, and check the Snapshot status after creation.<br> - Learn about Amazon Machine Images (AMIs) and practice creating a Custom AMI from a configured Windows Server 2025 Instance.<br> - Practice launching a new EC2 Instance from the Custom AMI and verify that the previously configured operating system, settings, and software can be reused.<br> - Learn about methods for recovering access to Windows and Linux Instances when encountering Key Pair or login credential issues.<br> - Explore additional EC2 management topics, including EBS Snapshots Archive, AMI sharing, and Remote Desktop connections to EC2 Ubuntu Instances (optional topics).<br> - Learn how to use IAM Policies to control AWS resource costs and usage through restrictions on Regions, EC2 Instance Families, Instance Types, EBS Volume Types, and resource deletion conditions based on IP addresses or time periods. | 28/10/2026 | 28/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| 5 | **Practice Deploying the AWS User Management Application on Amazon EC2**<br><br> - Learn about the architecture and functionality of the AWS User Management application, which is built with Node.js, Express.js, Handlebars, and MySQL, and supports CRUD (Create, Read, Update, Delete) operations on user data.<br> - Prepare the Amazon Linux 2023 environment by installing the LAMP Web Server and the required components, including Apache, PHP, a database, and phpMyAdmin.<br> - Install Node.js and Git on the Linux Instance, then verify the installed versions.<br> - Use Git to clone the application source code from the repository `https://github.com/First-Cloud-Journey/000004-EC2.git`.<br> - Initialize and configure the Node.js project using NPM, and install the required libraries, including Express, dotenv, express-handlebars, body-parser, and mysql.<br> - Create and configure the `.env` file to specify the MySQL database connection settings. Start the application using the `npm start` command and access it through the EC2 Public DNS combined with port 5000.<br> - Continue practicing application deployment on Windows Server 2025 by installing XAMPP and Node.js, initializing the project, installing dependencies, and configuring the database connection.<br> - Start the application on Windows Server and access its interface through `http://localhost:5000` to verify that it works correctly.<br> - Test the CRUD functions by adding a new user and checking the user list after the data has been updated.<br> - Learn how to check and resolve Node.js library security warnings using `npm update`, `npm audit fix`, and updating Nodemon when necessary. | 29/10/2026 | 29/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| 6 | **Learn About and Practice Granting Applications Access to AWS Using IAM Roles**<br><br> - Learn about AWS Identity and Access Management (IAM), including the roles of IAM Users, Access Keys, Secret Access Keys, IAM Policies, and IAM Roles in managing access to AWS services.<br> - Practice creating an EC2 Instance using Amazon Linux with the t2.micro configuration, following the Workshop instructions, and connecting to the server using PuTTY.<br> - Create an Amazon S3 Bucket for data storage and verify that the Bucket has been created successfully.<br> - Practice creating an IAM User named `IAMAccessKey`, attaching the `AmazonS3FullAccess` Policy, and creating an Access Key for Command Line Interface (CLI) use.<br> - Learn how to use the Access Key ID and Secret Access Key in a Python application with the Boto3 library to upload files to an S3 Bucket.<br> - Understand the security risks of storing Access Keys and Secret Access Keys directly in application source code, especially the risk of exposing credentials.<br> - Practice creating an IAM Role named `EC2RoleS3Upload`, selecting EC2 as the AWS Service, and attaching the `AmazonS3FullAccess` Policy to grant applications running on EC2 access to S3.<br> - Attach the `EC2RoleS3Upload` IAM Role to the EC2 Instance through Actions → Security → Modify IAM Role.<br> - Create a Python application using Boto3 with an S3 Client that does not require Access Keys or Secret Access Keys to be specified directly in the source code.<br> - Practice uploading files to S3 using the IAM Role and verify the results in the S3 Bucket to confirm that access permissions are working correctly.<br> - Compare the two access management methods using Access Keys and IAM Roles, and evaluate the security benefits of using IAM Roles when applications run on EC2.<br> - Clean up resources after the Workshop: delete the data and S3 Bucket, terminate the EC2 Instance, delete the IAM User, deactivate/delete the Access Key, and delete the IAM Role that was created.<br> - Check and clean up other EC2 Workshop resources, including EC2 Instances, AMIs, EBS Snapshots, Security Groups, Key Pairs, and VPCs, to avoid unnecessary costs. | 30/10/2026 | 30/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/)<br>[Granting Authorization for an Application to Access AWS Services with an IAM Role](https://000048.awsfcaj.com/) |
 
 ### Week 4 Achievements:
 
-* Understood what AWS is and mastered the basic service groups: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Successfully created and configured an AWS Free Tier account.
-
-* Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.
-
-* Installed and configured AWS CLI on the computer, including:
-  * Access Key
-  * Secret Key
-  * Default Region
-  * ...
-
-* Used AWS CLI to perform basic operations such as:
-
-  * Check account & configuration information
-  * Retrieve the list of regions
-  * View EC2 service
-  * Create and manage key pairs
-  * Check information about running services
-  * ...
-
-* Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.
-* ...
+- Gained an overall understanding of Amazon EC2, the role of virtual server services in AWS Cloud, and important components such as Instance Types, AMIs, EBS, Key Pairs, and Security Groups.
+- Understood how to select EC2 Instance Types based on CPU, RAM, Storage, and Network Performance requirements to balance performance and cost.
+- Practiced creating separate VPCs for Linux and Windows environments, configuring Public Subnets and Private Subnets, and enabling automatic Public IPv4 address assignment for Public Subnets.
+- Created and configured Security Groups for each server environment, and understood the roles of Inbound Rules, Outbound Rules, and the Least Privilege principle in network security.
+- Successfully launched Microsoft Windows Server 2025 Instances and Amazon Linux 2023 Instances on AWS EC2.
+- Understood the process of connecting to Windows Server through RDP using the Administrator password decrypted with a Key Pair, and connecting to Amazon Linux through SSH using MobaXterm or PuTTY.
+- Learned how to modify EC2 Instance Types, create EBS Snapshots, and use Snapshots to support data backup and recovery.
+- Practiced creating Custom AMIs from configured EC2 Instances and launching new Instances from those AMIs, thereby understanding how server configurations can be reused.
+- Explored methods for recovering access to Windows and Linux EC2 Instances when encountering credential-related issues.
+- Understood how to use AWS IAM Policies to control Regions, EC2 Instance Types, EBS Volume Types, and resource deletion conditions to manage costs and strengthen security.
+- Learned how to prepare the environment for deploying Node.js applications on Amazon Linux 2023 and Windows Server 2025.
+- Practiced installing Git, Node.js, and the required libraries; using NPM to manage dependencies; and configuring applications through the `.env` file.
+- Understood how to deploy the AWS User Management application using Express.js, Handlebars, and MySQL on EC2, and verify the application through the Public DNS address or localhost combined with port 5000.
+- Tested the application's basic CRUD functions, including adding new users and viewing the data list after updates.
+- Understood how to check and resolve Node.js library security warnings using NPM Audit and update related packages.
+- Understood the differences between IAM Users, Access Keys, Secret Access Keys, IAM Policies, and IAM Roles in managing access to AWS services.
+- Practiced creating IAM Users, generating Access Keys, and using Boto3 in a Python application to upload files to Amazon S3.
+- Understood the security limitations and risks of storing Access Keys and Secret Access Keys directly in application source code.
+- Practiced creating an IAM Role for EC2, attaching the Role to an Instance, and using Boto3 to access Amazon S3 without specifying Access Keys or Secret Access Keys directly in the source code.
+- Compared the Access Key and IAM Role methods, and recognized that IAM Roles are more suitable for applications running on EC2 because they eliminate the need to embed long-term credentials in source code.
+- Understood the resource cleanup process after completing the Workshop, including terminating EC2 Instances, deleting S3 Buckets, AMIs, EBS Snapshots, Security Groups, Key Pairs, IAM Users, IAM Roles, and related VPCs to minimize unnecessary AWS costs.

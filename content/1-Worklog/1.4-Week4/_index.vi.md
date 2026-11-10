@@ -5,54 +5,48 @@ weight: 4
 chapter: false
 pre: " <b> 1.4. </b> "
 ---
-{{% notice warning %}}
-⚠️ **Lưu ý:** Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng **không sao chép nguyên văn** cho bài báo cáo của bạn kể cả warning này.
-{{% /notice %}}
-
 
 ### Mục tiêu tuần 4:
 
-* Kết nối, làm quen với các thành viên trong First Cloud AI Journey.
-* Hiểu dịch vụ AWS cơ bản, cách dùng console & CLI.
+- Tìm hiểu tổng quan về Amazon EC2 (Elastic Compute Cloud), vai trò của EC2 trong AWS và các thành phần quan trọng như Instance Type, AMI, EBS, Key Pair và Security Group.
+- Thực hành tạo và cấu hình Virtual Private Cloud (VPC) dành cho máy chủ Linux và Windows, thiết lập Security Group để kiểm soát lưu lượng truy cập.
+- Thực hành khởi chạy Amazon EC2 Instance sử dụng hệ điều hành Microsoft Windows Server 2025 và Amazon Linux 2023; kết nối đến máy chủ thông qua RDP và SSH.
+- Tìm hiểu cách quản lý EC2 Instance, thay đổi cấu hình máy chủ, tạo EBS Snapshot, tạo Custom AMI và khởi chạy Instance từ AMI đã tạo.
+- Thực hành triển khai ứng dụng AWS User Management sử dụng Node.js trên môi trường Amazon Linux 2023 và Windows Server 2025.
+- Tìm hiểu cách sử dụng AWS IAM để kiểm soát quyền truy cập và quản lý chi phí sử dụng tài nguyên AWS.
+- Thực hành cấp quyền cho ứng dụng truy cập Amazon S3 bằng Access Key và IAM Role gắn với EC2; so sánh mức độ an toàn của hai phương pháp.
+- Nắm được quy trình dọn dẹp các tài nguyên AWS sau khi hoàn thành Workshop nhằm hạn chế chi phí phát sinh.
 
 ### Các công việc cần triển khai trong tuần này:
-| Thứ | Công việc                                                                                                                                                                                   | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu                            |
-| --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | --------------- | ----------------------------------------- |
-| 2   | - Làm quen với các thành viên FCAJ <br> - Đọc và lưu ý các nội quy, quy định tại đơn vị thực tập                                                                                             | 11/08/2025   | 11/08/2025      |
-| 3   | - Tìm hiểu AWS và các loại dịch vụ <br>&emsp; + Compute <br>&emsp; + Storage <br>&emsp; + Networking <br>&emsp; + Database <br>&emsp; + ... <br>                                            | 12/08/2025   | 12/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 4   | - Tạo AWS Free Tier account <br> - Tìm hiểu AWS Console & AWS CLI <br> - **Thực hành:** <br>&emsp; + Tạo AWS account <br>&emsp; + Cài AWS CLI & cấu hình <br> &emsp; + Cách sử dụng AWS CLI | 13/08/2025   | 13/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 5   | - Tìm hiểu EC2 cơ bản: <br>&emsp; + Instance types <br>&emsp; + AMI <br>&emsp; + EBS <br>&emsp; + ... <br> - Các cách remote SSH vào EC2 <br> - Tìm hiểu Elastic IP   <br>                  | 14/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
-| 6   | - **Thực hành:** <br>&emsp; + Tạo EC2 instance <br>&emsp; + Kết nối SSH <br>&emsp; + Gắn EBS volume                                                                                         | 15/08/2025   | 15/08/2025      | <https://cloudjourney.awsstudygroup.com/> |
 
+| Thứ | Công việc | Ngày bắt đầu | Ngày hoàn thành | Nguồn tài liệu |
+|---|---|---|---|---|
+| Thứ 2 | **Tìm hiểu Amazon EC2 và chuẩn bị môi trường mạng**<br><br> - Tìm hiểu tổng quan về Amazon EC2, chức năng và lợi ích của việc sử dụng máy chủ ảo trên AWS Cloud.<br> - Tìm hiểu các loại EC2 Instance và các yếu tố ảnh hưởng đến hiệu năng như CPU, RAM, Storage và Network Performance.<br> - Tìm hiểu Amazon Machine Image (AMI), Amazon EBS, Instance Store, Key Pair và Security Group.<br> - Thực hành tạo VPC riêng cho môi trường Linux và Windows. Đối với Linux VPC, lựa chọn cấu hình VPC and more, thiết lập 2 Availability Zones, 2 Public Subnets và 2 Private Subnets; không tạo VPC Endpoint trong bài thực hành.<br> - Bật tính năng tự động cấp phát Public IPv4 cho các Public Subnet để hỗ trợ kết nối đến EC2 Instance.<br> - Tạo Security Group riêng cho Linux và Windows, cấu hình Inbound Rules tương ứng với nhu cầu truy cập như SSH (22), HTTP (80), HTTPS (443), RDP (3389), MySQL (3306), Custom TCP (5000) và ICMP.<br> - Tìm hiểu nguyên tắc bảo mật Least Privilege, chỉ mở những cổng cần thiết và giới hạn nguồn truy cập phù hợp. | 26/10/2026 | 26/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| Thứ 3 | **Khởi chạy EC2 Instance và thực hành kết nối đến máy chủ Windows/Linux**<br><br> - Thực hành khởi chạy Microsoft Windows Server 2025 Instance trên Amazon EC2 bằng AMI Windows Server 2025 License Included.<br> - Cấu hình Instance Type, Key Pair, VPC, Subnet, Security Group và các thông số cần thiết khi khởi tạo máy chủ Windows.<br> - Thực hành lấy mật khẩu Administrator bằng Key Pair đã tạo và kết nối đến Windows Server thông qua Remote Desktop Protocol (RDP).<br> - Thực hành khởi chạy Amazon Linux 2023 Instance, lựa chọn AMI, Instance Type, Key Pair, VPC, Subnet và Security Group phù hợp.<br> - Kết nối đến Amazon Linux Instance thông qua giao thức SSH bằng MobaXterm hoặc PuTTY trên máy tính Windows.<br> - Kiểm tra trạng thái Instance, địa chỉ Public IPv4, khả năng kết nối và hoạt động của các Security Group Rules.<br> - So sánh phương thức quản trị máy chủ Windows bằng RDP và máy chủ Linux bằng SSH. | 27/10/2026 | 27/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| Thứ 4 | **Tìm hiểu và thực hành quản lý tài nguyên Amazon EC2**<br><br> - Tìm hiểu các thông số của EC2 Instance Type và thực hành thay đổi cấu hình Instance Type để phù hợp với nhu cầu xử lý của máy chủ.<br> - Tìm hiểu Amazon EBS Snapshot là bản sao dữ liệu tại một thời điểm của Volume, hỗ trợ sao lưu, phục hồi và di chuyển dữ liệu.<br> - Thực hành tạo và quản lý EBS Snapshot từ tài nguyên EC2, kiểm tra trạng thái Snapshot sau khi tạo.<br> - Tìm hiểu Amazon Machine Image (AMI) và thực hành tạo Custom AMI từ Windows Server 2025 Instance đã được cấu hình.<br> - Thực hành khởi chạy một EC2 Instance mới từ Custom AMI, kiểm tra khả năng tái sử dụng hệ điều hành, cấu hình và phần mềm đã được thiết lập trước đó.<br> - Tìm hiểu các phương pháp khôi phục quyền truy cập vào Windows Instance và Linux Instance khi gặp sự cố liên quan đến Key Pair hoặc thông tin đăng nhập.<br> - Tìm hiểu thêm các nội dung quản lý EC2 như EBS Snapshots Archive, chia sẻ AMI và kết nối Remote Desktop đến EC2 Ubuntu (nội dung mở rộng).<br> - Tìm hiểu cách sử dụng IAM Policy để kiểm soát chi phí và mức độ sử dụng tài nguyên AWS thông qua giới hạn Region, EC2 Instance Family, Instance Type, EBS Volume Type và điều kiện xóa tài nguyên theo địa chỉ IP hoặc khoảng thời gian. | 28/10/2026 | 28/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| Thứ 5 | **Thực hành triển khai ứng dụng AWS User Management trên Amazon EC2**<br><br> - Tìm hiểu kiến trúc và chức năng của ứng dụng AWS User Management được xây dựng bằng Node.js, Express.js, Handlebars và MySQL, hỗ trợ các thao tác CRUD (Create, Read, Update, Delete) đối với dữ liệu người dùng.<br> - Thực hành chuẩn bị môi trường Amazon Linux 2023, cài đặt LAMP Web Server và các thành phần cần thiết như Apache, PHP, cơ sở dữ liệu và phpMyAdmin.<br> - Cài đặt Node.js và Git trên Linux Instance; kiểm tra phiên bản sau khi cài đặt.<br> - Sử dụng Git để tải mã nguồn ứng dụng từ repository `https://github.com/First-Cloud-Journey/000004-EC2.git`.<br> - Khởi tạo và cấu hình dự án Node.js bằng NPM; cài đặt các thư viện cần thiết gồm Express, dotenv, express-handlebars, body-parser và mysql.<br> - Tạo và cấu hình file `.env` để thiết lập thông tin kết nối cơ sở dữ liệu MySQL; khởi chạy ứng dụng bằng lệnh `npm start` và truy cập thông qua Public DNS của EC2 kết hợp cổng 5000.<br> - Tiếp tục thực hành triển khai ứng dụng trên Windows Server 2025: cài đặt XAMPP, Node.js, khởi tạo dự án, cài đặt dependencies và cấu hình kết nối cơ sở dữ liệu.<br> - Khởi chạy ứng dụng trên Windows Server và truy cập giao diện thông qua `http://localhost:5000` để kiểm tra hoạt động.<br> - Thực hiện kiểm thử các chức năng CRUD: thêm mới người dùng và kiểm tra danh sách người dùng sau khi cập nhật dữ liệu.<br> - Tìm hiểu cách kiểm tra và xử lý các cảnh báo bảo mật của thư viện Node.js bằng `npm update`, `npm audit fix` và cập nhật Nodemon khi cần thiết. | 29/10/2026 | 29/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/) |
+| Thứ 6 | **Tìm hiểu và thực hành cấp quyền cho ứng dụng truy cập AWS bằng IAM Role**<br><br> - Tìm hiểu tổng quan về AWS Identity and Access Management (IAM), vai trò của IAM User, Access Key, Secret Access Key, IAM Policy và IAM Role trong việc quản lý quyền truy cập dịch vụ AWS.<br> - Thực hành tạo EC2 Instance sử dụng Amazon Linux với cấu hình t2.micro theo hướng dẫn Workshop và kết nối đến máy chủ bằng PuTTY.<br> - Tạo Amazon S3 Bucket để lưu trữ dữ liệu và kiểm tra trạng thái tạo Bucket thành công.<br> - Thực hành tạo IAM User có tên `IAMAccessKey`, gán Policy `AmazonS3FullAccess` và tạo Access Key theo trường hợp sử dụng Command Line Interface (CLI).<br> - Tìm hiểu cách sử dụng Access Key ID và Secret Access Key trong ứng dụng Python với thư viện Boto3 để thực hiện thao tác tải tệp lên S3 Bucket.<br> - Tìm hiểu những rủi ro khi lưu trực tiếp Access Key và Secret Access Key trong mã nguồn ứng dụng, đặc biệt là nguy cơ lộ thông tin xác thực.<br> - Thực hành tạo IAM Role có tên `EC2RoleS3Upload`, chọn AWS Service là EC2 và gán Policy `AmazonS3FullAccess` để cấp quyền cho ứng dụng chạy trên EC2 truy cập S3.<br> - Gắn IAM Role `EC2RoleS3Upload` vào EC2 Instance thông qua chức năng Actions → Security → Modify IAM Role.<br> - Tạo ứng dụng Python sử dụng Boto3 với phương thức khởi tạo S3 Client không cần khai báo Access Key và Secret Access Key trực tiếp trong mã nguồn.<br> - Thực hành tải tệp lên S3 bằng IAM Role và kiểm tra kết quả trong S3 Bucket để xác nhận quyền truy cập đã hoạt động.<br> - So sánh hai phương pháp cấp quyền bằng Access Key và IAM Role; đánh giá lợi ích bảo mật của việc sử dụng IAM Role khi ứng dụng chạy trên EC2.<br> - Thực hiện dọn dẹp tài nguyên sau Workshop: xóa dữ liệu và S3 Bucket, chấm dứt EC2 Instance, xóa IAM User, vô hiệu hóa/xóa Access Key và xóa IAM Role đã tạo.<br> - Kiểm tra và dọn dẹp các tài nguyên của Workshop EC2 như EC2 Instance, AMI, EBS Snapshot, Security Group, Key Pair và VPC để tránh phát sinh chi phí không cần thiết. | 30/10/2026 | 30/10/2026 | [Introduction to Amazon EC2](https://000004.awsfcaj.com/)<br>[Granting Authorization for an Application to Access AWS Services with an IAM Role](https://000048.awsfcaj.com/) |
 
-### Kết quả đạt được tuần 4:
+### Kết quả đạt được trong Tuần 4:
 
-* Hiểu AWS là gì và nắm được các nhóm dịch vụ cơ bản: 
-  * Compute
-  * Storage
-  * Networking 
-  * Database
-  * ...
-
-* Đã tạo và cấu hình AWS Free Tier account thành công.
-
-* Làm quen với AWS Management Console và biết cách tìm, truy cập, sử dụng dịch vụ từ giao diện web.
-
-* Cài đặt và cấu hình AWS CLI trên máy tính bao gồm:
-  * Access Key
-  * Secret Key
-  * Region mặc định
-  * ...
-
-* Sử dụng AWS CLI để thực hiện các thao tác cơ bản như:
-
-  * Kiểm tra thông tin tài khoản & cấu hình
-  * Lấy danh sách region
-  * Xem dịch vụ EC2
-  * Tạo và quản lý key pair
-  * Kiểm tra thông tin dịch vụ đang chạy
-  * ...
-
-* Có khả năng kết nối giữa giao diện web và CLI để quản lý tài nguyên AWS song song.
-* ...
-
+- Nắm được tổng quan về Amazon EC2, vai trò của dịch vụ máy chủ ảo trong AWS Cloud và các thành phần quan trọng như Instance Type, AMI, EBS, Key Pair và Security Group.
+- Hiểu được cách lựa chọn EC2 Instance Type dựa trên nhu cầu CPU, RAM, Storage và Network Performance nhằm cân bằng giữa hiệu năng và chi phí.
+- Thực hành tạo VPC riêng cho Linux và Windows, cấu hình Public Subnet, Private Subnet và bật tự động cấp phát Public IPv4 cho Public Subnet.
+- Tạo và cấu hình Security Group cho từng môi trường máy chủ, hiểu được vai trò của Inbound Rules, Outbound Rules và nguyên tắc Least Privilege trong bảo mật mạng.
+- Khởi chạy được Microsoft Windows Server 2025 Instance và Amazon Linux 2023 Instance trên AWS EC2.
+- Nắm được quy trình kết nối đến Windows Server thông qua RDP bằng mật khẩu Administrator được giải mã từ Key Pair và kết nối đến Amazon Linux thông qua SSH bằng MobaXterm hoặc PuTTY.
+- Hiểu được cách thay đổi EC2 Instance Type, tạo EBS Snapshot và sử dụng Snapshot để hỗ trợ sao lưu, phục hồi dữ liệu.
+- Thực hành tạo Custom AMI từ EC2 Instance đã cấu hình và khởi chạy Instance mới từ AMI đó, qua đó hiểu được khả năng tái sử dụng cấu hình máy chủ.
+- Tìm hiểu các phương pháp khôi phục quyền truy cập vào EC2 Instance Windows và Linux khi gặp sự cố về thông tin xác thực.
+- Hiểu được cách sử dụng AWS IAM Policy để kiểm soát phạm vi Region, loại EC2 Instance, loại EBS Volume và điều kiện thực hiện thao tác xóa tài nguyên nhằm quản lý chi phí và tăng cường bảo mật.
+- Nắm được quy trình chuẩn bị môi trường triển khai ứng dụng Node.js trên Amazon Linux 2023 và Windows Server 2025.
+- Thực hành cài đặt Git, Node.js và các thư viện cần thiết; sử dụng NPM để quản lý dependencies và cấu hình ứng dụng thông qua file `.env`.
+- Hiểu được cách triển khai ứng dụng AWS User Management sử dụng Express.js, Handlebars và MySQL trên EC2; kiểm tra ứng dụng thông qua địa chỉ Public DNS hoặc localhost kết hợp cổng 5000.
+- Kiểm thử được các chức năng CRUD cơ bản của ứng dụng quản lý người dùng, bao gồm thêm mới và xem danh sách dữ liệu sau khi cập nhật.
+- Hiểu được cách kiểm tra và xử lý các cảnh báo bảo mật của thư viện Node.js thông qua NPM Audit và cập nhật các package có liên quan.
+- Hiểu được sự khác nhau giữa IAM User, Access Key, Secret Access Key, IAM Policy và IAM Role trong việc cấp quyền truy cập dịch vụ AWS.
+- Thực hành tạo IAM User, tạo Access Key và sử dụng Boto3 trong ứng dụng Python để tải tệp lên Amazon S3.
+- Hiểu được hạn chế bảo mật của việc lưu Access Key và Secret Access Key trực tiếp trong mã nguồn ứng dụng.
+- Thực hành tạo IAM Role dành cho EC2, gắn Role vào Instance và sử dụng Boto3 để truy cập Amazon S3 mà không cần khai báo Access Key và Secret Access Key trực tiếp trong mã nguồn.
+- So sánh được phương pháp sử dụng Access Key với IAM Role; nhận thức được IAM Role là phương thức phù hợp hơn cho ứng dụng chạy trên EC2 vì không cần nhúng thông tin xác thực dài hạn vào mã nguồn.
+- Nắm được quy trình dọn dẹp tài nguyên sau Workshop, bao gồm chấm dứt EC2 Instance, xóa S3 Bucket, AMI, EBS Snapshot, Security Group, Key Pair, IAM User, IAM Role và VPC liên quan nhằm hạn chế chi phí phát sinh trên AWS.
