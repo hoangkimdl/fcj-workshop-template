@@ -66,6 +66,7 @@ The solution deploys two independent event-processing pipelines across two AWS R
 
 **Architecture Diagram:**
 
+![Multi-Region Event-Driven Failover Architecture](../../images/blog1-multi-region-failover.jpg)
 *Figure 1. Multi-Region failover architecture using Amazon Route 53 and AWS serverless services.*
 
 The main processing flow in each Region is:

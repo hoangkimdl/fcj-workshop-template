@@ -12,22 +12,22 @@
     <title>Blog 1 :: Internship Report</title>
 
     
-    <link href="/css/nucleus.css?1794282165" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1794282165" rel="stylesheet">
-    <link href="/css/hybrid.css?1794282165" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1794282165" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1794282165" rel="stylesheet">
-    <link href="/css/auto-complete.css?1794282165" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1794282165" rel="stylesheet">
-    <link href="/css/theme.css?1794282165" rel="stylesheet">
-    <link href="/css/tabs.css?1794282165" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1794282165" rel="stylesheet">
+    <link href="/css/nucleus.css?1794294243" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1794294243" rel="stylesheet">
+    <link href="/css/hybrid.css?1794294243" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1794294243" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1794294243" rel="stylesheet">
+    <link href="/css/auto-complete.css?1794294243" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1794294243" rel="stylesheet">
+    <link href="/css/theme.css?1794294243" rel="stylesheet">
+    <link href="/css/tabs.css?1794294243" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1794294243" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1794282165" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1794294243" rel="stylesheet">
     
-    <link href="/css/vietnamese-font.css?1794282165" rel="stylesheet"><link href="/css/table-borders.css?1794282165" rel="stylesheet">
+    <link href="/css/vietnamese-font.css?1794294243" rel="stylesheet"><link href="/css/table-borders.css?1794294243" rel="stylesheet">
 
-    <script src="/js/jquery-3.3.1.min.js?1794282165"></script>
+    <script src="/js/jquery-3.3.1.min.js?1794294243"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1794282165"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1794282165"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1794294243"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1794294243"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1794282165"></script>
+<script type="text/javascript" src="/js/search.js?1794294243"></script>
 
     
   </div>
@@ -783,7 +783,8 @@
 <h3 id="31-overall-architecture">3.1. Overall Architecture</h3>
 <p>The solution deploys two independent event-processing pipelines across two AWS Regions. Each Region contains API Gateway, EventBridge, SQS, and Lambda components. Route 53 manages DNS routing, while DynamoDB Global Tables handle data replication between the two Regions.</p>
 <p><strong>Architecture Diagram:</strong></p>
-<p><em>Figure 1. Multi-Region failover architecture using Amazon Route 53 and AWS serverless services.</em></p>
+<p><img alt="Multi-Region Event-Driven Failover Architecture" src="../../images/blog1-multi-region-failover.jpg">
+<em>Figure 1. Multi-Region failover architecture using Amazon Route 53 and AWS serverless services.</em></p>
 <p>The main processing flow in each Region is:</p>
 <p><code>Amazon API Gateway → Amazon EventBridge → Amazon SQS → AWS Lambda → Amazon DynamoDB</code></p>
 <h3 id="32-normal-operating-conditions">3.2. Normal Operating Conditions</h3>
@@ -1228,19 +1229,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1794282165"></script>
-    <script src="/js/perfect-scrollbar.min.js?1794282165"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1794282165"></script>
-    <script src="/js/jquery.sticky.js?1794282165"></script>
-    <script src="/js/featherlight.min.js?1794282165"></script>
-    <script src="/js/highlight.pack.js?1794282165"></script>
+    <script src="/js/clipboard.min.js?1794294243"></script>
+    <script src="/js/perfect-scrollbar.min.js?1794294243"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1794294243"></script>
+    <script src="/js/jquery.sticky.js?1794294243"></script>
+    <script src="/js/featherlight.min.js?1794294243"></script>
+    <script src="/js/highlight.pack.js?1794294243"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1794282165"></script>
-    <script src="/js/learn.js?1794282165"></script>
-    <script src="/js/hugo-learn.js?1794282165"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1794294243"></script>
+    <script src="/js/learn.js?1794294243"></script>
+    <script src="/js/hugo-learn.js?1794294243"></script>
     
         
-            <script src="/mermaid/mermaid.js?1794282165"></script>
+            <script src="/mermaid/mermaid.js?1794294243"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });

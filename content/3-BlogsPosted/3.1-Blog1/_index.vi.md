@@ -66,7 +66,7 @@ Giải pháp triển khai hai pipeline xử lý sự kiện độc lập tại h
 
 **Sơ đồ kiến trúc:**
 
-![Kiến trúc Multi-Region Event-Driven Failover](D:\ThucTap\fcj-workshop-template\static\images\blog1-multi-region-failover.png)
+![Kiến trúc Multi-Region Event-Driven Failover](../../../images/blog1-multi-region-failover.jpg)
 
 *Hình 1. Kiến trúc chuyển đổi dự phòng đa Region sử dụng Amazon Route 53 và các dịch vụ AWS Serverless.*
 
