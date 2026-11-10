@@ -12,22 +12,22 @@
     <title>Blog 1 :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1793781996" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1793781996" rel="stylesheet">
-    <link href="/css/hybrid.css?1793781996" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1793781996" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1793781996" rel="stylesheet">
-    <link href="/css/auto-complete.css?1793781996" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1793781996" rel="stylesheet">
-    <link href="/css/theme.css?1793781996" rel="stylesheet">
-    <link href="/css/tabs.css?1793781996" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1793781996" rel="stylesheet">
+    <link href="/css/nucleus.css?1794281002" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1794281002" rel="stylesheet">
+    <link href="/css/hybrid.css?1794281002" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1794281002" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1794281002" rel="stylesheet">
+    <link href="/css/auto-complete.css?1794281002" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1794281002" rel="stylesheet">
+    <link href="/css/theme.css?1794281002" rel="stylesheet">
+    <link href="/css/tabs.css?1794281002" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1794281002" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1793781996" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1794281002" rel="stylesheet">
     
-    <link href="/css/vietnamese-font.css?1793781996" rel="stylesheet"><link href="/css/table-borders.css?1793781996" rel="stylesheet">
+    <link href="/css/vietnamese-font.css?1794281002" rel="stylesheet"><link href="/css/table-borders.css?1794281002" rel="stylesheet">
 
-    <script src="/js/jquery-3.3.1.min.js?1793781996"></script>
+    <script src="/js/jquery-3.3.1.min.js?1794281002"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1793781996"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1793781996"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1794281002"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1794281002"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1793781996"></script>
+<script type="text/javascript" src="/js/search.js?1794281002"></script>
 
     
   </div>
@@ -609,7 +609,7 @@
     <br>
     <b> Last Updated </b> <br>
     <i>
-        <font color=orange>04-11-2026</font>
+        <font color=orange>10-11-2026</font>
     </i>
 </left>
 <left>
@@ -673,7 +673,26 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#các-điểm-chính-cần-nắm">CÁC ĐIỂM CHÍNH CẦN NẮM</a></li>
+    <li><a href="#1-tổng-quan-về-kiến-trúc">1. TỔNG QUAN VỀ KIẾN TRÚC</a></li>
+    <li><a href="#2-các-dịch-vụ-aws-và-vai-trò">2. CÁC DỊCH VỤ AWS VÀ VAI TRÒ</a></li>
+    <li><a href="#3-kiến-trúc-và-luồng-xử-lý-hoạt-động">3. KIẾN TRÚC VÀ LUỒNG XỬ LÝ HOẠT ĐỘNG</a>
+      <ul>
+        <li><a href="#31-kiến-trúc-tổng-thể">3.1. Kiến trúc tổng thể</a></li>
+        <li><a href="#32-khi-hệ-thống-hoạt-động-bình-thường">3.2. Khi hệ thống hoạt động bình thường</a></li>
+        <li><a href="#33-khi-primary-region-gặp-sự-cố">3.3. Khi Primary Region gặp sự cố</a></li>
+        <li><a href="#34-khi-primary-region-phục-hồi">3.4. Khi Primary Region phục hồi</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-cơ-chế-nhân-bản-dữ-liệu-với-dynamodb-global-tables">4. CƠ CHẾ NHÂN BẢN DỮ LIỆU VỚI DYNAMODB GLOBAL TABLES</a></li>
+    <li><a href="#5-triển-khai-và-kiểm-thử-failover">5. TRIỂN KHAI VÀ KIỂM THỬ FAILOVER</a></li>
+    <li><a href="#6-lợi-ích-và-những-lưu-ý-khi-sử-dụng">6. LỢI ÍCH VÀ NHỮNG LƯU Ý KHI SỬ DỤNG</a></li>
+    <li><a href="#7-kết-luận">7. KẾT LUẬN</a></li>
+    <li><a href="#tài-liệu-tham-khảo">TÀI LIỆU THAM KHẢO</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -697,25 +716,208 @@
 
 
 
-	
-<div class="notices warning" ><p>⚠️ <strong>Lưu ý:</strong> Các thông tin dưới đây chỉ nhằm mục đích tham khảo, vui lòng <strong>không sao chép nguyên văn</strong> cho bài báo cáo của bạn kể cả warning này.</p>
-</div>
-
-<h1 id="session-policies-trong-amazon-eks-pod-identity">SESSION POLICIES TRONG AMAZON EKS POD IDENTITY</h1>
-<p>Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép bạn thu hẹp quyền IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo thêm nhiều IAM roles riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc least privilege hiệu quả hơn trong môi trường Kubernetes quy mô lớn.</p>
-<p>Các điểm chính cần nắm:</p>
+	<h1 id="kiến-trúc-chuyển-đổi-dự-phòng-đa-region-cho-ứng-dụng-hướng-sự-kiện-với-amazon-eventbridge-và-amazon-route-53">KIẾN TRÚC CHUYỂN ĐỔI DỰ PHÒNG ĐA REGION CHO ỨNG DỤNG HƯỚNG SỰ KIỆN VỚI AMAZON EVENTBRIDGE VÀ AMAZON ROUTE 53</h1>
+<p>Khi một ứng dụng chỉ được triển khai tại một AWS Region, sự cố nghiêm trọng tại khu vực đó có thể làm gián đoạn toàn bộ dịch vụ. Điều này đặc biệt ảnh hưởng đến các hệ thống xử lý sự kiện như tiếp nhận đơn hàng, cập nhật giao dịch hoặc ghi nhận hoạt động người dùng, nơi yêu cầu về tính sẵn sàng và khả năng duy trì dữ liệu rất quan trọng.</p>
+<p>Để hạn chế rủi ro, doanh nghiệp có thể triển khai kiến trúc Multi-Region, trong đó một Region đảm nhiệm vai trò chính và một Region khác được chuẩn bị làm môi trường dự phòng. Bằng cách kết hợp Amazon Route 53, Amazon API Gateway, Amazon EventBridge, Amazon SQS, AWS Lambda và Amazon DynamoDB Global Tables, hệ thống có thể chuyển hướng các yêu cầu mới sang Region dự phòng khi Region chính gặp sự cố.</p>
+<h2 id="các-điểm-chính-cần-nắm">CÁC ĐIỂM CHÍNH CẦN NẮM</h2>
 <ul>
-<li>Session policy là một IAM policy inline được chỉ định khi tạo hoặc cập nhật Pod Identity association.</li>
-<li>Quyền hiệu quả = intersection (giao) giữa permissions của IAM role và session policy → session policy chỉ có thể thu hẹp, không thể mở rộng quyền.</li>
-<li>Giúp tránh tình trạng over-permissioning khi reuse chung một IAM role cho nhiều workloads có nhu cầu khác nhau.</li>
-<li>Hỗ trợ cả same-account và cross-account (qua IAM role chaining).</li>
-<li>Giảm đáng kể số lượng IAM roles cần quản lý, tránh chạm giới hạn quota IAM trong cluster lớn.</li>
-<li>Cấu hình dễ dàng qua AWS Management Console, AWS CLI hoặc AWS SDK khi tạo association giữa Kubernetes ServiceAccount và IAM role.</li>
+<li><strong>Multi-Region Architecture:</strong> Triển khai ứng dụng tại nhiều AWS Region để tăng khả năng sẵn sàng và hỗ trợ khôi phục sau sự cố.</li>
+<li><strong>Active-Passive:</strong> Sử dụng Primary Region để xử lý lưu lượng bình thường và Secondary Region làm môi trường dự phòng.</li>
+<li><strong>Amazon Route 53:</strong> Sử dụng Health Check và Failover Routing Policy để kiểm tra endpoint và định tuyến DNS đến Region phù hợp.</li>
+<li><strong>Event-Driven Processing:</strong> API Gateway tiếp nhận yêu cầu, EventBridge định tuyến sự kiện, SQS lưu thông điệp và Lambda thực hiện xử lý.</li>
+<li><strong>DynamoDB Global Tables:</strong> Duy trì các bản sao dữ liệu tại nhiều Region thông qua cơ chế nhân bản liên vùng.</li>
+<li><strong>Automatic Failover:</strong> Khi Primary Region không đáp ứng điều kiện Health Check, Route 53 có thể chuyển các truy vấn DNS mới sang Secondary Region.</li>
+<li><strong>Data Consistency:</strong> Cần quan tâm đến độ trễ nhân bản, xử lý xung đột dữ liệu và khả năng xử lý thông điệp trùng lặp.</li>
 </ul>
-<p>Tính năng này đặc biệt hữu ích khi bạn có nhiều ứng dụng chạy trên cùng một IAM role nhưng cần giới hạn quyền khác nhau (ví dụ: một pod chỉ đọc S3 bucket cụ thể, pod khác chỉ gọi một số API nhất định).</p>
-<p>&hellip;Hình ảnh&hellip;</p>
-<p>&hellip;Link&hellip;</p>
-<p>&hellip;Hướng dẫn&hellip;</p>
+<h2 id="1-tổng-quan-về-kiến-trúc">1. TỔNG QUAN VỀ KIẾN TRÚC</h2>
+<p><strong>Multi-Region Architecture</strong> là mô hình triển khai ứng dụng trên nhiều AWS Region nhằm giảm sự phụ thuộc vào một khu vực hạ tầng duy nhất. Trong bài viết này, giải pháp sử dụng mô hình Active-Passive gồm:</p>
+<ul>
+<li><strong>Primary Region:</strong> Khu vực chính, tiếp nhận và xử lý các yêu cầu trong điều kiện hoạt động bình thường.</li>
+<li><strong>Secondary Region:</strong> Khu vực dự phòng, được triển khai sẵn các thành phần cần thiết để tiếp nhận yêu cầu khi Primary Region gặp sự cố.</li>
+</ul>
+<p>Bên cạnh đó, hệ thống sử dụng <strong>Event-Driven Architecture (EDA)</strong>, cho phép các thành phần giao tiếp thông qua sự kiện thay vì phụ thuộc trực tiếp vào nhau. Cách tiếp cận này giúp tách biệt quá trình tiếp nhận, định tuyến và xử lý dữ liệu, đồng thời hỗ trợ mở rộng từng thành phần độc lập.</p>
+<h2 id="2-các-dịch-vụ-aws-và-vai-trò">2. CÁC DỊCH VỤ AWS VÀ VAI TRÒ</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">Dịch vụ</th>
+          <th style="text-align: left">Vai trò</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Amazon Route 53</td>
+          <td style="text-align: left">Quản lý DNS, kiểm tra tình trạng endpoint và thực hiện Failover Routing.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon API Gateway</td>
+          <td style="text-align: left">Tiếp nhận yêu cầu HTTP/HTTPS và chuyển sự kiện đến EventBridge.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon EventBridge</td>
+          <td style="text-align: left">Tiếp nhận sự kiện qua Event Bus và định tuyến theo Event Rules.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon SQS</td>
+          <td style="text-align: left">Lưu giữ thông điệp trong hàng đợi để chờ xử lý.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">AWS Lambda</td>
+          <td style="text-align: left">Lấy thông điệp từ SQS, xử lý nghiệp vụ và ghi dữ liệu vào DynamoDB.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon DynamoDB Global Tables</td>
+          <td style="text-align: left">Nhân bản dữ liệu giữa các AWS Region.</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Amazon Route 53 – DNS Failover</strong></p>
+<p>Route 53 sử dụng Health Check để kiểm tra tình trạng hoạt động của endpoint tại Primary Region. Khi endpoint không còn đáp ứng điều kiện kiểm tra, Failover Routing Policy cho phép Route 53 trả về địa chỉ của Secondary Region cho các truy vấn DNS mới.</p>
+<p><strong>Amazon API Gateway và Amazon EventBridge</strong></p>
+<p>API Gateway là điểm tiếp nhận yêu cầu từ ứng dụng. Thông qua AWS Service Integration và API <code>PutEvents</code>, API Gateway chuyển dữ liệu sự kiện đến EventBridge. EventBridge tiếp nhận sự kiện, đánh giá các Event Rules và chuyển những sự kiện phù hợp đến Target được cấu hình.</p>
+<p><strong>Amazon SQS và AWS Lambda</strong></p>
+<p>SQS đóng vai trò hàng đợi trung gian, giúp tách biệt quá trình tiếp nhận sự kiện với quá trình xử lý. Lambda sử dụng Event Source Mapping để lấy thông điệp từ SQS theo từng batch và thực hiện logic nghiệp vụ.</p>
+<p><strong>Amazon DynamoDB Global Tables</strong></p>
+<p>Global Tables duy trì các bản sao của cùng một bảng DynamoDB tại nhiều Region. Khi dữ liệu được ghi vào một Replica, các thay đổi sẽ được nhân bản đến những Replica còn lại theo chế độ nhất quán đã cấu hình.</p>
+<h2 id="3-kiến-trúc-và-luồng-xử-lý-hoạt-động">3. KIẾN TRÚC VÀ LUỒNG XỬ LÝ HOẠT ĐỘNG</h2>
+<h3 id="31-kiến-trúc-tổng-thể">3.1. Kiến trúc tổng thể</h3>
+<p>Giải pháp triển khai hai pipeline xử lý sự kiện độc lập tại hai AWS Region. Mỗi Region có các thành phần API Gateway, EventBridge, SQS và Lambda. Route 53 quản lý định tuyến DNS, trong khi DynamoDB Global Tables đảm nhiệm việc nhân bản dữ liệu giữa hai khu vực.</p>
+<p><strong>Sơ đồ kiến trúc:</strong></p>
+<p><img alt="Kiến trúc Multi-Region Event-Driven Failover" src="d:\\ThucTap\\fcj-workshop-template\\static\\images\\blog1-multi-region-failover.png"></p>
+<p><em>Hình 1. Kiến trúc chuyển đổi dự phòng đa Region sử dụng Amazon Route 53 và các dịch vụ AWS Serverless.</em></p>
+<p>Luồng xử lý chính tại mỗi Region:</p>
+<p><code>Amazon API Gateway → Amazon EventBridge → Amazon SQS → AWS Lambda → Amazon DynamoDB</code></p>
+<h3 id="32-khi-hệ-thống-hoạt-động-bình-thường">3.2. Khi hệ thống hoạt động bình thường</h3>
+<p>Khi Primary Region hoạt động ổn định, Route 53 phân giải tên miền và ưu tiên trả về endpoint của Region chính.</p>
+<p>Luồng xử lý:</p>
+<ol>
+<li>Người dùng gửi yêu cầu đến tên miền ứng dụng và được Route 53 phân giải đến Primary Region.</li>
+<li>API Gateway tiếp nhận yêu cầu và gửi sự kiện đến EventBridge thông qua API <code>PutEvents</code>.</li>
+<li>EventBridge đánh giá Event Rules và chuyển sự kiện phù hợp đến SQS.</li>
+<li>Lambda lấy thông điệp từ SQS theo từng batch thông qua Event Source Mapping.</li>
+<li>Lambda xử lý sự kiện và ghi kết quả vào DynamoDB Replica tại Primary Region.</li>
+<li>DynamoDB Global Tables nhân bản thay đổi dữ liệu sang Replica tại Secondary Region.</li>
+</ol>
+<h3 id="33-khi-primary-region-gặp-sự-cố">3.3. Khi Primary Region gặp sự cố</h3>
+<p>Khi Primary Region không còn đáp ứng điều kiện Health Check, Route 53 cập nhật trạng thái và áp dụng Failover Routing Policy.</p>
+<p>Luồng xử lý:</p>
+<ol>
+<li>Route 53 Health Check phát hiện endpoint của Primary Region không còn khỏe mạnh.</li>
+<li>Route 53 chuyển sang sử dụng Secondary Record cho các truy vấn DNS mới.</li>
+<li>Người dùng được định tuyến đến API Gateway tại Secondary Region.</li>
+<li>EventBridge tiếp nhận và định tuyến sự kiện đến SQS của Region dự phòng.</li>
+<li>Lambda tại Secondary Region xử lý thông điệp và ghi dữ liệu vào DynamoDB Replica cục bộ.</li>
+</ol>
+<p>Nhờ các thành phần đã được triển khai sẵn, Secondary Region có thể tiếp tục tiếp nhận và xử lý các yêu cầu mới mà không cần xây dựng lại toàn bộ hệ thống.</p>
+<h3 id="34-khi-primary-region-phục-hồi">3.4. Khi Primary Region phục hồi</h3>
+<p>Khi endpoint của Primary Region hoạt động ổn định trở lại và vượt qua Health Check, Route 53 có thể tiếp tục ưu tiên Primary Record cho những truy vấn DNS mới.</p>
+<p>Quá trình đưa lưu lượng trở về Region chính được gọi là <strong>Failback</strong>. Tuy nhiên, người dùng có thể vẫn sử dụng kết quả DNS cũ trong một khoảng thời gian do DNS cache và TTL. Vì vậy, quá trình chuyển đổi không nhất thiết diễn ra đồng thời trên tất cả thiết bị.</p>
+<h2 id="4-cơ-chế-nhân-bản-dữ-liệu-với-dynamodb-global-tables">4. CƠ CHẾ NHÂN BẢN DỮ LIỆU VỚI DYNAMODB GLOBAL TABLES</h2>
+<p>DynamoDB Global Tables giúp duy trì dữ liệu tại nhiều Region, cho phép ứng dụng truy cập bản sao cục bộ khi một Region khác gặp sự cố.</p>
+<p>Hiện nay, Global Tables hỗ trợ hai chế độ nhất quán chính:</p>
+<ul>
+<li><strong>Multi-Region Eventual Consistency (MREC):</strong> Chế độ mặc định nếu không chỉ định chế độ khác. Dữ liệu được nhân bản bất đồng bộ giữa các Region và có thể tồn tại độ trễ trước khi mọi Replica nhận được thay đổi.</li>
+<li><strong>Multi-Region Strong Consistency (MRSC):</strong> Cung cấp khả năng nhất quán mạnh giữa các Region theo những điều kiện và giới hạn triển khai của AWS.</li>
+</ul>
+<p>Trong mẫu kiến trúc của bài AWS gốc, cấu hình CloudFormation tạo các Replica nhưng không chỉ định chế độ nhất quán khác. Vì vậy, cấu hình mặc định được áp dụng là MREC.</p>
+<p>Một số vấn đề cần quan tâm:</p>
+<ul>
+<li><strong>Replication Lag:</strong> Độ trễ giữa thời điểm dữ liệu được ghi và thời điểm xuất hiện tại Replica khác.</li>
+<li><strong>Write Conflict:</strong> Xung đột khi cùng một bản ghi được cập nhật đồng thời tại nhiều Region.</li>
+<li><strong>Data Consistency:</strong> Dữ liệu tại các Region có thể tạm thời khác nhau trong thời gian nhân bản chưa hoàn tất.</li>
+<li><strong>Recovery Point Objective (RPO):</strong> Cần đánh giá mức độ mất dữ liệu có thể chấp nhận khi xảy ra sự cố.</li>
+</ul>
+<p>Do đó, không nên mặc định rằng mọi dữ liệu vừa ghi tại Primary Region đã được đồng bộ ngay lập tức sang Secondary Region.</p>
+<h2 id="5-triển-khai-và-kiểm-thử-failover">5. TRIỂN KHAI VÀ KIỂM THỬ FAILOVER</h2>
+<p>Để triển khai giải pháp theo hướng dẫn AWS, cần chuẩn bị:</p>
+<ul>
+<li>Tài khoản AWS có quyền quản lý các dịch vụ liên quan.</li>
+<li>AWS CLI và AWS SAM CLI đã được cài đặt, cấu hình.</li>
+<li>Tên miền đã đăng ký và Hosted Zone trên Route 53.</li>
+<li>Chứng chỉ ACM phù hợp tại cả hai Region nếu sử dụng Regional Custom Domain.</li>
+<li>Hai AWS Region được lựa chọn làm Primary và Secondary.</li>
+</ul>
+<p><strong>Quy trình triển khai tổng quát:</strong></p>
+<ol>
+<li><strong>Deploy Primary Stack:</strong> Tạo API Gateway, EventBridge, SQS, Lambda, Route 53 Health Check, Primary DNS Record và DynamoDB Global Table với các Replica cần thiết.</li>
+<li><strong>Deploy Secondary Stack:</strong> Tạo pipeline xử lý riêng tại Region dự phòng và tham chiếu đến DynamoDB Global Table đã được tạo.</li>
+<li><strong>Kiểm tra hoạt động:</strong> Gửi một sự kiện đến Custom Domain và xác nhận yêu cầu được tiếp nhận tại Primary Region.</li>
+<li><strong>Mô phỏng sự cố:</strong> Làm cho Primary API Gateway Endpoint không còn đáp ứng Health Check trong môi trường thử nghiệm.</li>
+<li><strong>Xác nhận Failover:</strong> Gửi lại yêu cầu và kiểm tra hệ thống đã chuyển sang Secondary Region.</li>
+<li><strong>Kiểm tra dữ liệu:</strong> Xem CloudWatch Logs của Lambda và xác nhận bản ghi đã được lưu tại DynamoDB Replica của Secondary Region.</li>
+<li><strong>Khôi phục Primary:</strong> Khôi phục API Gateway Stage và Base Path Mapping, sau đó xác nhận Route 53 có thể ưu tiên lại Primary Region.</li>
+</ol>
+<p><strong>Ví dụ gửi sự kiện kiểm thử:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST https://api.example.com <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;Detail&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;IsHelloWorldExample&#34;: &#34;true&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;DetailType&#34;: &#34;POSTED&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;Source&#34;: &#34;demo.event&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }&#39;</span> -v
+</span></span></code></pre></div><p>Theo mẫu AWS, phản hồi HTTP có header <code>X-Region</code> để nhận biết Region đang tiếp nhận yêu cầu. Khi hoạt động bình thường, kết quả thể hiện Primary Region; sau khi Failover thành công, kết quả thể hiện Secondary Region.</p>
+<p><strong>Lưu ý:</strong> Với cấu hình Health Check mẫu có chu kỳ 30 giây và Failure Threshold bằng 3, thời gian phát hiện lỗi theo ngưỡng là khoảng 90 giây. Tuy nhiên, thời gian chuyển đổi thực tế còn phụ thuộc vào DNS TTL và bộ nhớ cache của DNS Resolver.</p>
+<h2 id="6-lợi-ích-và-những-lưu-ý-khi-sử-dụng">6. LỢI ÍCH VÀ NHỮNG LƯU Ý KHI SỬ DỤNG</h2>
+<p><strong>Lợi ích:</strong></p>
+<ul>
+<li><strong>Tăng tính sẵn sàng:</strong> Giảm sự phụ thuộc vào một AWS Region duy nhất.</li>
+<li><strong>Hỗ trợ khôi phục:</strong> Có sẵn môi trường dự phòng khi Region chính gặp sự cố.</li>
+<li><strong>Giảm sự phụ thuộc giữa các thành phần:</strong> EventBridge và SQS hỗ trợ tách biệt quá trình tiếp nhận và xử lý sự kiện.</li>
+<li><strong>Duy trì dữ liệu đa khu vực:</strong> DynamoDB Global Tables nhân bản dữ liệu giữa các Region.</li>
+<li><strong>Dễ quản lý hạ tầng:</strong> AWS SAM và CloudFormation hỗ trợ triển khai tài nguyên thông qua Infrastructure as Code.</li>
+</ul>
+<p><strong>Những lưu ý quan trọng:</strong></p>
+<ul>
+<li><strong>DNS Failover không phải chuyển đổi tức thời:</strong> Các DNS Resolver có thể tiếp tục sử dụng kết quả phân giải cũ cho đến khi TTL hết hạn.</li>
+<li><strong>Health Check phải phù hợp:</strong> Endpoint kiểm tra cần phản ánh tình trạng phục vụ thực tế của ứng dụng.</li>
+<li><strong>Xử lý thông điệp trùng lặp:</strong> Lambda và SQS có thể xử lý một thông điệp nhiều lần; cần thiết kế logic Idempotent và cân nhắc Dead-Letter Queue.</li>
+<li><strong>Theo dõi nhân bản dữ liệu:</strong> Cần giám sát ReplicationLatency đối với Global Tables sử dụng MREC.</li>
+<li><strong>Kiểm soát quyền IAM:</strong> Cấp quyền theo nguyên tắc Least Privilege.</li>
+<li><strong>Theo dõi chi phí:</strong> Cần tính đến API Gateway, Route 53 Health Checks, DynamoDB Global Tables, Lambda, SQS, CloudWatch Logs và dữ liệu truyền giữa các Region.</li>
+</ul>
+<p>Sau khi hoàn thành thử nghiệm, nên xóa Secondary Stack trước rồi mới xóa Primary Stack theo hướng dẫn triển khai của AWS. Đặc biệt, cần sao lưu dữ liệu quan trọng vì quá trình xóa Primary Stack có thể xóa Global Table và dữ liệu đã lưu.</p>
+<h2 id="7-kết-luận">7. KẾT LUẬN</h2>
+<p>Kiến trúc Multi-Region Event-Driven Failover kết hợp Amazon EventBridge và Amazon Route 53 là giải pháp hỗ trợ cải thiện khả năng sẵn sàng và khôi phục cho các ứng dụng xử lý sự kiện trên AWS.</p>
+<p>Trong mô hình này, Route 53 đảm nhiệm việc kiểm tra tình trạng endpoint và định tuyến DNS giữa Primary Region và Secondary Region. API Gateway tiếp nhận yêu cầu, EventBridge định tuyến sự kiện, SQS lưu trữ thông điệp, Lambda xử lý nghiệp vụ và DynamoDB Global Tables duy trì các bản sao dữ liệu giữa những Region được triển khai.</p>
+<p>Thông qua kiến trúc này, có thể thấy việc xây dựng hệ thống dự phòng không chỉ đơn thuần là triển khai thêm một Region, mà còn cần bảo đảm các thành phần xử lý, dữ liệu và cơ chế chuyển đổi được chuẩn bị đồng bộ.</p>
+<p>Tuy nhiên, để áp dụng trong môi trường thực tế, doanh nghiệp cần đánh giá RTO, RPO, DNS TTL, độ trễ nhân bản dữ liệu và khả năng xử lý thông điệp trùng lặp. Đây là những yếu tố quyết định mức độ phù hợp của kiến trúc đối với yêu cầu vận hành của từng ứng dụng.</p>
+<h2 id="tài-liệu-tham-khảo">TÀI LIỆU THAM KHẢO</h2>
+<ol>
+<li>
+<p>AWS Compute Blog – Multi-Region event-driven failover architecture with Amazon EventBridge and Route 53:<br>
+<a href="https://aws.amazon.com/blogs/compute/multi-region-event-driven-failover-architecture-with-amazon-eventbridge-and-route-53/">https://aws.amazon.com/blogs/compute/multi-region-event-driven-failover-architecture-with-amazon-eventbridge-and-route-53/</a></p>
+</li>
+<li>
+<p>Amazon Route 53 – Failover Routing:<br>
+<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html</a></p>
+</li>
+<li>
+<p>Amazon EventBridge – Rules in Amazon EventBridge:<br>
+<a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html">https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html</a></p>
+</li>
+<li>
+<p>Amazon EventBridge API – PutEvents:<br>
+<a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html">https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html</a></p>
+</li>
+<li>
+<p>AWS Lambda – Using Lambda with Amazon SQS:<br>
+<a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html</a></p>
+</li>
+<li>
+<p>Amazon DynamoDB – Global Tables:<br>
+<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html</a></p>
+</li>
+<li>
+<p>Amazon DynamoDB – How Global Tables Work:<br>
+<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html">https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html</a></p>
+</li>
+<li>
+<p>AWS CloudFormation – AWS SAM Transform:<br>
+<a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-serverless.html">https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-serverless.html</a></p>
+</li>
+</ol>
 
 
 
@@ -1027,19 +1229,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1793781996"></script>
-    <script src="/js/perfect-scrollbar.min.js?1793781996"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1793781996"></script>
-    <script src="/js/jquery.sticky.js?1793781996"></script>
-    <script src="/js/featherlight.min.js?1793781996"></script>
-    <script src="/js/highlight.pack.js?1793781996"></script>
+    <script src="/js/clipboard.min.js?1794281002"></script>
+    <script src="/js/perfect-scrollbar.min.js?1794281002"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1794281002"></script>
+    <script src="/js/jquery.sticky.js?1794281002"></script>
+    <script src="/js/featherlight.min.js?1794281002"></script>
+    <script src="/js/highlight.pack.js?1794281002"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1793781996"></script>
-    <script src="/js/learn.js?1793781996"></script>
-    <script src="/js/hugo-learn.js?1793781996"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1794281002"></script>
+    <script src="/js/learn.js?1794281002"></script>
+    <script src="/js/hugo-learn.js?1794281002"></script>
     
         
-            <script src="/mermaid/mermaid.js?1793781996"></script>
+            <script src="/mermaid/mermaid.js?1794281002"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
