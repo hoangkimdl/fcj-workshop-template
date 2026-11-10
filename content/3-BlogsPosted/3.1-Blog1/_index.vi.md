@@ -6,7 +6,7 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# KIẾN TRÚC CHUYỂN ĐỔI DỰ PHÒNG ĐA REGION CHO ỨNG DỤNG HƯỚNG SỰ KIỆN VỚI AMAZON EVENTBRIDGE VÀ AMAZON ROUTE 53
+# Thiết kế hệ thống xử lý sự kiện đa Region có khả năng phục hồi cao trên AWS với Amazon EventBridge và Amazon Route 53
 
 Khi một ứng dụng chỉ được triển khai tại một AWS Region, sự cố nghiêm trọng tại khu vực đó có thể làm gián đoạn toàn bộ dịch vụ. Điều này đặc biệt ảnh hưởng đến các hệ thống xử lý sự kiện như tiếp nhận đơn hàng, cập nhật giao dịch hoặc ghi nhận hoạt động người dùng, nơi yêu cầu về tính sẵn sàng và khả năng duy trì dữ liệu rất quan trọng.
 

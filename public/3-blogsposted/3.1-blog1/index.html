@@ -12,22 +12,22 @@
     <title>Blog 1 :: Internship Report</title>
 
     
-    <link href="/css/nucleus.css?1794281002" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1794281002" rel="stylesheet">
-    <link href="/css/hybrid.css?1794281002" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1794281002" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1794281002" rel="stylesheet">
-    <link href="/css/auto-complete.css?1794281002" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1794281002" rel="stylesheet">
-    <link href="/css/theme.css?1794281002" rel="stylesheet">
-    <link href="/css/tabs.css?1794281002" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1794281002" rel="stylesheet">
+    <link href="/css/nucleus.css?1794282165" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1794282165" rel="stylesheet">
+    <link href="/css/hybrid.css?1794282165" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1794282165" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1794282165" rel="stylesheet">
+    <link href="/css/auto-complete.css?1794282165" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1794282165" rel="stylesheet">
+    <link href="/css/theme.css?1794282165" rel="stylesheet">
+    <link href="/css/tabs.css?1794282165" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1794282165" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1794281002" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1794282165" rel="stylesheet">
     
-    <link href="/css/vietnamese-font.css?1794281002" rel="stylesheet"><link href="/css/table-borders.css?1794281002" rel="stylesheet">
+    <link href="/css/vietnamese-font.css?1794282165" rel="stylesheet"><link href="/css/table-borders.css?1794282165" rel="stylesheet">
 
-    <script src="/js/jquery-3.3.1.min.js?1794281002"></script>
+    <script src="/js/jquery-3.3.1.min.js?1794282165"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1794281002"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1794281002"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1794282165"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1794282165"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1794281002"></script>
+<script type="text/javascript" src="/js/search.js?1794282165"></script>
 
     
   </div>
@@ -673,7 +673,26 @@
                 
                     <div class="progress">
     <div class="wrapper">
-<nav id="TableOfContents"></nav>
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#key-points-to-understand">KEY POINTS TO UNDERSTAND</a></li>
+    <li><a href="#1-architecture-overview">1. ARCHITECTURE OVERVIEW</a></li>
+    <li><a href="#2-aws-services-and-their-roles">2. AWS SERVICES AND THEIR ROLES</a></li>
+    <li><a href="#3-architecture-and-operational-flow">3. ARCHITECTURE AND OPERATIONAL FLOW</a>
+      <ul>
+        <li><a href="#31-overall-architecture">3.1. Overall Architecture</a></li>
+        <li><a href="#32-normal-operating-conditions">3.2. Normal Operating Conditions</a></li>
+        <li><a href="#33-when-the-primary-region-experiences-a-failure">3.3. When the Primary Region Experiences a Failure</a></li>
+        <li><a href="#34-when-the-primary-region-recovers">3.4. When the Primary Region Recovers</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-data-replication-with-dynamodb-global-tables">4. DATA REPLICATION WITH DYNAMODB GLOBAL TABLES</a></li>
+    <li><a href="#5-deployment-and-failover-testing">5. DEPLOYMENT AND FAILOVER TESTING</a></li>
+    <li><a href="#6-benefits-and-important-considerations">6. BENEFITS AND IMPORTANT CONSIDERATIONS</a></li>
+    <li><a href="#7-conclusion">7. CONCLUSION</a></li>
+    <li><a href="#references">REFERENCES</a></li>
+  </ul>
+</nav>
     </div>
 </div>
 
@@ -697,25 +716,207 @@
 
 
 
-	
-<div class="notices warning" ><p>⚠️ <strong>Note:</strong> The information below is for reference purposes only. Please <strong>do not copy verbatim</strong> for your report, including this warning.</p>
-</div>
-
-<h1 id="session-policies-in-amazon-eks-pod-identity">SESSION POLICIES IN AMAZON EKS POD IDENTITY</h1>
-<p>Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.</p>
-<p>Key points to know:</p>
+	<h1 id="designing-a-resilient-multi-region-event-processing-system-on-aws-with-amazon-eventbridge-and-amazon-route-53">Designing a Resilient Multi-Region Event Processing System on AWS with Amazon EventBridge and Amazon Route 53</h1>
+<p>When an application is deployed in only one AWS Region, a major failure in that Region can disrupt the entire service. This is particularly concerning for event-driven systems, such as order processing, transaction updates, and user activity tracking, where high availability and data durability are essential.</p>
+<p>To reduce these risks, organizations can implement a Multi-Region architecture in which one Region serves as the primary environment while another is prepared as a standby environment. By combining Amazon Route 53, Amazon API Gateway, Amazon EventBridge, Amazon SQS, AWS Lambda, and Amazon DynamoDB Global Tables, the system can redirect new requests to the standby Region when the primary Region experiences a failure.</p>
+<h2 id="key-points-to-understand">KEY POINTS TO UNDERSTAND</h2>
 <ul>
-<li>A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.</li>
-<li>Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them.</li>
-<li>Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs.</li>
-<li>Supports both same-account and cross-account (via IAM role chaining).</li>
-<li>Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters.</li>
-<li>Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role.</li>
+<li><strong>Multi-Region Architecture:</strong> Deploying an application across multiple AWS Regions to improve availability and support disaster recovery.</li>
+<li><strong>Active-Passive:</strong> Using the Primary Region to handle normal traffic while the Secondary Region serves as a standby environment.</li>
+<li><strong>Amazon Route 53:</strong> Using Health Checks and Failover Routing Policy to monitor endpoints and route DNS queries to the appropriate Region.</li>
+<li><strong>Event-Driven Processing:</strong> API Gateway receives requests, EventBridge routes events, SQS stores messages, and Lambda processes them.</li>
+<li><strong>DynamoDB Global Tables:</strong> Maintaining data replicas across multiple AWS Regions through cross-Region replication.</li>
+<li><strong>Automatic Failover:</strong> When the Primary Region fails to meet Health Check conditions, Route 53 can direct new DNS queries to the Secondary Region.</li>
+<li><strong>Data Consistency:</strong> Considering replication latency, write conflicts, and duplicate message processing.</li>
 </ul>
-<p>This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).</p>
-<p>&hellip;Image&hellip;</p>
-<p>&hellip;Link&hellip;</p>
-<p>&hellip;Guide&hellip;</p>
+<h2 id="1-architecture-overview">1. ARCHITECTURE OVERVIEW</h2>
+<p><strong>Multi-Region Architecture</strong> is an application deployment model that uses multiple AWS Regions to reduce dependence on a single infrastructure location. This solution adopts an Active-Passive model consisting of:</p>
+<ul>
+<li><strong>Primary Region:</strong> The main Region that receives and processes requests under normal operating conditions.</li>
+<li><strong>Secondary Region:</strong> The standby Region, where the necessary components are pre-deployed to handle requests when the Primary Region experiences a failure.</li>
+</ul>
+<p>In addition, the system uses <strong>Event-Driven Architecture (EDA)</strong>, which allows components to communicate through events rather than relying on direct interactions with one another. This approach separates request reception, event routing, and data processing while allowing individual components to scale independently.</p>
+<h2 id="2-aws-services-and-their-roles">2. AWS SERVICES AND THEIR ROLES</h2>
+<table>
+  <thead>
+      <tr>
+          <th style="text-align: left">AWS Service</th>
+          <th style="text-align: left">Role</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: left">Amazon Route 53</td>
+          <td style="text-align: left">Manages DNS, monitors endpoint health, and performs Failover Routing.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon API Gateway</td>
+          <td style="text-align: left">Receives HTTP/HTTPS requests and forwards events to EventBridge.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon EventBridge</td>
+          <td style="text-align: left">Receives events through an Event Bus and routes them according to Event Rules.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon SQS</td>
+          <td style="text-align: left">Stores messages in queues until they are ready for processing.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">AWS Lambda</td>
+          <td style="text-align: left">Retrieves messages from SQS, processes business logic, and writes data to DynamoDB.</td>
+      </tr>
+      <tr>
+          <td style="text-align: left">Amazon DynamoDB Global Tables</td>
+          <td style="text-align: left">Replicates data across AWS Regions.</td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Amazon Route 53 – DNS Failover</strong></p>
+<p>Route 53 uses Health Checks to monitor the availability of the endpoint in the Primary Region. When the endpoint no longer meets the health check conditions, the Failover Routing Policy allows Route 53 to return the Secondary Region&rsquo;s endpoint for new DNS queries.</p>
+<p><strong>Amazon API Gateway and Amazon EventBridge</strong></p>
+<p>API Gateway serves as the entry point for application requests. Through AWS Service Integration and the <code>PutEvents</code> API, API Gateway forwards event data to EventBridge. EventBridge receives the events, evaluates the configured Event Rules, and routes matching events to their designated targets.</p>
+<p><strong>Amazon SQS and AWS Lambda</strong></p>
+<p>SQS acts as an intermediate message queue, separating event reception from event processing. Lambda uses Event Source Mapping to retrieve messages from SQS in batches and execute the corresponding business logic.</p>
+<p><strong>Amazon DynamoDB Global Tables</strong></p>
+<p>Global Tables maintain replicas of the same DynamoDB table across multiple Regions. When data is written to one replica, the changes are replicated to the other replicas according to the configured consistency mode.</p>
+<h2 id="3-architecture-and-operational-flow">3. ARCHITECTURE AND OPERATIONAL FLOW</h2>
+<h3 id="31-overall-architecture">3.1. Overall Architecture</h3>
+<p>The solution deploys two independent event-processing pipelines across two AWS Regions. Each Region contains API Gateway, EventBridge, SQS, and Lambda components. Route 53 manages DNS routing, while DynamoDB Global Tables handle data replication between the two Regions.</p>
+<p><strong>Architecture Diagram:</strong></p>
+<p><em>Figure 1. Multi-Region failover architecture using Amazon Route 53 and AWS serverless services.</em></p>
+<p>The main processing flow in each Region is:</p>
+<p><code>Amazon API Gateway → Amazon EventBridge → Amazon SQS → AWS Lambda → Amazon DynamoDB</code></p>
+<h3 id="32-normal-operating-conditions">3.2. Normal Operating Conditions</h3>
+<p>When the Primary Region is operating normally, Route 53 resolves the domain name and prioritizes the endpoint of the primary environment.</p>
+<p>Processing flow:</p>
+<ol>
+<li>A user sends a request to the application domain name, and Route 53 resolves it to the Primary Region.</li>
+<li>API Gateway receives the request and sends the event to EventBridge through the <code>PutEvents</code> API.</li>
+<li>EventBridge evaluates the Event Rules and routes matching events to SQS.</li>
+<li>Lambda retrieves messages from SQS in batches through Event Source Mapping.</li>
+<li>Lambda processes the events and writes the results to the DynamoDB replica in the Primary Region.</li>
+<li>DynamoDB Global Tables replicate the data changes to the replica in the Secondary Region.</li>
+</ol>
+<h3 id="33-when-the-primary-region-experiences-a-failure">3.3. When the Primary Region Experiences a Failure</h3>
+<p>When the Primary Region no longer meets the Health Check conditions, Route 53 updates its health status and applies the Failover Routing Policy.</p>
+<p>Processing flow:</p>
+<ol>
+<li>Route 53 Health Check detects that the Primary Region endpoint is unhealthy.</li>
+<li>Route 53 switches to the Secondary Record for new DNS queries.</li>
+<li>Users are routed to the API Gateway endpoint in the Secondary Region.</li>
+<li>EventBridge receives and routes events to the SQS queue in the standby Region.</li>
+<li>Lambda in the Secondary Region processes the messages and writes data to its local DynamoDB replica.</li>
+</ol>
+<p>Because the necessary components have already been deployed, the Secondary Region can continue receiving and processing new requests without rebuilding the entire system.</p>
+<h3 id="34-when-the-primary-region-recovers">3.4. When the Primary Region Recovers</h3>
+<p>When the Primary Region endpoint becomes healthy again and passes the Health Check, Route 53 can resume prioritizing the Primary Record for new DNS queries.</p>
+<p>The process of directing traffic back to the primary environment is called <strong>Failback</strong>. However, users may continue using previously resolved DNS records for some time because of DNS caching and TTL settings. Therefore, the transition does not necessarily happen simultaneously across all devices.</p>
+<h2 id="4-data-replication-with-dynamodb-global-tables">4. DATA REPLICATION WITH DYNAMODB GLOBAL TABLES</h2>
+<p>DynamoDB Global Tables maintain data across multiple Regions, allowing applications to access local replicas when another Region experiences a failure.</p>
+<p>Global Tables currently support two main consistency modes:</p>
+<ul>
+<li><strong>Multi-Region Eventual Consistency (MREC):</strong> The default mode when no alternative consistency mode is specified. Data is replicated asynchronously across Regions, so there may be a delay before all replicas receive the latest changes.</li>
+<li><strong>Multi-Region Strong Consistency (MRSC):</strong> Provides strong consistency across Regions, subject to AWS deployment requirements and limitations.</li>
+</ul>
+<p>In the original AWS architecture example, the CloudFormation configuration creates replicas without explicitly specifying another consistency mode. Therefore, the default MREC mode is applied.</p>
+<p>Several important considerations include:</p>
+<ul>
+<li><strong>Replication Lag:</strong> The delay between the time data is written and the time it becomes available in another Region&rsquo;s replica.</li>
+<li><strong>Write Conflict:</strong> Conflicts that may occur when the same record is updated simultaneously in multiple Regions.</li>
+<li><strong>Data Consistency:</strong> Data across Regions may temporarily differ while replication is still in progress.</li>
+<li><strong>Recovery Point Objective (RPO):</strong> The amount of data loss an application can tolerate in the event of a failure.</li>
+</ul>
+<p>Therefore, it should not be assumed that every piece of data written to the Primary Region is immediately replicated to the Secondary Region.</p>
+<h2 id="5-deployment-and-failover-testing">5. DEPLOYMENT AND FAILOVER TESTING</h2>
+<p>To deploy the solution according to the AWS guide, the following prerequisites are required:</p>
+<ul>
+<li>An AWS account with permissions to manage the related services.</li>
+<li>AWS CLI and AWS SAM CLI installed and configured.</li>
+<li>A registered domain name and a Route 53 Hosted Zone.</li>
+<li>Appropriate ACM certificates in both Regions if Regional Custom Domains are used.</li>
+<li>Two selected AWS Regions designated as Primary and Secondary.</li>
+</ul>
+<p><strong>General Deployment Process:</strong></p>
+<ol>
+<li><strong>Deploy Primary Stack:</strong> Create API Gateway, EventBridge, SQS, Lambda, Route 53 Health Check, Primary DNS Record, and the DynamoDB Global Table with the required replicas.</li>
+<li><strong>Deploy Secondary Stack:</strong> Create an independent processing pipeline in the standby Region and reference the existing DynamoDB Global Table.</li>
+<li><strong>Verify Normal Operation:</strong> Send an event to the Custom Domain and confirm that the request is received by the Primary Region.</li>
+<li><strong>Simulate a Failure:</strong> Make the Primary API Gateway endpoint fail its Health Check in the testing environment.</li>
+<li><strong>Verify Failover:</strong> Send another request and check whether the system has switched to the Secondary Region.</li>
+<li><strong>Verify Data:</strong> Review Lambda CloudWatch Logs and confirm that the record has been written to the DynamoDB replica in the Secondary Region.</li>
+<li><strong>Restore the Primary Region:</strong> Restore the API Gateway Stage and Base Path Mapping, then verify that Route 53 can prioritize the Primary Region again.</li>
+</ol>
+<p><strong>Example of Sending a Test Event:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>curl -X POST https://api.example.com <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -H <span style="color:#e6db74">&#34;Content-Type: application/json&#34;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>  -d <span style="color:#e6db74">&#39;{
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;Detail&#34;: {
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">      &#34;IsHelloWorldExample&#34;: &#34;true&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    },
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;DetailType&#34;: &#34;POSTED&#34;,
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;Source&#34;: &#34;demo.event&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  }&#39;</span> -v
+</span></span></code></pre></div><p>According to the AWS example, the HTTP response includes an <code>X-Region</code> header that identifies the Region handling the request. Under normal conditions, the result indicates the Primary Region. After a successful Failover, the result indicates the Secondary Region.</p>
+<p><strong>Note:</strong> With the example Health Check configuration using a 30-second interval and a Failure Threshold of 3, the failure detection threshold is approximately 90 seconds. However, the actual failover time also depends on DNS TTL and DNS Resolver caching.</p>
+<h2 id="6-benefits-and-important-considerations">6. BENEFITS AND IMPORTANT CONSIDERATIONS</h2>
+<p><strong>Benefits:</strong></p>
+<ul>
+<li><strong>Improved Availability:</strong> Reduces dependence on a single AWS Region.</li>
+<li><strong>Disaster Recovery Support:</strong> Provides a standby environment when the primary Region experiences a failure.</li>
+<li><strong>Reduced Component Coupling:</strong> EventBridge and SQS help separate event reception from event processing.</li>
+<li><strong>Multi-Region Data Availability:</strong> DynamoDB Global Tables replicate data across Regions.</li>
+<li><strong>Simplified Infrastructure Management:</strong> AWS SAM and CloudFormation support infrastructure deployment through Infrastructure as Code.</li>
+</ul>
+<p><strong>Important Considerations:</strong></p>
+<ul>
+<li><strong>DNS Failover Is Not Instantaneous:</strong> DNS Resolvers may continue using previously cached DNS records until their TTL expires.</li>
+<li><strong>Appropriate Health Checks:</strong> The monitored endpoint should accurately reflect the application&rsquo;s actual service availability.</li>
+<li><strong>Duplicate Message Processing:</strong> Lambda and SQS may process a message more than once. Applications should implement Idempotent processing logic and consider using a Dead-Letter Queue.</li>
+<li><strong>Data Replication Monitoring:</strong> ReplicationLatency should be monitored for Global Tables using MREC.</li>
+<li><strong>IAM Access Control:</strong> Permissions should follow the Least Privilege principle.</li>
+<li><strong>Cost Monitoring:</strong> Costs should account for API Gateway, Route 53 Health Checks, DynamoDB Global Tables, Lambda, SQS, CloudWatch Logs, and cross-Region data transfer.</li>
+</ul>
+<p>After completing the testing process, it is recommended to delete the Secondary Stack first, followed by the Primary Stack, according to the AWS deployment guide. In particular, important data should be backed up because deleting the Primary Stack may also delete the Global Table and its stored data.</p>
+<h2 id="7-conclusion">7. CONCLUSION</h2>
+<p>The Multi-Region Event-Driven Failover architecture, combining Amazon EventBridge and Amazon Route 53, is a solution that helps improve availability and disaster recovery capabilities for event-driven applications on AWS.</p>
+<p>In this architecture, Route 53 monitors endpoint health and manages DNS routing between the Primary and Secondary Regions. API Gateway receives requests, EventBridge routes events, SQS stores messages, Lambda processes business logic, and DynamoDB Global Tables maintain data replicas across the deployed Regions.</p>
+<p>This architecture demonstrates that building a standby system involves more than simply deploying an additional Region. The processing components, data replication mechanisms, and failover procedures must also be properly prepared and coordinated.</p>
+<p>However, before applying this architecture in a production environment, organizations should evaluate RTO, RPO, DNS TTL, data replication latency, and duplicate message handling. These factors determine whether the architecture is suitable for the operational requirements of a particular application.</p>
+<h2 id="references">REFERENCES</h2>
+<ol>
+<li>
+<p>AWS Compute Blog – Multi-Region event-driven failover architecture with Amazon EventBridge and Route 53:<br>
+<a href="https://aws.amazon.com/blogs/compute/multi-region-event-driven-failover-architecture-with-amazon-eventbridge-and-route-53/">https://aws.amazon.com/blogs/compute/multi-region-event-driven-failover-architecture-with-amazon-eventbridge-and-route-53/</a></p>
+</li>
+<li>
+<p>Amazon Route 53 – Failover Routing:<br>
+<a href="https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html">https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html</a></p>
+</li>
+<li>
+<p>Amazon EventBridge – Rules in Amazon EventBridge:<br>
+<a href="https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html">https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html</a></p>
+</li>
+<li>
+<p>Amazon EventBridge API – PutEvents:<br>
+<a href="https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html">https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html</a></p>
+</li>
+<li>
+<p>AWS Lambda – Using Lambda with Amazon SQS:<br>
+<a href="https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html">https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html</a></p>
+</li>
+<li>
+<p>Amazon DynamoDB – Global Tables:<br>
+<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html">https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html</a></p>
+</li>
+<li>
+<p>Amazon DynamoDB – How Global Tables Work:<br>
+<a href="https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html">https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_HowItWorks.html</a></p>
+</li>
+<li>
+<p>AWS CloudFormation – AWS SAM Transform:<br>
+<a href="https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-serverless.html">https://docs.aws.amazon.com/AWSCloudFormation/latest/TemplateReference/transform-aws-serverless.html</a></p>
+</li>
+</ol>
 
 
 
@@ -1027,19 +1228,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1794281002"></script>
-    <script src="/js/perfect-scrollbar.min.js?1794281002"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1794281002"></script>
-    <script src="/js/jquery.sticky.js?1794281002"></script>
-    <script src="/js/featherlight.min.js?1794281002"></script>
-    <script src="/js/highlight.pack.js?1794281002"></script>
+    <script src="/js/clipboard.min.js?1794282165"></script>
+    <script src="/js/perfect-scrollbar.min.js?1794282165"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1794282165"></script>
+    <script src="/js/jquery.sticky.js?1794282165"></script>
+    <script src="/js/featherlight.min.js?1794282165"></script>
+    <script src="/js/highlight.pack.js?1794282165"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1794281002"></script>
-    <script src="/js/learn.js?1794281002"></script>
-    <script src="/js/hugo-learn.js?1794281002"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1794282165"></script>
+    <script src="/js/learn.js?1794282165"></script>
+    <script src="/js/hugo-learn.js?1794282165"></script>
     
         
-            <script src="/mermaid/mermaid.js?1794281002"></script>
+            <script src="/mermaid/mermaid.js?1794282165"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
