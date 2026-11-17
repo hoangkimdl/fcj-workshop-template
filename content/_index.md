@@ -13,7 +13,7 @@ chapter: false
 
 &emsp; **Phone Number:** 0911673872
 
-&emsp; **Email:** 23110248.student.hcmute.edu.vn
+&emsp; **Email:** 23110248@student.hcmute.edu.vn
 
 &emsp; **University:** Ho Chi Minh City University of Technology and Engineering
 

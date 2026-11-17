@@ -13,7 +13,7 @@ chapter: false
 
 &emsp; **Số điện thoại:** 0911673872
 
-&emsp; **Email:** 23110248.student.hcmute.edu.vn
+&emsp; **Email:** 23110248@student.hcmute.edu.vn
 
 &emsp; **Trường:** Đại học Công nghệ Kỹ thuật TP.HCM
 
