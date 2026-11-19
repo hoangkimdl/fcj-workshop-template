@@ -41,6 +41,19 @@
                 href="http://localhost:1313/"
                 />
   </url><url>
+    <loc>http://localhost:1313/1-worklog/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="http://localhost:1313/vi/1-worklog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/1-worklog/"
+                />
+  </url><url>
     <loc>http://localhost:1313/3-blogsposted/3.2-blog2/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -65,19 +78,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/3-blogsposted/3.3-blog3/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/1-worklog/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="http://localhost:1313/vi/1-worklog/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/1-worklog/"
                 />
   </url><url>
     <loc>http://localhost:1313/1-worklog/1.2-week2/</loc>
@@ -184,6 +184,19 @@
                 href="http://localhost:1313/5-workshop/"
                 />
   </url><url>
+    <loc>http://localhost:1313/1-worklog/1.6-week6/</loc>
+    <lastmod>2026-11-09T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="http://localhost:1313/vi/1-worklog/1.6-week6/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/1-worklog/1.6-week6/"
+                />
+  </url><url>
     <loc>http://localhost:1313/6-self-evaluation/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -210,16 +223,16 @@
                 href="http://localhost:1313/7-feedback/"
                 />
   </url><url>
-    <loc>http://localhost:1313/1-worklog/1.6-week6/</loc>
+    <loc>http://localhost:1313/1-worklog/1.7-week7/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="vi"
-                href="http://localhost:1313/vi/1-worklog/1.6-week6/"
+                href="http://localhost:1313/vi/1-worklog/1.7-week7/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/1-worklog/1.6-week6/"
+                href="http://localhost:1313/1-worklog/1.7-week7/"
                 />
   </url><url>
     <loc>http://localhost:1313/4-eventparticipated/4.1-event1/</loc>

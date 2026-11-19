@@ -21,6 +21,13 @@
 	"content": "Internship Report Student Information: Full Name: Nguyen Thi Hoang Kim\nPhone Number: 0911673872\nEmail: 23110248@student.hcmute.edu.vn\nUniversity: Ho Chi Minh City University of Technology and Engineering\nMajor: Information Technology\nClass: AWS102026\nInternship Company: Amazon Web Services Viet Nam Company Limited\nInternship Position: Workforce Bootcamp - First Cloud AI Journey\nInternship Duration: From 01/10/2026 to 01/01/2027\nReport Content Worklog Proposal BlogsPosted Events Participated Workshop Self-evaluation Sharing and Feedback "
 },
 {
+	"uri": "http://localhost:1313/1-worklog/",
+	"title": "Worklog",
+	"tags": [],
+	"description": "",
+	"content": "On this page, you will need to introduce your worklog. How did you complete it? How many weeks did you take to complete the program? What did you do in those weeks?\nTypically, and as a standard, a worklog is carried out over about 3 months (throughout the internship period) with weekly contents as follows:\nWeek 1: Getting familiar with AWS and basic AWS services\nWeek 2: Doing task Week 3: Doing task Week 4: Doing task Week 5: Doing task Week 6: Doing task Week 7: Doing task Week 8: Doing task Week 9: Doing task Week 10: Doing task Week 11: Doing task Week 12: Doing task "
+},
+{
 	"uri": "http://localhost:1313/3-blogsposted/3.2-blog2/",
 	"title": "Blog 2",
 	"tags": [],
@@ -33,13 +40,6 @@
 	"tags": [],
 	"description": "",
 	"content": "\r⚠️ Note: The information below is for reference purposes only. Please do not copy verbatim for your report, including this warning.\nSESSION POLICIES IN AMAZON EKS POD IDENTITY Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.\nKey points to know:\nA session policy is an inline IAM policy specified when creating or updating a Pod Identity association. Effective permissions = intersection between the IAM role permissions and the session policy → the session policy can only narrow permissions, not expand them. Helps avoid over-permissioning when reusing a single IAM role for multiple workloads with different needs. Supports both same-account and cross-account (via IAM role chaining). Significantly reduces the number of IAM roles that need to be managed, helping avoid hitting IAM quota limits in large clusters. Easily configured through the AWS Management Console, AWS CLI, or AWS SDK when creating an association between a Kubernetes ServiceAccount and an IAM role. This feature is especially useful when you have many applications running on the same IAM role but need different permission restrictions (for example: one pod only reads a specific S3 bucket, another pod only calls certain APIs).\n\u0026hellip;Image\u0026hellip;\n\u0026hellip;Link\u0026hellip;\n\u0026hellip;Guide\u0026hellip;\n"
-},
-{
-	"uri": "http://localhost:1313/1-worklog/",
-	"title": "Worklog",
-	"tags": [],
-	"description": "",
-	"content": "\r⚠️ Note: The information below is for reference purposes only. Please do not copy verbatim for your report, including this warning.\nOn this page, you will need to introduce your worklog. How did you complete it? How many weeks did you take to complete the program? What did you do in those weeks?\nTypically, and as a standard, a worklog is carried out over about 3 months (throughout the internship period) with weekly contents as follows:\nWeek 1: Getting familiar with AWS and basic AWS services\nWeek 2: Doing task A\u0026hellip;\nWeek 3: Doing task B\u0026hellip;\nWeek 4: Doing task C\u0026hellip;\nWeek 5: Doing task D\u0026hellip;\nWeek 6: Doing task E\u0026hellip;\nWeek 7: Doing task G\u0026hellip;\nWeek 8: Doing task H\u0026hellip;\nWeek 9: Doing task I\u0026hellip;\nWeek 10: Doing task L\u0026hellip;\nWeek 11: Doing task M\u0026hellip;\nWeek 12: Doing task N\u0026hellip;\n"
 },
 {
 	"uri": "http://localhost:1313/1-worklog/1.2-week2/",
@@ -117,6 +117,13 @@
 	"tags": [],
 	"description": "",
 	"content": "\r⚠️ Note: The information below is for reference purposes only. Please do not copy verbatim for your report, including this warning.\nHere, you can freely share your personal opinions about your experience participating in the First Cloud AI Journey program. This will help the FCAJ team improve any shortcomings based on the following aspects:\nOverall Evaluation 1. Working Environment\nThe working environment is very friendly and open. FCAJ members are always willing to help whenever I encounter difficulties, even outside working hours. The workspace is tidy and comfortable, helping me focus better. However, I think it would be nice to have more social gatherings or team bonding activities to strengthen relationships.\n2. Support from Mentor / Team Admin\nThe mentor provides very detailed guidance, explains clearly when I don’t understand, and always encourages me to ask questions. The admin team supports administrative tasks, provides necessary documents, and creates favorable conditions for me to work effectively. I especially appreciate that the mentor allows me to try and solve problems myself instead of just giving the answer.\n3. Relevance of Work to Academic Major\nThe tasks I was assigned align well with the knowledge I learned at university, while also introducing me to new areas I had never encountered before. This allowed me to both strengthen my foundational knowledge and gain practical skills.\n4. Learning \u0026amp; Skill Development Opportunities\nDuring the internship, I learned many new skills such as using project management tools, teamwork skills, and professional communication in a corporate environment. The mentor also shared valuable real-world experiences that helped me better plan my career path.\n5. Company Culture \u0026amp; Team Spirit\nThe company culture is very positive: everyone respects each other, works seriously but still keeps things enjoyable. When there are urgent projects, everyone works together and supports one another regardless of their position. This made me feel like a real part of the team, even as an intern.\n6. Internship Policies / Benefits\nThe company provides an internship allowance and offers flexible working hours when needed. In addition, having the opportunity to join internal training sessions is a big plus.\nAdditional Questions What did you find most satisfying during your internship? What do you think the company should improve for future interns? If recommending to a friend, would you suggest they intern here? Why or why not? Suggestions \u0026amp; Expectations Do you have any suggestions to improve the internship experience? Would you like to continue this program in the future? Any other comments (free sharing): "
+},
+{
+	"uri": "http://localhost:1313/1-worklog/1.7-week7/",
+	"title": "",
+	"tags": [],
+	"description": "",
+	"content": ""
 },
 {
 	"uri": "http://localhost:1313/4-eventparticipated/4.1-event1/",

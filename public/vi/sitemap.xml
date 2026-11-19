@@ -41,6 +41,19 @@
                 href="http://localhost:1313/vi/"
                 />
   </url><url>
+    <loc>http://localhost:1313/vi/1-worklog/</loc>
+    <lastmod>2026-10-01T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/1-worklog/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="http://localhost:1313/vi/1-worklog/"
+                />
+  </url><url>
     <loc>http://localhost:1313/vi/3-blogsposted/3.2-blog2/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -65,19 +78,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="http://localhost:1313/vi/3-blogsposted/3.3-blog3/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/vi/1-worklog/</loc>
-    <lastmod>2024-01-01T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/1-worklog/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="http://localhost:1313/vi/1-worklog/"
                 />
   </url><url>
     <loc>http://localhost:1313/vi/1-worklog/1.2-week2/</loc>
@@ -208,6 +208,19 @@
                 rel="alternate"
                 hreflang="vi"
                 href="http://localhost:1313/vi/6-self-evaluation/"
+                />
+  </url><url>
+    <loc>http://localhost:1313/vi/1-worklog/1.7-week7/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/1-worklog/1.7-week7/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="http://localhost:1313/vi/1-worklog/1.7-week7/"
                 />
   </url><url>
     <loc>http://localhost:1313/vi/7-feedback/</loc>
