@@ -210,6 +210,19 @@
                 href="http://localhost:1313/6-self-evaluation/"
                 />
   </url><url>
+    <loc>http://localhost:1313/1-worklog/1.7-week7/</loc>
+    <lastmod>2026-11-16T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="vi"
+                href="http://localhost:1313/vi/1-worklog/1.7-week7/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="http://localhost:1313/1-worklog/1.7-week7/"
+                />
+  </url><url>
     <loc>http://localhost:1313/7-feedback/</loc>
     <lastmod>2024-01-01T00:00:00+00:00</lastmod>
     <xhtml:link
@@ -221,18 +234,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="http://localhost:1313/7-feedback/"
-                />
-  </url><url>
-    <loc>http://localhost:1313/1-worklog/1.7-week7/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="http://localhost:1313/vi/1-worklog/1.7-week7/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="http://localhost:1313/1-worklog/1.7-week7/"
                 />
   </url><url>
     <loc>http://localhost:1313/4-eventparticipated/4.1-event1/</loc>
