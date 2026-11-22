@@ -6,257 +6,123 @@ chapter: false
 pre: " <b> 3.1. </b> "
 ---
 
-# Kiến trúc xử lý đơn hàng đa Region trên AWS: Cách chuyển hướng yêu cầu mới sang Region dự phòng khi Region chính gặp sự cố
+# Amazon Polly Bidirectional Streaming: Tăng tốc tổng hợp giọng nói cho ứng dụng AI hội thoại
 
-Một nền tảng thương mại điện tử có thể tiếp nhận nhiều yêu cầu đặt hàng trong ngày. Khi khách hàng nhấn nút đặt hàng, hệ thống cần tiếp nhận yêu cầu, ghi nhận thông tin, đưa sự kiện vào quy trình xử lý và lưu lại kết quả. Nếu toàn bộ ứng dụng chỉ hoạt động tại một AWS Region, sự cố nghiêm trọng tại khu vực đó có thể khiến khách hàng không gửi được yêu cầu mới, đồng thời làm gián đoạn quá trình xử lý các sự kiện đang chờ.
+## 1. Bối cảnh
 
-Một cách giảm rủi ro là chuẩn bị thêm một AWS Region để dự phòng. Tuy nhiên, chỉ triển khai thêm tài nguyên tại khu vực thứ hai chưa đủ. Hệ thống còn phải phát hiện khi Region chính gặp sự cố, chuyển các yêu cầu mới đến Region dự phòng, tiếp tục xử lý sự kiện và bảo đảm dữ liệu cần thiết có thể được truy cập ở khu vực thay thế.
+Trong các ứng dụng AI hội thoại, người dùng thường muốn nghe câu trả lời ngay khi hệ thống bắt đầu tạo nội dung, thay vì phải chờ toàn bộ câu trả lời hoàn tất. Ví dụ, một chatbot chăm sóc khách hàng có thể sử dụng mô hình ngôn ngữ lớn (Large Language Model – LLM) để tạo câu trả lời, sau đó chuyển nội dung thành giọng nói để người dùng nghe.
 
-Để giải quyết bài toán này, kiến trúc **Multi-Region Event-Driven Failover** kết hợp Amazon Route 53, Amazon API Gateway, Amazon EventBridge, Amazon SQS, AWS Lambda và Amazon DynamoDB Global Tables. Kiến trúc sử dụng mô hình **Active-Passive**: Region chính xử lý lưu lượng trong điều kiện bình thường, còn Region dự phòng được chuẩn bị sẵn để tiếp nhận yêu cầu khi endpoint của Region chính không còn đáp ứng Health Check.
+LLM thường tạo văn bản theo từng phần trong quá trình xử lý. Tuy nhiên, với cách tích hợp Text-to-Speech (TTS) truyền thống, ứng dụng phải cung cấp toàn bộ văn bản trong một yêu cầu tổng hợp. Điều này khiến hệ thống phải chờ đến khi có đủ nội dung mới bắt đầu yêu cầu TTS. Nếu muốn giảm thời gian chờ, nhà phát triển thường phải tự chia văn bản thành nhiều đoạn, gửi nhiều yêu cầu tổng hợp và xử lý việc ghép các phần âm thanh.
 
-Tình huống cửa hàng trực tuyến trong bài viết là ví dụ giả định, được sử dụng để minh họa cách kiến trúc vận hành. Đây không phải câu chuyện khách hàng hay một hệ thống thương mại điện tử cụ thể đã được triển khai.
+Amazon Polly đã có thể trả âm thanh theo luồng trong phản hồi của API `SynthesizeSpeech`. Điểm hạn chế nằm ở chiều đầu vào: API này yêu cầu văn bản hoàn chỉnh trong một yêu cầu. Amazon Polly Bidirectional Streaming được giới thiệu để giải quyết vấn đề đó, cho phép ứng dụng gửi văn bản từng phần và đồng thời nhận âm thanh được tổng hợp trong cùng một phiên kết nối.
 
-## 1. BÀI TOÁN THỰC TẾ: ĐIỀU GÌ XẢY RA KHI REGION CHÍNH GẶP SỰ CỐ?
+## 2. Giới thiệu Amazon Polly Bidirectional Streaming
 
-### 1.1. Rủi ro khi ứng dụng chỉ triển khai tại một Region
+Amazon Polly là dịch vụ Text-to-Speech được quản lý bởi AWS, có khả năng chuyển văn bản thành giọng nói tổng hợp. Dịch vụ cung cấp nhiều giọng đọc và engine khác nhau để phục vụ các nhu cầu chuyển đổi văn bản thành âm thanh.
 
-AWS Region là một khu vực địa lý riêng biệt trong hạ tầng AWS. Một Region có thể bao gồm nhiều Availability Zone (AZ), giúp ứng dụng tăng khả năng chịu lỗi trong phạm vi khu vực đó. Tuy nhiên, nếu toàn bộ ứng dụng chỉ được triển khai tại một Region, sự cố ảnh hưởng đến khu vực này vẫn có thể làm gián đoạn dịch vụ trên phạm vi lớn hơn.
+Tính năng Bidirectional Streaming sử dụng API `StartSpeechSynthesisStream`. API này thiết lập một kết nối HTTP/2 hai chiều giữa ứng dụng và Amazon Polly. Thay vì chờ có toàn bộ văn bản, ứng dụng có thể gửi nội dung theo từng phần khi dữ liệu xuất hiện. Đồng thời, Polly tổng hợp nội dung đã nhận và gửi các đoạn âm thanh trở lại ứng dụng.
 
-Ví dụ, một cửa hàng trực tuyến tiếp nhận đơn hàng thông qua API. Khi khách hàng gửi yêu cầu, hệ thống cần ghi nhận sự kiện, đưa sự kiện vào quy trình xử lý và cập nhật dữ liệu đơn hàng. Nếu endpoint API tại Region đang hoạt động gặp sự cố, các yêu cầu mới có thể không được tiếp nhận. Các thành phần xử lý sự kiện phụ thuộc vào Region đó cũng có thể bị ảnh hưởng.
+Cơ chế này có ba điểm quan trọng:
 
-Trong tình huống này, doanh nghiệp không chỉ cần khôi phục giao diện ứng dụng. Hệ thống còn phải xác định những yêu cầu nào đã được tiếp nhận, những thông điệp nào còn chờ xử lý, dữ liệu nào đã được ghi nhận và cách tiếp tục phục vụ khách hàng mà không tạo ra đơn hàng trùng lặp hoặc trạng thái giao dịch sai lệch.
+- **Gửi văn bản tăng dần:** Ứng dụng chuyển từng phần văn bản đến Polly thông qua sự kiện `TextEvent`. Các phần văn bản không bắt buộc phải trùng với ranh giới câu hoặc đoạn.
+- **Nhận âm thanh đồng thời:** Polly trả dữ liệu âm thanh qua sự kiện `AudioEvent` ngay khi các phần âm thanh được tạo ra. Việc nhận âm thanh có thể diễn ra trong khi ứng dụng vẫn đang gửi thêm văn bản.
+- **Đóng phiên có kiểm soát:** Khi đã gửi hết nội dung, ứng dụng gửi `CloseStreamEvent`. Polly xử lý phần văn bản còn trong bộ đệm, gửi các đoạn âm thanh cuối cùng và thông báo kết thúc bằng `StreamClosedEvent`.
 
-### 1.2. Những vấn đề cần giải quyết
+Điểm mới cốt lõi không phải là Polly lần đầu tiên hỗ trợ truyền âm thanh theo luồng. Điểm mới là khả năng truyền cả văn bản đầu vào theo luồng, đồng thời nhận âm thanh đầu ra trên cùng một kết nối HTTP/2. Cách làm này đặc biệt phù hợp với nội dung được tạo liên tục từ LLM.
 
-Việc triển khai thêm một Region chỉ có ý nghĩa khi khu vực dự phòng có thể thay thế Region chính trong phạm vi nghiệp vụ cần thiết. Để làm được điều đó, hệ thống cần giải quyết ba vấn đề liên kết với nhau:
+## 3. Mô hình kiến trúc tổng quan
 
-1. **Phát hiện sự cố:** Xác định endpoint tại Region chính có còn đáp ứng điều kiện phục vụ hay không.
-2. **Điều hướng yêu cầu:** Chuyển các truy vấn DNS mới đến endpoint của Region dự phòng khi Region chính không khỏe mạnh.
-3. **Duy trì xử lý và dữ liệu:** Chuẩn bị sẵn pipeline xử lý tại Region dự phòng và duy trì bản sao dữ liệu để khu vực này có thể tiếp tục hoạt động.
+![Mô hình kiến trúc Amazon Polly Bidirectional Streaming](../../../images/KientrucungdungAIhoithoaivoiAmazonPolly.png)
 
-Multi-AZ và Multi-Region cũng cần được phân biệt. Multi-AZ tập trung vào khả năng chịu lỗi giữa các Availability Zone trong cùng một Region. Multi-Region mở rộng phương án phục hồi sang một khu vực AWS khác, nhưng thường đòi hỏi chi phí và công sức vận hành cao hơn.
+*Hình 1. Mô hình kiến trúc minh họa ứng dụng AI hội thoại sử dụng Amazon Polly Bidirectional Streaming.*
 
-## 2. TỔNG QUAN KIẾN TRÚC GIẢI PHÁP
+Kiến trúc minh họa gồm bốn thành phần:
 
-### 2.1. Mô hình kiến trúc tổng thể
+| Thành phần | Vai trò |
+|---|---|
+| Ứng dụng Web/Mobile | Nhận câu hỏi của người dùng và phát các đoạn âm thanh được chuyển về từ backend. |
+| Backend ứng dụng | Tiếp nhận yêu cầu, gọi LLM, mở phiên streaming với Polly, gửi văn bản và tiếp nhận các đoạn âm thanh. |
+| Mô hình ngôn ngữ lớn (LLM) | Phân tích câu hỏi và tạo câu trả lời theo từng phần. Có thể sử dụng Amazon Bedrock hoặc một nền tảng LLM khác có hỗ trợ sinh nội dung theo luồng. |
+| Amazon Polly | Nhận văn bản qua `TextEvent`, tổng hợp giọng nói bằng Generative engine và trả âm thanh qua `AudioEvent`. |
 
-Giải pháp sử dụng hai AWS Region theo mô hình Active-Passive. Trong điều kiện bình thường, Primary Region tiếp nhận và xử lý lưu lượng. Secondary Region được chuẩn bị sẵn với các thành phần cần thiết để tiếp nhận yêu cầu khi xảy ra chuyển đổi.
+Backend đóng vai trò điều phối giữa LLM, Amazon Polly và ứng dụng người dùng. Cách truyền dữ liệu âm thanh từ backend đến trình duyệt hoặc thiết bị di động là phần do nhà phát triển lựa chọn. Chẳng hạn, backend có thể sử dụng WebSocket hoặc một cơ chế streaming phù hợp. Đây là kết nối riêng của ứng dụng, không phải yêu cầu bắt buộc của giao thức HTTP/2 giữa backend và Amazon Polly.
 
-Mỗi Region có một pipeline xử lý sự kiện riêng gồm:
+## 4. Luồng hoạt động
 
-**Amazon API Gateway → Amazon EventBridge → Amazon SQS → AWS Lambda → Amazon DynamoDB**
+Một phiên Bidirectional Streaming có thể diễn ra theo trình tự sau:
 
-Amazon Route 53 quản lý tên miền chung và các bản ghi định tuyến Primary/Secondary. Health Check theo dõi endpoint API Gateway được cấu hình. Amazon DynamoDB Global Tables duy trì các bản sao dữ liệu giữa hai Region.
+1. **Người dùng gửi câu hỏi:** Ứng dụng Web hoặc Mobile gửi nội dung đến backend.
+2. **Backend gọi LLM:** Backend chuyển câu hỏi đến mô hình ngôn ngữ. LLM bắt đầu tạo câu trả lời theo từng phần thay vì phải chờ đến khi hoàn tất toàn bộ nội dung.
+3. **Mở phiên với Polly:** Backend gọi `StartSpeechSynthesisStream` thông qua AWS SDK tương thích và thiết lập các tham số tổng hợp như `Engine`, `VoiceId`, `OutputFormat` và `SampleRate`.
+4. **Gửi văn bản:** Mỗi khi nhận được phần nội dung mới từ LLM, backend gửi phần đó đến Polly dưới dạng `TextEvent`.
+5. **Nhận âm thanh:** Trong khi backend tiếp tục gửi văn bản, Polly trả về các đoạn âm thanh qua `AudioEvent`. Backend tiếp nhận các đoạn này và chuyển về ứng dụng.
+6. **Phát âm thanh:** Ứng dụng sắp xếp và bổ sung các đoạn âm thanh vào bộ đệm phát để người dùng có thể nghe khi dữ liệu đã sẵn sàng.
+7. **Kết thúc phiên:** Khi LLM đã tạo xong câu trả lời, backend gửi `CloseStreamEvent`. Polly xử lý phần dữ liệu còn lại và gửi `StreamClosedEvent` để thông báo phiên tổng hợp đã hoàn tất.
 
-**Sơ đồ kiến trúc:**
+Cách xử lý này giúp hai quá trình diễn ra song song: LLM tiếp tục tạo văn bản, trong khi Polly tổng hợp những phần văn bản đã nhận. Ứng dụng không cần chờ LLM hoàn tất toàn bộ câu trả lời mới bắt đầu quá trình tổng hợp giọng nói.
 
-![Kiến trúc xử lý sự kiện đa Region với Amazon EventBridge và Amazon Route 53](../../../images/blog1-multi-region-failover.jpg)
+## 5. So sánh với API SynthesizeSpeech
 
-*Hình 1. Kiến trúc xử lý sự kiện đa Region theo mô hình Active-Passive. Nguồn hình: AWS Compute Blog – “Multi-Region event-driven failover architecture with Amazon EventBridge and Route 53” (01/06/2026).*
+Để hiểu rõ giá trị của tính năng mới, cần phân biệt Bidirectional Streaming với API `SynthesizeSpeech` vốn đã có của Amazon Polly.
 
-Có thể đọc sơ đồ theo ba nhóm chức năng:
+`SynthesizeSpeech` hoạt động theo mô hình request–response: ứng dụng gửi toàn bộ văn bản trong một yêu cầu, sau đó nhận phản hồi âm thanh. Âm thanh trong phản hồi vẫn có thể được truyền dần khi sẵn sàng; vì vậy, khác biệt chính không nằm ở việc API cũ có hay không có audio streaming, mà nằm ở cách gửi văn bản đầu vào.
 
-1. **Điều hướng truy cập:** Route 53 phân giải tên miền đến endpoint của Region được chọn.
-2. **Tiếp nhận và xử lý sự kiện:** API Gateway tiếp nhận yêu cầu; EventBridge định tuyến sự kiện; SQS lưu thông điệp; Lambda xử lý nghiệp vụ.
-3. **Lưu trữ và nhân bản dữ liệu:** Lambda ghi dữ liệu vào DynamoDB tại Region đang hoạt động; Global Tables nhân bản thay đổi sang Replica ở Region còn lại.
+Trong khi đó, `StartSpeechSynthesisStream` cho phép gửi văn bản từng phần qua `TextEvent` và nhận âm thanh qua `AudioEvent` trong cùng một phiên HTTP/2 hai chiều.
 
-Hai pipeline xử lý được triển khai độc lập theo Region. EventBridge Bus, SQS Queue và Lambda tại Secondary Region là những tài nguyên riêng, không phải hàng đợi hoặc hàm Lambda dùng chung xuyên Region. Lambda Event Source Mapping và SQS Queue mà nó đọc phải nằm trong cùng AWS Region.
+| Tiêu chí | `SynthesizeSpeech` | `StartSpeechSynthesisStream` |
+|---|---|---|
+| Cách gửi văn bản | Gửi toàn bộ văn bản trong một yêu cầu | Gửi văn bản từng phần qua `TextEvent` |
+| Cách nhận âm thanh | Nhận luồng âm thanh trong phản hồi HTTP | Nhận các đoạn âm thanh qua `AudioEvent` |
+| Giao tiếp | Request–response | Streaming hai chiều qua HTTP/2 |
+| Engine hỗ trợ | Standard, Neural, Long-form và Generative | Chỉ Generative |
+| Speech Marks | Có hỗ trợ | Không hỗ trợ |
+| Trường hợp phù hợp | Văn bản đã có sẵn trước khi tổng hợp | Văn bản được tạo dần, cần tổng hợp trước khi LLM hoàn tất |
 
-Nếu sử dụng cùng một tên miền tùy chỉnh cho API Gateway tại cả hai Region, custom domain cần được cấu hình ở từng Region và phải có chứng chỉ SSL/TLS phù hợp trong AWS Certificate Manager tại từng Region. Trong cấu hình minh họa, Health Check theo dõi endpoint API Gateway theo tên miền `execute-api` của Region, với đường dẫn `/Prod/health` và cổng HTTPS 443.
+Như vậy, `SynthesizeSpeech` vẫn phù hợp khi ứng dụng đã có sẵn nội dung và cần cách tích hợp đơn giản. `StartSpeechSynthesisStream` phù hợp hơn khi văn bản xuất hiện liên tục, chẳng hạn câu trả lời từ chatbot hoặc nội dung được dịch theo từng phần.
 
-### 2.2. Phân biệt luồng DNS và luồng xử lý sự kiện
+## 6. Hiệu năng trong thử nghiệm của AWS
 
-Trong kiến trúc này có hai luồng hoạt động khác nhau:
+Trong bài viết giới thiệu kỹ thuật, AWS thực hiện benchmark với cùng một nội dung gồm 7.045 ký tự, khoảng 970 từ. Thử nghiệm sử dụng giọng Matthew, Generative engine, định dạng MP3 ở tần số lấy mẫu 24 kHz tại Region US West (Oregon). AWS mô phỏng quá trình LLM tạo nội dung với tốc độ khoảng 30 mili giây mỗi từ.
 
-- **Luồng điều hướng:** Người dùng truy cập tên miền chung. Route 53 trả lời truy vấn DNS bằng bản ghi Primary hoặc Secondary tùy trạng thái Health Check và Failover Routing Policy.
-- **Luồng xử lý sự kiện:** Sau khi yêu cầu đến API Gateway tại một Region, API Gateway gửi sự kiện đến EventBridge Bus của Region đó. EventBridge định tuyến sự kiện phù hợp đến SQS; Lambda đọc thông điệp và ghi dữ liệu vào DynamoDB Replica tại Region tương ứng.
+| Chỉ số | Tích hợp tuần tự với `SynthesizeSpeech` | Bidirectional Streaming |
+|---|---:|---:|
+| Tổng thời gian xử lý | 115.226 ms (khoảng 115 giây) | 70.071 ms (khoảng 70 giây) |
+| Số lần gọi API | 27 | 1 phiên streaming |
+| Cách gửi nội dung | Gửi tuần tự từng câu hoàn chỉnh | Gửi văn bản dần khi nội dung được tạo |
 
-Route 53 không trực tiếp chuyển tiếp từng gói tin HTTP hoặc di chuyển kết nối đang mở giữa hai Region. Dịch vụ này tham gia ở bước phân giải DNS. Sau khi nhận được câu trả lời DNS, trình duyệt hoặc ứng dụng mới kết nối đến endpoint được trả về. Vì vậy, DNS Failover không tự động chuyển các kết nối đang tồn tại sang Region khác.
+Trong kịch bản này, AWS ghi nhận thời gian xử lý giảm khoảng 39% và số lần gọi API giảm từ 27 xuống 1. Đây là kết quả thử nghiệm với cấu hình và cách tích hợp cụ thể của AWS, không phải mức cải thiện được đảm bảo cho mọi ứng dụng. Hiệu quả thực tế còn phụ thuộc vào tốc độ sinh văn bản của LLM, độ trễ mạng, giọng đọc, cách chia dữ liệu và cơ chế phát âm thanh của ứng dụng.
 
-## 3. KHI HỆ THỐNG HOẠT ĐỘNG BÌNH THƯỜNG
+## 7. Lợi ích và tình huống ứng dụng
 
-### 3.1. Khách hàng gửi yêu cầu đặt hàng
+**Giảm thời gian chờ cảm nhận:** Người dùng có thể bắt đầu nghe câu trả lời trong khi LLM vẫn đang tạo phần nội dung tiếp theo. Điều này giúp cuộc hội thoại bằng giọng nói phản hồi tự nhiên hơn.
 
-Khi khách hàng nhấn **Đặt hàng**, ứng dụng gửi một HTTP request đến tên miền chung của hệ thống. Trong trạng thái bình thường, Route 53 phân giải tên miền đến endpoint API Gateway tại Primary Region.
+**Giảm logic tích hợp ở phía ứng dụng:** Với cách triển khai truyền thống, nhà phát triển có thể phải tự chia nội dung, gửi nhiều yêu cầu TTS, theo dõi thứ tự và ghép các đoạn âm thanh. Bidirectional Streaming cung cấp một phiên giao tiếp hai chiều, nhờ đó giảm một phần logic điều phối và số lần gọi API.
 
-API Gateway tiếp nhận dữ liệu của yêu cầu, chẳng hạn mã đơn hàng, mã khách hàng và thông tin sản phẩm. Sau đó, API Gateway sử dụng tích hợp dịch vụ AWS (AWS service integration) để gửi sự kiện đến EventBridge thông qua API `PutEvents`. Trong ví dụ này, loại sự kiện `OrderCreated` được giả định là tên do ứng dụng đặt ra để biểu thị một yêu cầu tạo đơn hàng.
+**Hỗ trợ các ứng dụng cần phản hồi liên tục:** Tính năng có thể được sử dụng trong chatbot chăm sóc khách hàng, trợ lý ảo, hệ thống trả lời tự động qua điện thoại (IVR), ứng dụng dịch thuật hội thoại và công cụ hỗ trợ tiếp cận bằng giọng nói.
 
-Cần phân biệt **tiếp nhận sự kiện** với **hoàn tất xử lý đơn hàng**. Việc API Gateway gửi sự kiện đến EventBridge không có nghĩa Lambda đã xử lý xong hoặc toàn bộ nghiệp vụ đặt hàng đã hoàn tất. Đây là quy trình bất đồng bộ: sự kiện được tiếp nhận trước, còn các bước xử lý phía sau diễn ra tiếp theo.
+Tuy nhiên, Bidirectional Streaming không tự động giải quyết toàn bộ độ trễ của ứng dụng. Tốc độ phản hồi vẫn chịu ảnh hưởng từ thời gian xử lý của LLM, mạng, quá trình tổng hợp giọng nói và cách ứng dụng phân phối âm thanh đến người dùng.
 
-Một điểm cần kiểm tra là phản hồi của `PutEvents`. HTTP 200 không đảm bảo mọi entry trong yêu cầu đều được tiếp nhận thành công. Khi gửi nhiều entry, EventBridge có thể xử lý thành công một số entry nhưng trả lỗi cho những entry khác. Ứng dụng cần kiểm tra `FailedEntryCount` và thông tin lỗi của từng entry để biết sự kiện nào cần được gửi lại. Ngoài ra, nếu gửi sự kiện đến Event Bus không tồn tại, EventBridge có thể vẫn trả HTTP 200 nhưng sự kiện bị bỏ mà không được tính vào `FailedEntryCount`. Vì vậy, tên và sự tồn tại của Event Bus cũng cần được kiểm soát.
+## 8. Hạn chế và lưu ý khi triển khai
 
-Nếu hệ thống mới xác nhận sự kiện đã được tiếp nhận, giao diện nên thông báo trạng thái như “Đã tiếp nhận yêu cầu đặt hàng”. Chỉ nên hiển thị “Đặt hàng thành công” sau khi các điều kiện nghiệp vụ cần thiết đã được xác nhận.
+- **Chỉ hỗ trợ Generative engine:** `StartSpeechSynthesisStream` hiện yêu cầu Generative engine. Nếu ứng dụng cần Standard, Neural hoặc Long-form engine, cần lựa chọn API phù hợp khác, chẳng hạn `SynthesizeSpeech`.
+- **Không hỗ trợ Speech Marks:** Ứng dụng cần dữ liệu Speech Marks để đồng bộ từ, phụ đề hoặc hoạt ảnh phải cân nhắc phương án khác.
+- **Cần SDK tương thích:** Bidirectional Streaming yêu cầu AWS SDK hỗ trợ HTTP/2 event streams. AWS hiện liệt kê các SDK như Java 2.x, JavaScript v3, .NET v4, C++, Go v2, Kotlin, PHP v3, Ruby v3, Rust và Swift; AWS CLI, Python và .NET v3 chưa được hỗ trợ theo Developer Guide. Với backend Node.js, có thể sử dụng AWS SDK for JavaScript v3.
+- **Có giới hạn thời gian phiên:** Một phiên streaming tối đa 10 phút. Nếu không có sự kiện đầu vào trong 5 giây, Polly có thể đóng phiên. Ứng dụng cần xử lý khoảng dừng dài và mở phiên mới khi nội dung vượt quá thời lượng cho phép.
+- **Cần cân bằng độ trễ và chất lượng giọng nói:** Polly mặc định có thể đệm văn bản để tổng hợp tại ranh giới ngôn ngữ tự nhiên. Ứng dụng có thể yêu cầu flush để tổng hợp sớm hơn, nhưng flush giữa câu có thể ảnh hưởng đến ngữ điệu hoặc cách phát âm do Polly thiếu ngữ cảnh của phần nội dung tiếp theo.
+- **Cần kiểm tra Region và giọng đọc:** Trước khi triển khai, cần xác nhận Generative engine và giọng đọc mong muốn có sẵn tại AWS Region đang sử dụng. Không nên mặc định mọi ngôn ngữ hoặc mọi giọng Polly đều tương thích với Bidirectional Streaming.
 
-### 3.2. Sự kiện được phân phối đến hàng đợi
+Ngoài ra, thông tin xác thực AWS nên được quản lý ở backend bằng IAM Role hoặc cơ chế cấp quyền phù hợp. Không nên đưa Access Key và Secret Access Key dài hạn vào mã JavaScript chạy trực tiếp trên trình duyệt hoặc ứng dụng di động.
 
-Sau khi EventBridge nhận sự kiện, dịch vụ kiểm tra các Event Rules đã cấu hình trên Event Bus. Rule xác định loại sự kiện hoặc mẫu dữ liệu cần khớp. Khi sự kiện thỏa mãn điều kiện, EventBridge gửi sự kiện đến Target tương ứng. Trong kiến trúc này, Target là một SQS Queue thuộc cùng Region.
+## 9. Kết luận
 
-Ví dụ, sự kiện `OrderCreated` có thể khớp với Rule dành cho yêu cầu tạo đơn hàng. EventBridge chuyển sự kiện đó đến hàng đợi để chờ xử lý.
+Amazon Polly Bidirectional Streaming mở rộng khả năng tổng hợp giọng nói bằng cách cho phép ứng dụng gửi văn bản đầu vào theo luồng và nhận âm thanh đầu ra đồng thời qua một kết nối HTTP/2. Đây là điểm cải tiến quan trọng đối với các ứng dụng AI hội thoại, nơi nội dung thường được tạo dần bởi LLM.
 
-SQS đóng vai trò vùng đệm giữa thời điểm tiếp nhận yêu cầu và thời điểm xử lý nghiệp vụ. Nếu nhiều khách hàng đặt hàng trong một khoảng thời gian ngắn, thông điệp có thể được lưu trong hàng đợi thay vì buộc API phải chờ Lambda xử lý từng yêu cầu. Điều này giúp tách tốc độ tiếp nhận khỏi tốc độ xử lý, nhưng không có nghĩa thông điệp chắc chắn được xử lý ngay lập tức hoặc thành công ở lần đầu.
+Tính năng có thể giúp giảm thời gian chờ cảm nhận của người dùng và đơn giản hóa một phần quá trình tích hợp TTS. Tuy nhiên, việc lựa chọn API vẫn cần dựa trên đặc điểm ứng dụng: `StartSpeechSynthesisStream` phù hợp với văn bản được tạo liên tục, còn `SynthesizeSpeech` vẫn là lựa chọn hợp lý khi văn bản đã có sẵn hoặc cần các engine và tính năng mà API streaming chưa hỗ trợ.
 
-### 3.3. Lambda xử lý thông điệp và ghi dữ liệu
+## Tài liệu tham khảo
 
-Lambda được cấu hình để đọc thông điệp từ SQS thông qua Event Source Mapping. Lambda polling hàng đợi, nhận thông điệp theo từng batch và thực hiện hàm xử lý. Khi xử lý thành công toàn bộ batch, các thông điệp tương ứng được xóa khỏi hàng đợi. Nếu hàm xử lý thất bại, theo hành vi mặc định, các thông điệp trong batch có thể hiển thị trở lại sau khi Visibility Timeout kết thúc để được thử xử lý lại.
-
-Trong ví dụ đặt hàng, Lambda có thể kiểm tra thông tin sản phẩm, xác thực dữ liệu cần thiết, ghi nhận đơn hàng và cập nhật trạng thái xử lý vào DynamoDB tại Primary Region. Các bước nghiệp vụ cụ thể phụ thuộc vào thiết kế ứng dụng; kiến trúc minh họa tập trung vào luồng tiếp nhận, xếp hàng, xử lý và ghi dữ liệu.
-
-Do SQS và Lambda hoạt động theo cơ chế **at-least-once delivery**, một thông điệp có thể được xử lý nhiều lần. Vì vậy, ứng dụng cần thiết kế logic **Idempotency** để việc xử lý lại cùng một yêu cầu không tạo ra tác động nghiệp vụ ngoài ý muốn.
-
-Đối với đơn hàng, nên sử dụng một khóa Idempotency ổn định ở cấp nghiệp vụ, chẳng hạn mã yêu cầu do ứng dụng khách tạo và giữ nguyên trong các lần thử lại. Hệ thống có thể dùng khóa này để kiểm tra yêu cầu đã được xử lý hay chưa trước khi tạo đơn hàng mới. Khóa cần được lưu và kiểm tra một cách nhất quán; chỉ dựa vào ID của sự kiện EventBridge là chưa đủ cho mọi trường hợp.
-
-Cần phân biệt hai loại mã:
-
-- **ID sự kiện EventBridge:** EventBridge cấp ID khi tiếp nhận mỗi sự kiện qua `PutEvents`. Khi cùng một thông điệp SQS được giao lại, ID sự kiện bên trong thông điệp vẫn giữ nguyên, nên có thể hỗ trợ nhận diện lần xử lý lặp của chính sự kiện đó.
-- **Khóa Idempotency của đơn hàng:** Được ứng dụng tạo và giữ nguyên khi gửi lại cùng một yêu cầu nghiệp vụ. Nếu khách hàng gửi lại request và hệ thống gọi `PutEvents` lần nữa, EventBridge có thể cấp ID sự kiện mới. Khóa nghiệp vụ ổn định mới giúp nhận diện đây vẫn là cùng một yêu cầu đặt hàng.
-
-### 3.4. Dữ liệu được nhân bản sang Region dự phòng
-
-Sau khi Lambda ghi dữ liệu vào DynamoDB tại Primary Region, DynamoDB Global Tables tự động nhân bản thay đổi sang các Replica của bảng tại những Region đã cấu hình. Nhờ vậy, ứng dụng tại Secondary Region có thể truy cập bản sao dữ liệu cục bộ khi cần tiếp nhận lưu lượng.
-
-Trong cấu hình minh họa, Global Table được tạo với các Replica ở hai Region nhưng không chỉ định chế độ nhất quán khác. Khi không chỉ định chế độ, DynamoDB Global Tables mặc định sử dụng **Multi-Region Eventual Consistency (MREC)**. Với MREC, thay đổi được nhân bản bất đồng bộ, thường trong khoảng một giây hoặc ít hơn, nhưng đây không phải cam kết thời gian cố định. Độ trễ thực tế phụ thuộc Region, tải và các yếu tố vận hành.
-
-Cũng cần phân biệt mô hình Active-Passive ở tầng ứng dụng với khả năng multi-active của DynamoDB Global Tables. Ứng dụng trong kiến trúc này ưu tiên xử lý lưu lượng tại Primary Region, nhưng các Replica của Global Tables vẫn có thể nhận thao tác đọc và ghi. Trong giai đoạn chuyển đổi, DNS cache có thể khiến một số người dùng vẫn truy cập Primary trong khi người dùng khác đã được điều hướng sang Secondary. Nếu cả hai Region cập nhật cùng một mục dữ liệu trong khoảng thời gian nhân bản, xung đột ghi có thể xảy ra. Với MREC, DynamoDB giải quyết xung đột ở cấp mục dữ liệu bằng cơ chế **last writer wins**, dựa trên dấu thời gian nội bộ của lần ghi.
-
-## 4. KHI REGION CHÍNH GẶP SỰ CỐ, HỆ THỐNG CHUYỂN ĐỔI NHƯ THẾ NÀO?
-
-Hãy tiếp tục tình huống cửa hàng trực tuyến. Trong giờ cao điểm, endpoint API Gateway tại Primary Region không còn phản hồi theo điều kiện Health Check đã cấu hình. Nếu không có cơ chế dự phòng, người dùng có thể tiếp tục gửi yêu cầu đến endpoint gặp lỗi.
-
-### 4.1. Route 53 phát hiện endpoint không khỏe mạnh
-
-Route 53 sử dụng Health Check để gửi yêu cầu kiểm tra đến endpoint API Gateway của Region chính. Cấu hình minh họa sử dụng HTTPS, đường dẫn `/Prod/health`, cổng 443, chu kỳ kiểm tra 30 giây và Failure Threshold bằng 3.
-
-Với Health Check HTTP/HTTPS, mỗi health checker cần thiết lập được kết nối TCP đến endpoint trong thời gian quy định và nhận được mã trạng thái HTTP 2xx hoặc 3xx trong thời gian phản hồi cho phép. Route 53 sử dụng các health checker ở nhiều vị trí và tổng hợp kết quả để đánh giá trạng thái endpoint. Health Check HTTPS cũng không xác thực tính hợp lệ hoặc thời hạn của chứng chỉ SSL/TLS.
-
-Khi endpoint không đáp ứng số lần kiểm tra liên tiếp theo ngưỡng, Route 53 có thể đánh giá bản ghi Primary là không khỏe mạnh. Với Failover Routing Policy, các truy vấn DNS mới có thể được trả về bản ghi Secondary nếu bản ghi dự phòng đáp ứng điều kiện cấu hình.
-
-Cần hiểu đúng về mốc thời gian: chu kỳ 30 giây và ngưỡng 3 lần tương ứng khoảng 90 giây theo cách tính đơn giản của cấu hình mẫu. Tuy nhiên, đây không phải cam kết rằng toàn bộ ứng dụng sẽ phục hồi sau đúng 90 giây. Việc đánh giá trạng thái dựa trên nhiều health checker, sau đó còn có DNS TTL, cache của resolver và khả năng tiếp nhận của Region dự phòng. Trong phần thử nghiệm minh họa, thời gian chờ được hướng dẫn là khoảng 2–3 phút.
-
-Health Check cũng chỉ phản ánh endpoint và điều kiện mà nó được cấu hình để kiểm tra. Nếu `/Prod/health` chỉ trả về mã thành công khi API Gateway phản hồi mà không kiểm tra những phụ thuộc quan trọng phía sau, Route 53 có thể vẫn xem endpoint là khỏe mạnh ngay cả khi EventBridge, SQS, Lambda hoặc DynamoDB đang gặp lỗi. Do đó, nội dung của endpoint kiểm tra sức khỏe cần được thiết kế phù hợp với mức độ sẵn sàng mà ứng dụng muốn đánh giá.
-
-### 4.2. Các yêu cầu mới được điều hướng đến Region dự phòng
-
-Khi bản ghi Primary bị đánh giá không khỏe mạnh, Route 53 có thể trả về bản ghi Secondary cho các truy vấn DNS mới. Ứng dụng phân giải lại tên miền và nhận endpoint API Gateway tại Secondary Region.
-
-Yêu cầu đặt hàng mới sau đó đi vào pipeline riêng của Region dự phòng:
-
-1. API Gateway tại Secondary Region tiếp nhận HTTP request.
-2. API Gateway gửi sự kiện đến EventBridge Bus tại Secondary Region thông qua `PutEvents`.
-3. EventBridge kiểm tra Rule và chuyển sự kiện phù hợp đến SQS Queue của Region này.
-4. Lambda tại Secondary Region đọc thông điệp và thực hiện xử lý.
-5. Lambda ghi dữ liệu vào Replica DynamoDB tại Secondary Region.
-6. DynamoDB Global Tables nhân bản thay đổi sang các Replica khác theo chế độ đã cấu hình.
-
-Nhờ có pipeline riêng và dữ liệu được nhân bản liên Region, Secondary Region có thể tiếp tục tiếp nhận và xử lý các yêu cầu mới được điều hướng đến đó. Đây là ý nghĩa chính của cơ chế failover trong kiến trúc này.
-
-Tuy nhiên, DNS cache có thể khiến quá trình chuyển đổi không đồng thời với mọi người dùng. Một số ứng dụng vẫn có thể gửi yêu cầu đến endpoint cũ trong khoảng thời gian còn lưu kết quả DNS. Vì vậy, cần có timeout, retry có kiểm soát và khóa Idempotency ổn định ở cấp nghiệp vụ.
-
-### 4.3. Những yêu cầu đã gửi trước khi sự cố xảy ra được xử lý ra sao?
-
-Mỗi Region có một SQS Queue riêng. Hàng đợi tại Primary Region không tự động được sao chép sang SQS tại Secondary Region trong kiến trúc này.
-
-Vì vậy, nếu một yêu cầu đã được tiếp nhận và đang chờ xử lý trong SQS của Primary Region ngay trước khi sự cố xảy ra, không thể mặc định thông điệp đó sẽ tự xuất hiện trong hàng đợi của Secondary Region. Hàng đợi cũ vẫn thuộc Region ban đầu; khả năng truy cập và tiếp tục xử lý thông điệp còn phụ thuộc tình trạng hoạt động của Region đó.
-
-Đối với hệ thống đặt hàng thực tế, doanh nghiệp cần có cách đối soát các yêu cầu đã được tiếp nhận nhưng chưa có kết quả cuối cùng. Có thể sử dụng mã đơn hàng hoặc khóa Idempotency để kiểm tra trạng thái, cho phép khách hàng thử lại an toàn và tránh tạo đơn hàng trùng. Đây là yêu cầu thiết kế nghiệp vụ bổ sung, không phải chức năng tự động được đảm bảo chỉ bằng DNS Failover.
-
-### 4.4. Vì sao người dùng có thể vẫn gặp lỗi trong một khoảng thời gian?
-
-Route 53 thay đổi câu trả lời DNS, chứ không trực tiếp chuyển từng kết nối mạng đang hoạt động. DNS Resolver, trình duyệt hoặc ứng dụng có thể còn lưu địa chỉ của Primary Region trong bộ nhớ đệm đến khi TTL hoặc thời hạn cache hết hiệu lực. Những kết nối đã mở đến endpoint cũ cũng không tự động được chuyển sang Region dự phòng.
-
-Do đó, trong thời gian chuyển đổi, một số yêu cầu có thể vẫn đi đến endpoint cũ và thất bại. Ứng dụng cần có cơ chế timeout, phân giải DNS lại và retry có kiểm soát. Khóa Idempotency phải được giữ nguyên qua các lần thử lại để một yêu cầu đặt hàng không bị ghi nhận nhiều lần.
-
-## 5. KHI REGION CHÍNH PHỤC HỒI, ĐIỀU GÌ XẢY RA?
-
-Khi endpoint tại Primary Region hoạt động trở lại và đáp ứng điều kiện Health Check, Route 53 có thể đánh giá bản ghi Primary là khỏe mạnh và tiếp tục ưu tiên bản ghi này theo Failover Routing Policy. Trong cấu hình minh họa, sau khi khôi phục endpoint, lưu lượng được định tuyến trở lại Primary sau khoảng 2–3 phút. Đây là kết quả của cấu hình thử nghiệm, không phải thời gian phục hồi được bảo đảm cho mọi hệ thống.
-
-Failback cũng không nhất thiết xảy ra đồng thời với mọi người dùng. Một số DNS Resolver vẫn có thể giữ kết quả phân giải cũ trong thời gian TTL hoặc cache còn hiệu lực. Vì vậy, một số yêu cầu có thể vẫn đến Secondary Region dù Primary đã phục hồi.
-
-Trong thời gian Secondary Region xử lý yêu cầu, các thay đổi được ghi vào DynamoDB Global Tables sẽ được nhân bản về các Replica khác theo chế độ nhất quán đã cấu hình. Với MREC, quá trình nhân bản là bất đồng bộ. Nếu một Region tạm thời bị cô lập, những thay đổi chưa kịp nhân bản sẽ tiếp tục được thử nhân bản khi Replica hoạt động trở lại. Tuy nhiên, dữ liệu mới chưa được nhân bản có thể chưa sẵn sàng để ứng dụng ở Region còn lại đọc trong thời gian sự cố.
-
-Ngoài dữ liệu, doanh nghiệp cần xem xét những thông điệp còn tồn tại trong SQS của Region chính trước khi kết luận hệ thống đã trở về trạng thái bình thường. Endpoint hoạt động trở lại không đồng nghĩa mọi thông điệp tồn đọng, dữ liệu và quy trình nghiệp vụ đã được đối soát xong.
-
-## 6. NHỮNG LỢI ÍCH VÀ GIỚI HẠN CẦN CÂN NHẮC
-
-### 6.1. Những vấn đề kiến trúc giải quyết
-
-- **Giảm phụ thuộc vào một Region:** Khi endpoint chính không còn khỏe mạnh, Route 53 có thể điều hướng các truy vấn DNS mới đến Region dự phòng, tạo một đường tiếp nhận thay thế.
-- **Duy trì pipeline xử lý tại Region dự phòng:** Secondary Region có API Gateway, EventBridge, SQS và Lambda riêng để xử lý các sự kiện mới được chuyển đến.
-- **Tách biệt tiếp nhận và xử lý:** EventBridge định tuyến sự kiện theo Rule, còn SQS giữ thông điệp để Lambda xử lý sau. Việc tiếp nhận yêu cầu và xử lý nghiệp vụ được tách thành các giai đoạn.
-- **Duy trì bản sao dữ liệu liên vùng:** DynamoDB Global Tables nhân bản dữ liệu đến các Region đã cấu hình, hỗ trợ ứng dụng truy cập dữ liệu tại khu vực dự phòng khi cần chuyển đổi.
-
-### 6.2. Những giới hạn và rủi ro cần hiểu đúng
-
-**Chuyển đổi DNS không tức thời:** Health Check cần thời gian phát hiện lỗi; DNS TTL và cache có thể khiến người dùng tiếp tục sử dụng endpoint cũ. Kết nối đang mở không tự động được chuyển vùng.
-
-**Health Check không mặc nhiên kiểm tra toàn bộ nghiệp vụ:** Nếu endpoint kiểm tra không xác minh các phụ thuộc quan trọng, hệ thống có thể vẫn được đánh giá là khỏe mạnh dù một thành phần phía sau đang lỗi. Cần thiết kế nội dung Health Check phù hợp với cách ứng dụng vận hành.
-
-**Hàng đợi không tự động chuyển Region:** SQS ở Primary và Secondary là hai hàng đợi riêng. Các thông điệp đang chờ tại Primary không tự động được sao chép sang Secondary trong kiến trúc này.
-
-**Thông điệp có thể được xử lý lặp:** Lambda tích hợp với SQS theo cơ chế at-least-once. Ứng dụng cần xử lý Idempotent dựa trên khóa nghiệp vụ ổn định, không chỉ dựa vào ID sự kiện EventBridge.
-
-**Dữ liệu có thể có độ trễ nhân bản:** MREC sao chép bất đồng bộ. Khi sự cố xảy ra ngay sau một lần ghi, Replica ở Region khác có thể chưa nhận được thay đổi mới nhất. Nếu cùng một mục bị cập nhật tại nhiều Region, cơ chế last writer wins có thể quyết định phiên bản cuối cùng.
-
-**Chi phí và độ phức tạp vận hành tăng:** Doanh nghiệp phải duy trì tài nguyên ở nhiều Region, theo dõi Health Check, quản lý cấu hình và quyền IAM, giám sát độ trễ nhân bản, kiểm tra failover/failback và tính đến chi phí truyền dữ liệu liên Region.
-
-### 6.3. RTO và RPO – Hai mục tiêu cần xác định trước
-
-Khi thiết kế Disaster Recovery, doanh nghiệp cần xác định hai mục tiêu quan trọng:
-
-- **Recovery Time Objective (RTO):** Khoảng thời gian gián đoạn tối đa mà doanh nghiệp có thể chấp nhận trước khi dịch vụ phải khôi phục.
-- **Recovery Point Objective (RPO):** Mức mất dữ liệu tối đa có thể chấp nhận, thường được biểu diễn bằng khoảng thời gian dữ liệu có thể bị mất.
-
-Không thể lấy thời gian Health Check khoảng 90 giây trong cấu hình minh họa làm RTO của toàn bộ hệ thống. RTO thực tế còn phụ thuộc thời gian phát hiện sự cố, DNS cache, khả năng tiếp nhận của Secondary Region, việc xử lý lại yêu cầu thất bại, trạng thái hàng đợi và khả năng hoạt động của các phụ thuộc.
-
-Với MREC, nhân bản dữ liệu là bất đồng bộ nên RPO phụ thuộc vào độ trễ nhân bản tại thời điểm xảy ra sự cố. Không nên khẳng định RPO bằng 0 chỉ vì hệ thống sử dụng DynamoDB Global Tables.
-
-DynamoDB còn hỗ trợ **Multi-Region Strong Consistency (MRSC)**. Chế độ này cung cấp cơ chế nhất quán mạnh liên Region và RPO bằng 0 theo mô hình Global Tables, nhưng phải được thiết kế ngay từ khi tạo bảng. MRSC yêu cầu triển khai chính xác ba Region: ba Replica hoặc hai Replica cộng một Witness. Chế độ này có độ trễ ghi cao hơn do cần giao tiếp liên Region và không thể chuyển một Global Table đã tạo từ MREC sang MRSC. Vì vậy, MRSC không phải lựa chọn có thể thay trực tiếp vào kiến trúc hai Region đang phân tích.
-
-### 6.4. Tự động hay thủ công khi chuyển đổi Region?
-
-Cơ chế trong kiến trúc này sử dụng Health Check và Route 53 để tự động chuyển hướng DNS khi endpoint chính bị đánh giá không khỏe mạnh. Cách làm này có thể rút ngắn thời gian cần thao tác của đội vận hành.
-
-Tuy nhiên, failover tự động dựa trên Health Check hoặc cảnh báo cần được cân nhắc. Một lần đánh giá sai có thể khiến hệ thống chuyển Region không cần thiết, gây gián đoạn hoặc phát sinh rủi ro dữ liệu. AWS Well-Architected Framework lưu ý rằng trong một số tình huống, tổ chức chọn kích hoạt failover thủ công nhưng vẫn tự động hóa các bước thực hiện để thao tác khôi phục nhanh và nhất quán.
-
-Do đó, lựa chọn tự động hay thủ công cần dựa trên RTO, mức độ quan trọng của dữ liệu, khả năng phát hiện sự cố và mức độ tin cậy của cơ chế Health Check.
-
-### 6.5. Khi nào kiến trúc này phù hợp?
-
-Kiến trúc Multi-Region Event-Driven Failover phù hợp để xem xét đối với các ứng dụng:
-
-- Có yêu cầu duy trì khả năng tiếp nhận yêu cầu khi một Region gặp sự cố.
-- Có luồng xử lý sự kiện có thể tách thành các bước tiếp nhận, định tuyến, lưu hàng đợi và xử lý nền.
-- Có thể sử dụng mô hình Active-Passive và chấp nhận đặc điểm về DNS Failover, độ trễ nhân bản dữ liệu và thời gian phục hồi.
-- Có đủ nguồn lực để vận hành, giám sát, kiểm thử và chi trả cho hạ tầng ở nhiều Region.
-
-Ngược lại, nếu ứng dụng chỉ cần khả năng chịu lỗi trong phạm vi một AZ hoặc một Region và không có yêu cầu phục hồi liên vùng rõ ràng, doanh nghiệp nên đánh giá phương án Multi-AZ trước khi đầu tư vào Multi-Region. Lựa chọn kiến trúc cần dựa trên yêu cầu nghiệp vụ, không chỉ dựa trên số lượng dịch vụ AWS có thể kết hợp.
-
-## 7. KẾT LUẬN
-
-Kiến trúc Multi-Region Event-Driven Failover kết hợp Amazon Route 53, Amazon API Gateway, Amazon EventBridge, Amazon SQS, AWS Lambda và Amazon DynamoDB Global Tables nhằm hỗ trợ ứng dụng tiếp tục tiếp nhận và xử lý sự kiện khi endpoint tại Region chính gặp sự cố.
-
-Trong tình huống cửa hàng trực tuyến, Route 53 điều hướng các truy vấn DNS mới đến Region dự phòng; API Gateway tiếp nhận yêu cầu; EventBridge định tuyến sự kiện; SQS lưu thông điệp để chờ xử lý; Lambda thực hiện nghiệp vụ; DynamoDB Global Tables nhân bản dữ liệu giữa các Region. Mỗi thành phần đảm nhiệm một phần riêng của quy trình và phối hợp để hỗ trợ duy trì hoạt động khi xảy ra sự cố.
-
-Tuy nhiên, triển khai thêm một Region không tự động bảo đảm hệ thống không gián đoạn hoặc không mất dữ liệu. DNS Failover có độ trễ; Health Check chỉ phản ánh endpoint và điều kiện được kiểm tra; SQS tại mỗi Region là hàng đợi riêng; Lambda có thể xử lý lặp thông điệp; DynamoDB Global Tables ở chế độ MREC có độ trễ nhân bản và khả năng xung đột ghi cần được xem xét.
-
-Vì vậy, trước khi áp dụng, doanh nghiệp cần xác định RTO và RPO, thiết kế Health Check phù hợp, xây dựng khóa Idempotency ổn định cho nghiệp vụ, lập kế hoạch đối soát thông điệp chưa hoàn tất và kiểm thử định kỳ kịch bản Failover/Failback. Khả năng phục hồi không chỉ phụ thuộc vào việc có thêm một Region, mà còn phụ thuộc vào cách hệ thống xử lý yêu cầu, dữ liệu và trạng thái nghiệp vụ trong suốt quá trình chuyển đổi.
-
-## TÀI LIỆU THAM KHẢO
-
-- AWS Compute Blog – *Multi-Region event-driven failover architecture with Amazon EventBridge and Route 53* (01/06/2026):  
-  https://aws.amazon.com/blogs/compute/multi-region-event-driven-failover-architecture-with-amazon-eventbridge-and-route-53/
-- Amazon Route 53 – *Failover routing*:  
-  https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy-failover.html
-- Amazon Route 53 – *How Amazon Route 53 determines whether a health check is healthy*:  
-  https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html
-- Amazon EventBridge – *Rules in Amazon EventBridge*:  
-  https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-rules.html
-- Amazon EventBridge – *Sending events with PutEvents*:  
-  https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-putevents.html
-- AWS Lambda – *Using Lambda with Amazon SQS*:  
-  https://docs.aws.amazon.com/lambda/latest/dg/with-sqs.html
-- Amazon DynamoDB – *Global tables – multi-active, multi-Region replication*:  
-  https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/GlobalTables.html
-- Amazon DynamoDB – *Using DynamoDB global tables*:  
-  https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/bp-global-table-design.html
-- AWS Well-Architected Framework – *Use defined recovery strategies to meet the recovery objectives*:  
-  https://docs.aws.amazon.com/wellarchitected/latest/framework/rel_planning_for_recovery_disaster_recovery.html
+- AWS Machine Learning Blog, [Introducing Amazon Polly Bidirectional Streaming: Real-time speech synthesis for conversational AI](https://aws.amazon.com/blogs/machine-learning/introducing-amazon-polly-bidirectional-streaming-real-time-speech-synthesis-for-conversational-ai/), 26/03/2026.
+- AWS What's New, [Amazon Polly expands Generative TTS engine with 10 new voices, 2 new regions, and Bidirectional Streaming API](https://aws.amazon.com/about-aws/whats-new/2026/03/amazon-polly-expands-TTS-new-voices-and-bidirectional-streaming/), 20/03/2026.
+- Amazon Polly Developer Guide, [Synthesizing speech with bidirectional streaming](https://docs.aws.amazon.com/polly/latest/dg/bidirectional-streaming.html).
+- Amazon Polly Developer Guide, [SynthesizeSpeech and StartSpeechSynthesisStream compared](https://docs.aws.amazon.com/polly/latest/dg/bidirectional-streaming-choosing.html).
+- Amazon Polly Developer Guide, [Sending text and receiving audio](https://docs.aws.amazon.com/polly/latest/dg/bidirectional-streaming-lifecycle.html).
