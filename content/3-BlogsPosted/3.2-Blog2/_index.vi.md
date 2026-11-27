@@ -56,7 +56,7 @@ AWS Budgets chịu trách nhiệm theo dõi chi tiêu, trong khi AWS Config đá
 
 **Sơ đồ kiến trúc:**
 
-*Chèn sơ đồ kiến trúc từ AWS Labs.*
+![Mô hình Kiến trúc tổng thể của Budget Controls for AWS](../../../images/KientructongthecuaBudgetControlsforAWS.png)
 
 *Hình 1. Kiến trúc tổng thể của Budget Controls for AWS.*
 
@@ -175,9 +175,9 @@ Truy cập AWS Config tại Region Singapore và sử dụng **1-click setup** �
 
 Sau khi hoàn tất, kiểm tra trạng thái Config Recorder và Delivery Channel trước khi triển khai CloudFormation.
 
-*Chèn ảnh AWS Config Settings và trạng thái ghi nhận cấu hình.*
+![Thiết lập và kiểm tra trạng thái hoạt động của AWS Config tại Region Singapore.](../../../images/aws-config-setup-singapore.png)
 
-*Hình 2. Thiết lập AWS Config tại Region Singapore.*
+*Hình 2. Thiết lập và kiểm tra trạng thái hoạt động của AWS Config tại Region Singapore.*
 
 ### 4.2. Triển khai bằng AWS CloudFormation
 
@@ -193,9 +193,9 @@ Tên tham số email cần căn cứ vào đúng phiên bản file YAML đã t�
 
 Tiếp theo, kiểm tra quyền IAM được yêu cầu, tạo Stack và chờ trạng thái `CREATE_COMPLETE`. Sau đó, mở email và xác nhận SNS Subscription.
 
-*Chèn ảnh CloudFormation tạo Stack và trạng thái CREATE_COMPLETE.*
+![Triển khai Budget Controls for AWS bằng CloudFormation tại Region Singapore.](../../../images/cloudformation-upload-budgetcontrol-template.png)
 
-*Hình 3. Triển khai Budget Controls for AWS bằng CloudFormation.*
+*Hình 3. Triển khai Budget Controls for AWS bằng CloudFormation tại Region Singapore.*
 
 ### 4.3. Tạo EC2 và kiểm tra tag mặc định
 
@@ -208,7 +208,7 @@ Sau khi AWS Config ghi nhận thay đổi cấu hình, Custom Config Rule đánh
 
 Người dùng kiểm tra tag trong EC2 Console hoặc AWS Resource Groups Tag Editor. Cần chờ AWS Config hoàn tất ghi nhận và đánh giá trước khi kết luận quá trình remediation chưa hoạt động.
 
-*Chèn ảnh hai EC2 Instances có tag BudgetControlAction.*
+![Kiểm tra tag `BudgetControlAction` trên EC2.](../../../images/ec2-budgetcontrol-tag-bc.png)
 
 *Hình 4. Kiểm tra tag `BudgetControlAction` trên EC2.*
 
@@ -230,7 +230,7 @@ Sau khi cập nhật, kiểm tra lại giá trị tag để bảo đảm thay đ
 
 **Lưu ý:** Đổi tag sang `Stop` không làm EC2 dừng ngay lập tức. Tag chỉ xác định hành động khi workflow kiểm soát ngân sách được kích hoạt. Kiểm tra được tag `Stop` không đồng nghĩa đã kiểm thử thành công toàn bộ quy trình dừng tài nguyên ở ngưỡng ngân sách.
 
-*Chèn ảnh Tag Editor hiển thị giá trị Inform và Stop.*
+![Quản lý tag bằng AWS Resource Groups Tag Editor.](../../../images/tag-editor-budgetcontrolaction.png)
 
 *Hình 5. Quản lý tag bằng AWS Resource Groups Tag Editor.*
 

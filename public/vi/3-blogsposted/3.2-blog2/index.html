@@ -12,22 +12,22 @@
     <title>Blog 2 :: Báo cáo thực tập</title>
 
     
-    <link href="/css/nucleus.css?1795367079" rel="stylesheet">
-    <link href="/css/fontawesome-all.min.css?1795367079" rel="stylesheet">
-    <link href="/css/hybrid.css?1795367079" rel="stylesheet">
-    <link href="/css/featherlight.min.css?1795367079" rel="stylesheet">
-    <link href="/css/perfect-scrollbar.min.css?1795367079" rel="stylesheet">
-    <link href="/css/auto-complete.css?1795367079" rel="stylesheet">
-    <link href="/css/atom-one-dark-reasonable.css?1795367079" rel="stylesheet">
-    <link href="/css/theme.css?1795367079" rel="stylesheet">
-    <link href="/css/tabs.css?1795367079" rel="stylesheet">
-    <link href="/css/hugo-theme.css?1795367079" rel="stylesheet">
+    <link href="/css/nucleus.css?1795800132" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css?1795800132" rel="stylesheet">
+    <link href="/css/hybrid.css?1795800132" rel="stylesheet">
+    <link href="/css/featherlight.min.css?1795800132" rel="stylesheet">
+    <link href="/css/perfect-scrollbar.min.css?1795800132" rel="stylesheet">
+    <link href="/css/auto-complete.css?1795800132" rel="stylesheet">
+    <link href="/css/atom-one-dark-reasonable.css?1795800132" rel="stylesheet">
+    <link href="/css/theme.css?1795800132" rel="stylesheet">
+    <link href="/css/tabs.css?1795800132" rel="stylesheet">
+    <link href="/css/hugo-theme.css?1795800132" rel="stylesheet">
     
-    <link href="/css/theme-workshop.css?1795367079" rel="stylesheet">
+    <link href="/css/theme-workshop.css?1795800132" rel="stylesheet">
     
-    <link href="/css/vietnamese-font.css?1795367079" rel="stylesheet"><link href="/css/table-borders.css?1795367079" rel="stylesheet">
+    <link href="/css/vietnamese-font.css?1795800132" rel="stylesheet"><link href="/css/table-borders.css?1795800132" rel="stylesheet">
 
-    <script src="/js/jquery-3.3.1.min.js?1795367079"></script>
+    <script src="/js/jquery-3.3.1.min.js?1795800132"></script>
 
     <style>
       :root #header + #content > #left > #rlblock_left{
@@ -57,14 +57,14 @@
     <span data-search-clear=""><i class="fas fa-times"></i></span>
 </div>
 
-<script type="text/javascript" src="/js/lunr.min.js?1795367079"></script>
-<script type="text/javascript" src="/js/auto-complete.js?1795367079"></script>
+<script type="text/javascript" src="/js/lunr.min.js?1795800132"></script>
+<script type="text/javascript" src="/js/auto-complete.js?1795800132"></script>
 <script type="text/javascript">
     
         var baseurl = "http:\/\/localhost:1313\/\/vi";
     
 </script>
-<script type="text/javascript" src="/js/search.js?1795367079"></script>
+<script type="text/javascript" src="/js/search.js?1795800132"></script>
 
     
   </div>
@@ -693,7 +693,7 @@
     <br>
     <b> Last Updated </b> <br>
     <i>
-        <font color=orange>23-11-2026</font>
+        <font color=orange>28-11-2026</font>
     </i>
 </left>
 <left>
@@ -897,7 +897,7 @@
 <h3 id="13-kiến-trúc-tổng-thể">1.3. Kiến trúc tổng thể</h3>
 <p>AWS Budgets chịu trách nhiệm theo dõi chi tiêu, trong khi AWS Config đánh giá tag trên các tài nguyên thuộc phạm vi hỗ trợ. EventBridge, Lambda, DynamoDB, SNS và Step Functions phối hợp để ghi nhận tài nguyên, thực hiện hành động và gửi kết quả.</p>
 <p><strong>Sơ đồ kiến trúc:</strong></p>
-<p><em>Chèn sơ đồ kiến trúc từ AWS Labs.</em></p>
+<p><img alt="Mô hình Kiến trúc tổng thể của Budget Controls for AWS" src="../../../images/KientructongthecuaBudgetControlsforAWS.png"></p>
 <p><em>Hình 1. Kiến trúc tổng thể của Budget Controls for AWS.</em></p>
 <p>Giải pháp có hai luồng hoạt động chính:</p>
 <ul>
@@ -988,8 +988,8 @@
 <h3 id="41-bật-aws-config">4.1. Bật AWS Config</h3>
 <p>Truy cập AWS Config tại Region Singapore và sử dụng <strong>1-click setup</strong> để thiết lập ghi nhận cấu hình tài nguyên.</p>
 <p>Sau khi hoàn tất, kiểm tra trạng thái Config Recorder và Delivery Channel trước khi triển khai CloudFormation.</p>
-<p><em>Chèn ảnh AWS Config Settings và trạng thái ghi nhận cấu hình.</em></p>
-<p><em>Hình 2. Thiết lập AWS Config tại Region Singapore.</em></p>
+<p><img alt="Thiết lập và kiểm tra trạng thái hoạt động của AWS Config tại Region Singapore." src="../../../images/aws-config-setup-singapore.png"></p>
+<p><em>Hình 2. Thiết lập và kiểm tra trạng thái hoạt động của AWS Config tại Region Singapore.</em></p>
 <h3 id="42-triển-khai-bằng-aws-cloudformation">4.2. Triển khai bằng AWS CloudFormation</h3>
 <p>Tải repository Budget Controls for AWS từ AWS Labs và sử dụng file <code>budgetcontrol_resources.yaml</code>.</p>
 <p>Truy cập CloudFormation Console, chọn <strong>Create stack → With new resources (standard)</strong>, tải lên Template và nhập các thông tin cần thiết:</p>
@@ -1000,8 +1000,8 @@
 </ul>
 <p>Tên tham số email cần căn cứ vào đúng phiên bản file YAML đã tải lên. Trong Template được tham chiếu, tham số là <code>NotificationEmail</code>; README của repository có thể hiển thị tên khác.</p>
 <p>Tiếp theo, kiểm tra quyền IAM được yêu cầu, tạo Stack và chờ trạng thái <code>CREATE_COMPLETE</code>. Sau đó, mở email và xác nhận SNS Subscription.</p>
-<p><em>Chèn ảnh CloudFormation tạo Stack và trạng thái CREATE_COMPLETE.</em></p>
-<p><em>Hình 3. Triển khai Budget Controls for AWS bằng CloudFormation.</em></p>
+<p><img alt="Triển khai Budget Controls for AWS bằng CloudFormation tại Region Singapore." src="../../../images/cloudformation-upload-budgetcontrol-template.png"></p>
+<p><em>Hình 3. Triển khai Budget Controls for AWS bằng CloudFormation tại Region Singapore.</em></p>
 <h3 id="43-tạo-ec2-và-kiểm-tra-tag-mặc-định">4.3. Tạo EC2 và kiểm tra tag mặc định</h3>
 <p>Tạo hai EC2 Instances tại cùng Region với CloudFormation Stack:</p>
 <ul>
@@ -1010,7 +1010,7 @@
 </ul>
 <p>Sau khi AWS Config ghi nhận thay đổi cấu hình, Custom Config Rule đánh giá tag <code>BudgetControlAction</code> trên tài nguyên được hỗ trợ. Nếu tag chưa tồn tại hoặc không hợp lệ, Lambda Remediation có thể bổ sung giá trị mặc định <code>Inform</code>.</p>
 <p>Người dùng kiểm tra tag trong EC2 Console hoặc AWS Resource Groups Tag Editor. Cần chờ AWS Config hoàn tất ghi nhận và đánh giá trước khi kết luận quá trình remediation chưa hoạt động.</p>
-<p><em>Chèn ảnh hai EC2 Instances có tag BudgetControlAction.</em></p>
+<p><img alt="Kiểm tra tag <code>BudgetControlAction</code> trên EC2." src="../../../images/ec2-budgetcontrol-tag-bc.png"></p>
 <p><em>Hình 4. Kiểm tra tag <code>BudgetControlAction</code> trên EC2.</em></p>
 <h3 id="44-thay-đổi-tag-bằng-ec2-console-hoặc-tag-editor">4.4. Thay đổi tag bằng EC2 Console hoặc Tag Editor</h3>
 <p>Người dùng có thể cập nhật tag bằng một trong hai cách:</p>
@@ -1039,7 +1039,7 @@
 </table>
 <p>Sau khi cập nhật, kiểm tra lại giá trị tag để bảo đảm thay đổi đã được áp dụng.</p>
 <p><strong>Lưu ý:</strong> Đổi tag sang <code>Stop</code> không làm EC2 dừng ngay lập tức. Tag chỉ xác định hành động khi workflow kiểm soát ngân sách được kích hoạt. Kiểm tra được tag <code>Stop</code> không đồng nghĩa đã kiểm thử thành công toàn bộ quy trình dừng tài nguyên ở ngưỡng ngân sách.</p>
-<p><em>Chèn ảnh Tag Editor hiển thị giá trị Inform và Stop.</em></p>
+<p><img alt="Quản lý tag bằng AWS Resource Groups Tag Editor." src="../../../images/tag-editor-budgetcontrolaction.png"></p>
 <p><em>Hình 5. Quản lý tag bằng AWS Resource Groups Tag Editor.</em></p>
 <h2 id="5-chi-phí-và-những-giới-hạn-cần-lưu-ý">5. CHI PHÍ VÀ NHỮNG GIỚI HẠN CẦN LƯU Ý</h2>
 <h3 id="51-chi-phí-vận-hành-giải-pháp">5.1. Chi phí vận hành giải pháp</h3>
@@ -1446,19 +1446,19 @@
     <div style="left: -1000px; overflow: scroll; position: absolute; top: -1000px; border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;">
       <div style="border: none; box-sizing: content-box; height: 200px; margin: 0px; padding: 0px; width: 200px;"></div>
     </div>
-    <script src="/js/clipboard.min.js?1795367079"></script>
-    <script src="/js/perfect-scrollbar.min.js?1795367079"></script>
-    <script src="/js/perfect-scrollbar.jquery.min.js?1795367079"></script>
-    <script src="/js/jquery.sticky.js?1795367079"></script>
-    <script src="/js/featherlight.min.js?1795367079"></script>
-    <script src="/js/highlight.pack.js?1795367079"></script>
+    <script src="/js/clipboard.min.js?1795800132"></script>
+    <script src="/js/perfect-scrollbar.min.js?1795800132"></script>
+    <script src="/js/perfect-scrollbar.jquery.min.js?1795800132"></script>
+    <script src="/js/jquery.sticky.js?1795800132"></script>
+    <script src="/js/featherlight.min.js?1795800132"></script>
+    <script src="/js/highlight.pack.js?1795800132"></script>
     <script>hljs.initHighlightingOnLoad();</script>
-    <script src="/js/modernizr.custom-3.6.0.js?1795367079"></script>
-    <script src="/js/learn.js?1795367079"></script>
-    <script src="/js/hugo-learn.js?1795367079"></script>
+    <script src="/js/modernizr.custom-3.6.0.js?1795800132"></script>
+    <script src="/js/learn.js?1795800132"></script>
+    <script src="/js/hugo-learn.js?1795800132"></script>
     
         
-            <script src="/mermaid/mermaid.js?1795367079"></script>
+            <script src="/mermaid/mermaid.js?1795800132"></script>
         
         <script>
             mermaid.initialize({ startOnLoad: true });
