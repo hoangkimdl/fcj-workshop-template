@@ -3,9 +3,32 @@
 .markdown table,
 #body-inner table {
     width: 100%;
+    table-layout: fixed;
     border-collapse: collapse !important;
     border-spacing: 0 !important;
     border: 1px solid #dddddd !important;
+}
+
+#body-inner table th:nth-child(1),
+#body-inner table td:nth-child(1) {
+    width: 7%;
+}
+
+#body-inner table th:nth-child(2),
+#body-inner table td:nth-child(2) {
+    width: 48%;
+}
+
+#body-inner table th:nth-child(3),
+#body-inner table td:nth-child(3),
+#body-inner table th:nth-child(4),
+#body-inner table td:nth-child(4) {
+    width: 12%;
+}
+
+#body-inner table th:nth-child(5),
+#body-inner table td:nth-child(5) {
+    width: 21%;
 }
 
 /* Horizontal and vertical separators */
