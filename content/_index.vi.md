@@ -27,7 +27,9 @@ chapter: false
 
 &emsp; **Thời gian thực tập:** Từ ngày 01/10/2026 đến ngày 01/01/2027
 
-![Ảnh đại diện](/images/avatar.jpg)
+<div style="text-align: center;">
+    <img src="/images/avatar.png" alt="Ảnh đại diện" style="width: 100px; max-width: 100%; height: auto;">
+</div>
 
 ### Nội dung báo cáo
 

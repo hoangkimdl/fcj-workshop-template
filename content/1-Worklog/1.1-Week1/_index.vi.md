@@ -1,7 +1,6 @@
-﻿
----
+﻿---
 title: "Worklog Tuần 1"
-date: 2026-10-05
+date: 2026-10-01
 weight: 1
 chapter: false
 pre: " <b> 1.1. </b> "

@@ -27,7 +27,9 @@ chapter: false
 
 &emsp; **Internship Duration:** From 01/10/2026 to 01/01/2027
 
-![Profile picture](/images/avatar.jpg)
+<div style="text-align: center;">
+    <img src="/images/avatar.png" alt="Ảnh đại diện" style="width: 100px; max-width: 100%; height: auto;">
+</div>
 
 ### Report Content
 
